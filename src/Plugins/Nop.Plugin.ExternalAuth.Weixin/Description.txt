@@ -1,0 +1,9 @@
+﻿Group: ExternalAuth methods
+FriendlyName: 微信验证插件
+SystemName: ExternalAuth.Weixin
+Version: 1.39
+SupportedVersions: 3.90
+Author: 李维 <oldrev@gmail.com> 
+DisplayOrder: 5
+FileName: Nop.Plugin.ExternalAuth.Weixin.dll
+Description: This plugin enables weixin authentication (login using weixin account)

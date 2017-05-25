@@ -1,0 +1,9 @@
+﻿Group: Payment methods
+FriendlyName: 微信支付
+SystemName: Payments.Weixin
+Version: 1.00
+SupportedVersions: 3.90
+Author: 李维@云南伴星科技有限公司
+DisplayOrder: 1
+FileName: Nop.Plugin.Payments.Weixin.dll
+Description: This plugin allows paying with Purchase Orders

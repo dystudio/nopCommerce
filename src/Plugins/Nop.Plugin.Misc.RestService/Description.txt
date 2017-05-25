@@ -1,0 +1,8 @@
+﻿Group: Api
+FriendlyName: RestService
+SystemName: Nop.Plugin.Misc.RestService
+Version: 1.00
+SupportedVersions: 3.70
+Author: hassanabbas
+DisplayOrder: 1
+FileName: Nop.Plugin.Misc.RestService.dll
