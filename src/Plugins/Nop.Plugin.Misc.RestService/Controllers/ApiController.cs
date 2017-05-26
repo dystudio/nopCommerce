@@ -1,16 +1,21 @@
-﻿using Nop.Core;
+﻿using Newtonsoft.Json;
+using Nop.Core;
+using Nop.Core.Caching;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
+using Nop.Plugin.Misc.RestService.Common;
 using Nop.Plugin.Misc.RestService.Models;
 using Nop.Services.Catalog;
 using Nop.Services.Customers;
 using Nop.Services.Orders;
 using Nop.Services.Vendors;
 using Nop.Web.Framework.Controllers;
+using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -31,7 +36,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         private IStoreContext _storeContext;
         private IProductService _productService;
         private ICategoryService _categoryService;
-
+        private ICacheManager _cacheManager;
         #endregion
 
         #region Ctor
@@ -47,7 +52,8 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             ICustomerRegistrationService customerRegistrationService,
             IStoreContext storeContext,
             IProductService productService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            ICacheManager cacheManager)
         {
             _customerService = customerService;
             _orderService = orderService;
@@ -60,12 +66,76 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             _storeContext = storeContext;
             _productService = productService;
             _categoryService = categoryService;
+            _cacheManager = cacheManager;
         }
 
         #endregion
 
+        #region Access Token
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult GetAccessToken(string clientId, string clientSecret, string serverUrl, string redirectUrl, string apiToken)
+        {
+            if (!IsApiTokenValid(apiToken))
+                return InvalidApiToken(apiToken);
+
+            var state = Guid.NewGuid();
+
+            var client = new RestClient(serverUrl);
+            var request = new RestRequest("oauth/authorize", Method.GET);
+            request.AddParameter("client_id", clientId); // adds to POST or URL querystring based on Method
+            request.AddParameter("redirect_uri", redirectUrl);
+            request.AddParameter("response_type", "code");
+            request.AddParameter("state", state);
+            var userAccessModel = new UserAccessModel
+            {
+                ClientId = clientId,
+                ClientSecret = clientSecret,
+                RedirectUrl = redirectUrl,
+                ServerUrl = serverUrl
+            };
+            //cached for one day
+            _cacheManager.Set(state.ToString(), userAccessModel, 360000*24);
+            IRestResponse response = client.Execute(request);
+            var content = response.Content; // raw content as string
+            if (string.IsNullOrEmpty(content))
+                return ErrorOccured("Token not generated from provider.");
+
+            dynamic result = new ExpandoObject();
+            result.AccessToken = content;
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult GetAccessToken(string code, string state)
+        {
+            if(string.IsNullOrEmpty(code) || string.IsNullOrEmpty(state))
+                return ErrorOccured("code or state is empty.");
+            var userAccessModel = _cacheManager.Get(state, () => {
+                return new UserAccessModel();
+            });
+            var authParameters = _cacheManager.Get(code + state, () => {
+                return new AuthParameters()
+                {
+                    ClientId = userAccessModel.ClientId,
+                    ClientSecret = userAccessModel.ClientSecret,
+                    ServerUrl = userAccessModel.ServerUrl,
+                    RedirectUrl = userAccessModel.RedirectUrl,
+                    GrantType = "authorization_code",
+                    Code = code
+                };
+            });
+            var nopAuthorizationManager = new AuthorizationManager(authParameters.ClientId, authParameters.ClientSecret, authParameters.ServerUrl);
+            string responseJson = nopAuthorizationManager.GetAuthorizationData(authParameters);
+            AuthorizationModel authorizationModel = JsonConvert.DeserializeObject<AuthorizationModel>(responseJson);
+            return Json(authorizationModel.AccessToken, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region Customers
-        
+
         /// <summary>
         /// To Get Customer Details
         /// </summary>
@@ -284,6 +354,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             return Json(new { Product = product }, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
         #region Sign In Sign Up
         ///api/login?Username={admin@yourstore.com}&Password={ideofuzion}
         /// <summary>

@@ -46,6 +46,9 @@
     <Reference Include="Nop.Web.Framework">
       <HintPath>..\..\Presentation\Nop.Web\bin\Nop.Web.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -85,6 +88,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ApiAuthorizer.cs" />
+    <Compile Include="Common\AuthorizationManager.cs" />
+    <Compile Include="Common\AuthorizationModel.cs" />
+    <Compile Include="Common\AuthParameters.cs" />
+    <Compile Include="Common\UserAccessModel.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Models\APIResponse.cs" />
@@ -119,6 +127,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <Content Include="web.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
