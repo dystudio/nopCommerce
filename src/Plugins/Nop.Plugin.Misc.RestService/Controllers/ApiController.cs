@@ -79,32 +79,33 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             if (!IsApiTokenValid(apiToken))
                 return InvalidApiToken(apiToken);
 
-            var state = Guid.NewGuid();
+            var token = _cacheManager.Get(clientId + clientSecret + apiToken, () => {
+                var state = Guid.NewGuid();
 
-            var client = new RestClient(serverUrl);
-            var request = new RestRequest("oauth/authorize", Method.GET);
-            request.AddParameter("client_id", clientId); // adds to POST or URL querystring based on Method
-            request.AddParameter("redirect_uri", redirectUrl);
-            request.AddParameter("response_type", "code");
-            request.AddParameter("state", state);
-            var userAccessModel = new UserAccessModel
-            {
-                ClientId = clientId,
-                ClientSecret = clientSecret,
-                RedirectUrl = redirectUrl,
-                ServerUrl = serverUrl
-            };
-            //cached for one day
-            _cacheManager.Set(state.ToString(), userAccessModel, 360000*24);
-            IRestResponse response = client.Execute(request);
-            var content = response.Content; // raw content as string
-            if (string.IsNullOrEmpty(content))
-                return ErrorOccured("Token not generated from provider.");
-
-            dynamic result = new ExpandoObject();
-            result.AccessToken = content;
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+                var client = new RestClient(serverUrl);
+                var request = new RestRequest("oauth/authorize", Method.GET);
+                request.AddParameter("client_id", clientId); // adds to POST or URL querystring based on Method
+                request.AddParameter("redirect_uri", redirectUrl);
+                request.AddParameter("response_type", "code");
+                request.AddParameter("state", state);
+                var userAccessModel = new UserAccessModel
+                {
+                    ClientId = clientId,
+                    ClientSecret = clientSecret,
+                    RedirectUrl = redirectUrl,
+                    ServerUrl = serverUrl
+                };
+                //cached for one day
+                _cacheManager.Set(state.ToString(), userAccessModel, 360000 * 24);
+                IRestResponse response = client.Execute(request);
+                var content = response.Content; // raw content as string
+                dynamic result = new ExpandoObject();
+                result.AccessToken = content;
+                if (string.IsNullOrEmpty(content))
+                    return ErrorOccured("Token not generated from provider.");
+                return result;
+            });
+            return Json(token, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
