@@ -2,7 +2,7 @@
 FriendlyName: RestService
 SystemName: Nop.Plugin.Misc.RestService
 Version: 1.00
-SupportedVersions: 3.70
+SupportedVersions: 3.90
 Author: hassanabbas
 DisplayOrder: 1
 FileName: Nop.Plugin.Misc.RestService.dll
