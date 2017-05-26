@@ -133,26 +133,30 @@ namespace Nop.Plugin.ExternalAuth.Weixin.Services {
             //at this point request is valid
             request.Customer.Username = request.Username;
             request.Customer.Email = request.Email;
-            //request.Customer.PasswordFormat = request.PasswordFormat;
 
-            switch (request.PasswordFormat) {
-                case PasswordFormat.Clear: {
-                        //request.Customer.Password = request.Password;
-                    }
+            var customerPassword = new CustomerPassword
+            {
+                Customer = request.Customer,
+                PasswordFormat = request.PasswordFormat,
+                CreatedOnUtc = DateTime.UtcNow
+            };
+            switch (request.PasswordFormat)
+            {
+                case PasswordFormat.Clear:
+                    customerPassword.Password = request.Password;
                     break;
-                case PasswordFormat.Encrypted: {
-                        //request.Customer.Password = _encryptionService.EncryptText(request.Password);
-                    }
+                case PasswordFormat.Encrypted:
+                    customerPassword.Password = _encryptionService.EncryptText(request.Password);
                     break;
-                case PasswordFormat.Hashed: {
-                        string saltKey = _encryptionService.CreateSaltKey(5);
-                        //request.Customer.PasswordSalt = saltKey;
-                        //request.Customer.Password = _encryptionService.CreatePasswordHash(request.Password, saltKey, _customerSettings.HashedPasswordFormat);
+                case PasswordFormat.Hashed:
+                    {
+                        var saltKey = _encryptionService.CreateSaltKey(5);
+                        customerPassword.PasswordSalt = saltKey;
+                        customerPassword.Password = _encryptionService.CreatePasswordHash(request.Password, saltKey, _customerSettings.HashedPasswordFormat);
                     }
-                    break;
-                default:
                     break;
             }
+            _customerService.InsertCustomerPassword(customerPassword);
 
             request.Customer.Active = request.IsApproved;
 
