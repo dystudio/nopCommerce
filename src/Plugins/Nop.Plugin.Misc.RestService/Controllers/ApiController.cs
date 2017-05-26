@@ -108,9 +108,9 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             return Json(token, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
-        public ActionResult GetAccessToken(string code, string state)
+        public ActionResult Token(string code, string state)
         {
             if(string.IsNullOrEmpty(code) || string.IsNullOrEmpty(state))
                 return ErrorOccured("code or state is empty.");
