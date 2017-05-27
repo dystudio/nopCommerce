@@ -80,36 +80,30 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             if (!IsApiTokenValid(apiToken))
                 return InvalidApiToken(apiToken);
 
-            var token = _cacheManager.Get(clientId + clientSecret + apiToken, () =>
+            var state = Guid.NewGuid();
+
+            var client = new RestClient(serverUrl);
+            var request = new RestRequest("/oauth/authorize", Method.GET);
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("client_id", clientId); // adds to POST or URL querystring based on Method
+            request.AddParameter("redirect_uri", redirectUrl);
+            request.AddParameter("response_type", "code");
+            request.AddParameter("state", state);
+
+            var cachedUserAccessModel = _cacheManager.Get(state.ToString(), () =>
             {
-                var state = Guid.NewGuid();
-
-                var client = new RestClient(serverUrl);
-                var request = new RestRequest("/oauth/authorize", Method.GET);
-                request.AddHeader("Accept", "application/json");
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddParameter("client_id", clientId); // adds to POST or URL querystring based on Method
-                request.AddParameter("redirect_uri", redirectUrl);
-                request.AddParameter("response_type", "code");
-                request.AddParameter("state", state);
-
-                var cachedUserAccessModel = _cacheManager.Get(state.ToString(), () =>
+                return new UserAccessModel
                 {
-                    return new UserAccessModel
-                    {
-                        ClientId = clientId,
-                        ClientSecret = clientSecret,
-                        RedirectUrl = redirectUrl,
-                        ServerUrl = serverUrl
-                    };
-                });
-                IRestResponse response = client.Execute(request);
-                var content = response.Content; // raw content as string
-                var result = new AccessTokenViewModel();
-                result.AccessToken = content;
-                return result;
+                    ClientId = clientId,
+                    ClientSecret = clientSecret,
+                    RedirectUrl = redirectUrl,
+                    ServerUrl = serverUrl
+                };
             });
-            return Json(token, JsonRequestBehavior.AllowGet);
+            IRestResponse response = client.Execute(request);
+            var accessTokenViewModel = JsonConvert.DeserializeObject<AccessTokenViewModel>(response.Content); // raw content as json string
+            return Json(accessTokenViewModel, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -137,7 +131,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             var nopAuthorizationManager = new AuthorizationManager(authParameters.ClientId, authParameters.ClientSecret, authParameters.ServerUrl);
             string responseJson = nopAuthorizationManager.GetAuthorizationData(authParameters);
             AuthorizationModel authorizationModel = JsonConvert.DeserializeObject<AuthorizationModel>(responseJson);
-            return Json(authorizationModel.AccessToken, JsonRequestBehavior.AllowGet);
+            return Json(authorizationModel, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
