@@ -5,6 +5,7 @@ using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
+using Nop.Core.Infrastructure;
 using Nop.Plugin.Misc.RestService.Common;
 using Nop.Plugin.Misc.RestService.Models;
 using Nop.Services.Catalog;
@@ -48,7 +49,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             IProductAttributeParser productAttributeParser,
             IVendorService vendorService,
             RestServiceSettings settings,
-            CustomerSettings customerSettings, 
+            CustomerSettings customerSettings,
             ICustomerRegistrationService customerRegistrationService,
             IStoreContext storeContext,
             IProductService productService,
@@ -66,7 +67,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             _storeContext = storeContext;
             _productService = productService;
             _categoryService = categoryService;
-            _cacheManager = cacheManager;
+            _cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
         }
 
         #endregion
@@ -79,30 +80,33 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             if (!IsApiTokenValid(apiToken))
                 return InvalidApiToken(apiToken);
 
-            var token = _cacheManager.Get(clientId + clientSecret + apiToken, () => {
+            var token = _cacheManager.Get(clientId + clientSecret + apiToken, () =>
+            {
                 var state = Guid.NewGuid();
 
                 var client = new RestClient(serverUrl);
-                var request = new RestRequest("oauth/authorize", Method.GET);
+                var request = new RestRequest("/oauth/authorize", Method.GET);
+                request.AddHeader("Accept", "application/json");
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 request.AddParameter("client_id", clientId); // adds to POST or URL querystring based on Method
                 request.AddParameter("redirect_uri", redirectUrl);
                 request.AddParameter("response_type", "code");
                 request.AddParameter("state", state);
-                var userAccessModel = new UserAccessModel
+
+                var cachedUserAccessModel = _cacheManager.Get(state.ToString(), () =>
                 {
-                    ClientId = clientId,
-                    ClientSecret = clientSecret,
-                    RedirectUrl = redirectUrl,
-                    ServerUrl = serverUrl
-                };
-                //cached for one day
-                _cacheManager.Set(state.ToString(), userAccessModel, 360000 * 24);
+                    return new UserAccessModel
+                    {
+                        ClientId = clientId,
+                        ClientSecret = clientSecret,
+                        RedirectUrl = redirectUrl,
+                        ServerUrl = serverUrl
+                    };
+                });
                 IRestResponse response = client.Execute(request);
                 var content = response.Content; // raw content as string
-                dynamic result = new ExpandoObject();
+                var result = new AccessTokenViewModel();
                 result.AccessToken = content;
-                if (string.IsNullOrEmpty(content))
-                    return ErrorOccured("Token not generated from provider.");
                 return result;
             });
             return Json(token, JsonRequestBehavior.AllowGet);
@@ -110,14 +114,16 @@ namespace Nop.Plugin.Misc.RestService.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Token(string code, string state)
+        public ActionResult GetToken(string code, string state)
         {
-            if(string.IsNullOrEmpty(code) || string.IsNullOrEmpty(state))
+            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(state))
                 return ErrorOccured("code or state is empty.");
-            var userAccessModel = _cacheManager.Get(state, () => {
+            var userAccessModel = _cacheManager.Get(state, () =>
+            {
                 return new UserAccessModel();
             });
-            var authParameters = _cacheManager.Get(code + state, () => {
+            var authParameters = _cacheManager.Get(code + state, () =>
+            {
                 return new AuthParameters()
                 {
                     ClientId = userAccessModel.ClientId,
@@ -163,7 +169,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         {
             if (!IsApiTokenValid(apiToken))
                 return InvalidApiToken(apiToken);
-        
+
             var customers = _customerService.GetAllCustomers();
 
             return Json(GetCustomersJson(customers), JsonRequestBehavior.AllowGet);
@@ -276,7 +282,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
 
             var customers = _customerService.GetAllCustomers(createdFromUtc, createdToUtc, affiliateId, vendorId,
                 customerRole, email, username, firstName, lastName, dayOfBirth, monthOfBirth, company, phone,
-                zipPostalCode, string.Empty,isLoadOnlyWithShoppingCart, sct, pageIndex, pageSize);
+                zipPostalCode, string.Empty, isLoadOnlyWithShoppingCart, sct, pageIndex, pageSize);
 
             if (customers.Count == 0)
                 return ErrorOccured("Customers are not found.");
@@ -364,7 +370,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         /// <param name="Email">Customer Email or username</param>
         /// <param name="Password">Cutomer Password</param>
         /// <returns></returns>
-        public ActionResult Login(Customer customer,string password,string apiToken)
+        public ActionResult Login(Customer customer, string password, string apiToken)
         {
             if (!IsApiTokenValid(apiToken))
                 return InvalidApiToken(apiToken);
@@ -413,7 +419,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         {
             if (!IsApiTokenValid(apiToken))
                 return InvalidApiToken(apiToken);
-        
+
             APIResponse apiResponse = new APIResponse();
             bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
             var customer = _workContext.CurrentCustomer;

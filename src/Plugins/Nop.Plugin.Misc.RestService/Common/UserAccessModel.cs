@@ -10,4 +10,9 @@
 
         public string RedirectUrl { get; set; }
     }
+
+    public class AccessTokenViewModel
+    {
+        public string AccessToken { get; set; }
+    }
 }
