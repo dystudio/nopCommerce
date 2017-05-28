@@ -6,3 +6,4 @@ SupportedVersions: 3.90
 Author: hassanabbas
 DisplayOrder: 1
 FileName: Nop.Plugin.Misc.RestService.dll
+Description: This plugin provides oauth2 token service api for nop

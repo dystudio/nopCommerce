@@ -6,3 +6,4 @@ SupportedVersions: 3.90
 Author: dystudio.net
 DisplayOrder: 1
 FileName: Nop.Plugin.Misc.WeChatRestService.dll
+Description: This plugin provides oauth2 token service api and wechat api for nop

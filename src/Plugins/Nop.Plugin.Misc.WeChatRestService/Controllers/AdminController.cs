@@ -23,7 +23,11 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
         {
             var model = new ConfigureModel()
             {
-                ApiToken = _settings.ApiToken
+                ApiToken = _settings.ApiToken,
+                Token = _settings.Token,
+                EncodingAESKey = _settings.EncodingAESKey,
+                AppId = _settings.AppId,
+                AppSecret=_settings.AppSecret
             };
 
             return View("~/Plugins/Nop.Plugin.Misc.RestService/Views/Configure.cshtml", model);
@@ -33,7 +37,11 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
         public ActionResult Configure(ConfigureModel model)
         {
             _settings.ApiToken = model.ApiToken;
-            
+            _settings.Token = model.Token;
+            _settings.EncodingAESKey = model.EncodingAESKey;
+            _settings.AppId = model.AppId;
+            _settings.AppSecret = model.AppSecret;
+
             _settingService.SaveSetting(_settings);
             SuccessNotification("Settings saved..");
 
