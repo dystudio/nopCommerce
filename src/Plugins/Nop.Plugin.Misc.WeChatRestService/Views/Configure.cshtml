@@ -1,0 +1,43 @@
+﻿@model Nop.Plugin.Misc.WeChatRestService.Models.ConfigureModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                API Token:
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ApiToken)
+                @Html.ValidationMessageFor(model => model.ApiToken)
+                <span class="generate-hash" style="cursor: pointer;">Generate Hash</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var guid = (function () {
+                function s4() {
+                    return Math.floor((1 + Math.random()) * 0x10000)
+                               .toString(16)
+                               .substring(1);
+                }
+                return function () {
+                    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                           s4() + '-' + s4() + s4() + s4();
+                };
+            })();
+
+            $('.generate-hash').click(function (e) {
+                e.preventDefault();
+                $('#ApiToken').val(guid());
+            });
+        });
+    </script>
+}
