@@ -13,6 +13,34 @@
                 @Html.ValidationMessageFor(model => model.ApiToken)
                 <span class="generate-hash" style="cursor: pointer;">Generate Hash</span>
             </td>
+            <td class="adminTitle">
+                WeChat Token:
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Token)
+                @Html.ValidationMessageFor(model => model.Token)
+            </td>
+            <td class="adminTitle">
+                WeChat EncodingAESKey:
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.EncodingAESKey)
+                @Html.ValidationMessageFor(model => model.EncodingAESKey)
+            </td>
+            <td class="adminTitle">
+                WeChat AppId:
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AppId)
+                @Html.ValidationMessageFor(model => model.AppId)
+            </td>
+            <td class="adminTitle">
+                WeChat AppSecret:
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AppSecret)
+                @Html.ValidationMessageFor(model => model.AppSecret)
+            </td>
         </tr>
         <tr>
             <td colspan="2">

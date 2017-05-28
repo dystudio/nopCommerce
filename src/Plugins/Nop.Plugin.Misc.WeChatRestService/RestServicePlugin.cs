@@ -31,7 +31,7 @@ namespace Nop.Plugin.Misc.WeChatRestService
         {
             actionName = "Configure";
             controllerName = "Admin";
-            routeValues = new RouteValueDictionary() { { "Namespaces", "panoRazzi.RestService.Controllers" }, { "area", null } };
+            routeValues = new RouteValueDictionary() { { "Namespaces", "Nop.Plugin.Misc.WeChatRestService.Controllers" }, { "area", null } };
         }
 
         #endregion
