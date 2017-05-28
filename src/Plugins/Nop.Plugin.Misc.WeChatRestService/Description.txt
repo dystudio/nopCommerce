@@ -1,5 +1,5 @@
 ﻿Group: Api
-FriendlyName: WeChatRestService
+FriendlyName: WeChat Rest Service
 SystemName: Nop.Plugin.Misc.WeChatRestService
 Version: 1.00
 SupportedVersions: 3.90
