@@ -22,7 +22,7 @@ using System.Web.Mvc;
 
 namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 {
-    public class ApiController : BaseController
+    public class WeChatApiController : BaseController
     {
         #region Fields
 
@@ -42,7 +42,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 
         #region Ctor
 
-        public ApiController(
+        public WeChatApiController(
             ICustomerService customerService,
             IOrderService orderService,
             IWorkContext workContext,
