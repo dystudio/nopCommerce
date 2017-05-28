@@ -31,7 +31,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
         private IWorkContext _workContext;
         private IVendorService _vendorService;
         private IProductAttributeParser _productAttributeParser;
-        private RestServiceSettings _settings;
+        private WeChatRestServiceSettings _settings;
         private CustomerSettings _customerSettings;
         private ICustomerRegistrationService _customerRegistrationService;
         private IStoreContext _storeContext;
@@ -48,7 +48,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             IWorkContext workContext,
             IProductAttributeParser productAttributeParser,
             IVendorService vendorService,
-            RestServiceSettings settings,
+            WeChatRestServiceSettings settings,
             CustomerSettings customerSettings,
             ICustomerRegistrationService customerRegistrationService,
             IStoreContext storeContext,

@@ -6,14 +6,14 @@ using System.Web.Mvc;
 namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 {
     [AdminAuthorize]
-    public class AdminController : BasePluginController
+    public class WeChatAdminController : BasePluginController
     {
         private readonly ISettingService _settingService;
-        private readonly RestServiceSettings _settings;
+        private readonly WeChatRestServiceSettings _settings;
 
-        public AdminController(
+        public WeChatAdminController(
             ISettingService settingService,
-            RestServiceSettings settings)
+            WeChatRestServiceSettings settings)
         {
             _settingService = settingService;
             _settings = settings;
@@ -30,7 +30,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 AppSecret=_settings.AppSecret
             };
 
-            return View("~/Plugins/Nop.Plugin.Misc.RestService/Views/Configure.cshtml", model);
+            return View("~/Plugins/Nop.Plugin.Misc.WeChatRestService/Views/Configure.cshtml", model);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -45,7 +45,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             _settingService.SaveSetting(_settings);
             SuccessNotification("Settings saved..");
 
-            return View("~/Plugins/Nop.Plugin.Misc.RestService/Views/Configure.cshtml", model);
+            return View("~/Plugins/Nop.Plugin.Misc.WeChatRestService/Views/Configure.cshtml", model);
         }
     }
 }
