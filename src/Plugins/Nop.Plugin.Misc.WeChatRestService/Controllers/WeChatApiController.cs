@@ -14,6 +14,11 @@ using Nop.Services.Orders;
 using Nop.Services.Vendors;
 using Nop.Web.Framework.Controllers;
 using RestSharp;
+using Senparc.Weixin;
+using Senparc.Weixin.MP;
+using Senparc.Weixin.MP.Entities.Request;
+using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
+using Senparc.Weixin.WxOpen.Containers;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -133,6 +138,52 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             AuthorizationModel authorizationModel = JsonConvert.DeserializeObject<AuthorizationModel>(responseJson);
             return Json(authorizationModel, JsonRequestBehavior.AllowGet);
         }
+        #endregion
+
+        #region WeChat small app api
+        /// <summary>
+        /// GET请求用于处理微信小程序后台的URL验证
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("Index")]
+        public ActionResult Get(PostModel postModel, string echostr)
+        {
+            var token = _settings.Token;
+            if (CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, token))
+            {
+                return Content(echostr); //返回随机字符串则表示验证通过
+            }
+            else
+            {
+                return Content("failed:" + postModel.Signature + "," + CheckSignature.GetSignature(postModel.Timestamp, postModel.Nonce, token) + "。" +
+                    "如果你在浏览器中看到这句话，说明此地址可以被作为微信小程序后台的Url，请注意保持Token一致。");
+            }
+        }
+
+        /// <summary>
+        /// wx.login登陆成功之后发送的请求
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult OnLogin(string code)
+        {
+            var jsonResult = SnsApi.JsCode2Json(_settings.AppId, _settings.AppSecret, code);
+            if (jsonResult.errcode == ReturnCode.请求成功)
+            {
+                //Session["WxOpenUser"] = jsonResult;//使用Session保存登陆信息（不推荐）
+                //使用SessionContainer管理登录信息（推荐）
+                var sessionBag = SessionContainer.UpdateSession(null, jsonResult.openid, jsonResult.session_key);
+
+                //注意：生产环境下SessionKey属于敏感信息，不能进行传输！
+                return Json(new { success = true, msg = "OK", sessionId = sessionBag.Key, sessionKey = sessionBag.SessionKey });
+            }
+            else
+            {
+                return Json(new { success = false, msg = jsonResult.errmsg });
+            }
+        } 
         #endregion
 
         #region Misc
