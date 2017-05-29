@@ -101,37 +101,6 @@
     <Compile Include="Models\APIResponse.cs" />
     <Compile Include="Models\ConfigureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\AdvancedAPIs\Sns\SnsApi.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\AdvancedAPIs\Sns\SnsJson\JsCode2JsonResult.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\AdvancedAPIs\Template\TemplateApi.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\AdvancedAPIs\Template\TemplateJson\TempleteModel.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\AdvancedAPIs\WxApp\WxAppApi.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Containers\SessionContainer.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\DecodedUserInfo.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Request\Event\RequestMessageEventBase.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Request\Event\RequestMessageEvent_UserEnterTempSession.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Request\PostModel.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Request\RequestMessageBase.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Request\RequestMessageImage.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Request\RequestMessageText.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Response\ResponseMessageBase.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Response\SuccessResponseMessage.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Entities\Watermark.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Enums.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Exceptions\WxOpenException.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Helpers\EncryptHelper.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Helpers\EntityHelper.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Helpers\MsgTypeHelper.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Helpers\SessionHelper.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\MessageHandlers\IWxOpenMessageHandler.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\MessageHandlers\WxOpenMessageHandler.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\MessageHandlers\WxOpenMessageHandler.Event.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\MessageHandlers\WxOpenMessageHandler.Message.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Properties\AssemblyInfo.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\RequestMessageFactory.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Tencent\Cryptography.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Tencent\Sample.cs" />
-    <Compile Include="Senparc.Weixin.WxOpen\Tencent\WXBizMsgCrypt.cs" />
     <Compile Include="WeChatRestServicePlugin.cs" />
     <Compile Include="WeChatRestServiceSettings.cs" />
   </ItemGroup>
@@ -163,16 +132,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <Content Include="Senparc.Weixin.WxOpen\Senparc.Weixin.WxOpen.csproj" />
-    <Content Include="Senparc.Weixin.WxOpen\Senparc.Weixin.WxOpen.Packages.csproj" />
-    <Content Include="Senparc.Weixin.WxOpen\Tencent\Readme.txt" />
     <Content Include="web.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Configure.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Senparc.Weixin.WxOpen\packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
