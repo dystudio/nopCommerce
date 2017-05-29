@@ -183,7 +183,21 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             {
                 return Json(new { success = false, msg = jsonResult.errmsg });
             }
-        } 
+        }
+
+        [HttpPost]
+        public ActionResult CheckWxOpenSignature(string sessionId, string rawData, string signature)
+        {
+            try
+            {
+                var checkSuccess = Senparc.Weixin.WxOpen.Helpers.EncryptHelper.CheckSignature(sessionId, rawData, signature);
+                return Json(new { success = checkSuccess, msg = checkSuccess ? "签名校验成功" : "签名校验失败" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, msg = ex.Message });
+            }
+        }
         #endregion
 
         #region Misc
