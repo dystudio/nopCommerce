@@ -3,23 +3,45 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <table class="adminContent">
-        <tr>
-            <td class="adminTitle">
-                API Token:
-            </td>
-            <td class="adminData">
-                @Html.EditorFor(model => model.ApiToken)
-                @Html.ValidationMessageFor(model => model.ApiToken)
-                <span class="generate-hash" style="cursor: pointer;">Generate Hash</span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
-            </td>
-        </tr>
-    </table>
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Nop.Plugin.Misc.RestService.Configure.Title")
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save-continue" class="btn bg-blue generate-hash">
+                <i class="fa fa-floppy-o"></i>
+                @T("Nop.Plugin.Misc.RestService.GenerateHash")
+            </button>
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.ApiToken)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.ApiToken)
+                                @Html.ValidationMessageFor(model => model.ApiToken)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
         $(document).ready(function () {
             var guid = (function () {
