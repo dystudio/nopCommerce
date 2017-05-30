@@ -29,7 +29,7 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
                 AppSecret=_settings.AppSecret
             };
 
-            return View("~/Plugins/Nop.Plugin.Misc.WeChatRestService/Views/Configure.cshtml", model);
+            return View("~/Plugins/Nop.Plugin.Misc.WeChat/Views/Configure.cshtml", model);
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -43,7 +43,7 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
             _settingService.SaveSetting(_settings);
             SuccessNotification("Settings saved..");
 
-            return View("~/Plugins/Nop.Plugin.Misc.WeChatRestService/Views/Configure.cshtml", model);
+            return View("~/Plugins/Nop.Plugin.Misc.WeChat/Views/Configure.cshtml", model);
         }
     }
 }

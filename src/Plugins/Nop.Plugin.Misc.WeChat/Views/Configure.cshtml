@@ -39,6 +39,15 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.EncodingAESKey)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.EncodingAESKey)
+                                @Html.ValidationMessageFor(model => model.EncodingAESKey)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
                                 @Html.NopLabelFor(model => model.AppId)
                             </div>
                             <div class="col-md-9">
