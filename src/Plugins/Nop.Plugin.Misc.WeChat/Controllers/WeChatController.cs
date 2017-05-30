@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Autofac;
+using Newtonsoft.Json;
 using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Core.Domain.Catalog;
@@ -26,6 +27,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Nop.Plugin.Misc.WeChat.Controllers
@@ -46,6 +48,8 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
         private IProductService _productService;
         private ICategoryService _categoryService;
         private ICacheManager _cacheManager;
+        private HttpContextBase _httpContextBase;
+        private NopMessageHandler _nopMessageHandler;
         #endregion
 
         #region Ctor
@@ -62,7 +66,8 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
             IStoreContext storeContext,
             IProductService productService,
             ICategoryService categoryService,
-            ICacheManager cacheManager)
+            ICacheManager cacheManager,
+            HttpContextBase httpContextBase)
         {
             _customerService = customerService;
             _orderService = orderService;
@@ -76,6 +81,7 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
             _productService = productService;
             _categoryService = categoryService;
             _cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
+            _httpContextBase = httpContextBase;
         }
 
         #endregion
@@ -123,11 +129,16 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
                 postModel.EncodingAESKey = _settings.EncodingAESKey; //根据自己后台的设置保持一致
                 postModel.AppId = _settings.AppId; //根据自己后台的设置保持一致
 
-                var messageHandler = new NopMessageHandler(Request.InputStream, postModel, 10);
+                _nopMessageHandler = EngineContext.Current.ContainerManager.Container
+                .Resolve<NopMessageHandler>(
+                    new NamedParameter("inputStream",_httpContextBase.Request.InputStream),
+                    new NamedParameter("postModel", postModel),
+                    new NamedParameter("maxRecordCount", 10));
+                //var messageHandler = new NopMessageHandler(_httpContextBase.Request.InputStream, postModel, 10);
 
-                messageHandler.Execute(); //执行微信处理过程
+                _nopMessageHandler.Execute(); //执行微信处理过程
 
-                return new FixWeixinBugWeixinResult(messageHandler);
+                return new FixWeixinBugWeixinResult(_nopMessageHandler);
 
             }).ContinueWith<ActionResult>(task => task.Result);
         }

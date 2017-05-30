@@ -234,6 +234,20 @@ namespace Nop.Plugin.Misc.WeChat.Handler
                     }
                     return agentResponseMessage;//可能出现多种类型，直接在这里返回
                 })
+                .Keywords(new[] { "新闻", "News" }, () =>
+                {
+                   
+                    if (defaultResponseMessage.Content == "新闻" || defaultResponseMessage.Content == "News")
+                    {
+                        //Get news to send to client
+                    }
+                    else
+                    {
+                        //退出APP测试
+                        defaultResponseMessage.Content = "暂时没有新闻.";
+                    }
+                    return defaultResponseMessage;
+                })
                 .Keywords(new[] { "测试", "退出" }, () =>
                 {
                     /*

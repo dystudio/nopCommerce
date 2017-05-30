@@ -113,6 +113,7 @@
     <Compile Include="Common\Utilities\Server.cs" />
     <Compile Include="Controllers\WeChatAdminController.cs" />
     <Compile Include="Controllers\WeChatController.cs" />
+    <Compile Include="DependencyRegistrar.cs" />
     <Compile Include="Handlers\NopMessageContext.cs" />
     <Compile Include="Handlers\NopHandler.cs" />
     <Compile Include="Handlers\NopMessageHandler_Events.cs" />
