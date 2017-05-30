@@ -91,11 +91,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Download\CodeRecord.cs" />
+    <Compile Include="Common\Download\Config.cs" />
+    <Compile Include="Common\Download\ConfigHelper.cs" />
+    <Compile Include="Common\EventService.cs" />
+    <Compile Include="Common\LocationService.cs" />
+    <Compile Include="Common\MessageHandlers\CustomMessageHandler\CustomMessageContext.cs" />
+    <Compile Include="Common\MessageHandlers\CustomMessageHandler\CustomMessageHandler.cs" />
+    <Compile Include="Common\MessageHandlers\CustomMessageHandler\CustomMessageHandler_Events.cs" />
+    <Compile Include="Common\MessageHandlers\CustomThirdPartyMessageHandlers\CustomThirdPartyMessageHandler.cs" />
+    <Compile Include="Common\MessageHandlers\OpenMessageHandler\OpenCheckMessageHandler.cs" />
+    <Compile Include="Common\MessageHandlers\QyMessageHandler\QyCustomMessageContext.cs" />
+    <Compile Include="Common\MessageHandlers\QyMessageHandler\QyCustomMessageHandler.cs" />
+    <Compile Include="Common\MessageHandlers\WebSocket\CustomWebSocketMessageHandler.cs" />
+    <Compile Include="Common\MessageHandlers\WxOpenMessageHandler\CustomWxOpenMessageContext.cs" />
+    <Compile Include="Common\MessageHandlers\WxOpenMessageHandler\CustomWxOpenMessageHandler.cs" />
+    <Compile Include="Common\OpenTicket\OpenTicketHelper.cs" />
+    <Compile Include="Common\Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\TemplateMessage\WeixinTemplate_ExceptionAlert.cs" />
+    <Compile Include="Common\TemplateMessage\WxOpen\WxOpenTemplateMessage_PaySuccessNotice.cs" />
+    <Compile Include="Common\Utilities\Server.cs" />
     <Compile Include="Controllers\WeChatAdminController.cs" />
     <Compile Include="Controllers\WeChatApiController.cs" />
+    <Compile Include="Handlers\NopMessageContext.cs" />
+    <Compile Include="Handlers\NopHandler.cs" />
+    <Compile Include="Handlers\NopMessageHandler_Events.cs" />
     <Compile Include="Models\APIResponse.cs" />
     <Compile Include="Models\ConfigureModel.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeChatPlugin.cs" />
     <Compile Include="WeChatSettings.cs" />
   </ItemGroup>
@@ -115,6 +137,10 @@
       <Name>Nop.Services</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\..\ThirdParty\Senparc.WebSocket\src\Senparc.WebSocket\Senparc.WebSocket\Senparc.WebSocket.csproj">
+      <Project>{b745f5f5-9120-4d56-a86d-ed34eadb703c}</Project>
+      <Name>Senparc.WebSocket</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ThirdParty\Senparc.Weixin.MP.MvcExtension\Senparc.Weixin.MP.MvcExtension\Senparc.Weixin.MP.MvcExtension.csproj">
       <Project>{ee8630bc-6191-4c40-9061-12c76342562d}</Project>
       <Name>Senparc.Weixin.MP.MvcExtension</Name>
@@ -122,6 +148,14 @@
     <ProjectReference Include="..\..\ThirdParty\Senparc.Weixin.MP\Senparc.Weixin.MP\Senparc.Weixin.MP.csproj">
       <Project>{1d815fbf-451c-4e23-939c-cb80172f445c}</Project>
       <Name>Senparc.Weixin.MP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdParty\Senparc.Weixin.Open\Senparc.Weixin.Open\Senparc.Weixin.Open.csproj">
+      <Project>{54732c3d-b673-4bbf-b0c3-6432e3d6f522}</Project>
+      <Name>Senparc.Weixin.Open</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ThirdParty\Senparc.Weixin.QY\Senparc.Weixin.QY\Senparc.Weixin.QY.csproj">
+      <Project>{2ca35598-f1a1-4dc9-aa20-a4346bfcb954}</Project>
+      <Name>Senparc.Weixin.QY</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ThirdParty\Senparc.Weixin.WxOpen\Senparc.Weixin.WxOpen.csproj">
       <Project>{379d8c97-4f96-45af-9f91-6bd160514495}</Project>
@@ -133,6 +167,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\Download\readme.txt" />
     <Content Include="Description.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -142,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Common\app.config" />
     <None Include="packages.config" />
     <Content Include="web.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -151,7 +187,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

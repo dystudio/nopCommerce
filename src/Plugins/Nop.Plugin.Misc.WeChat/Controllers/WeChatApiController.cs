@@ -7,6 +7,7 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Infrastructure;
 using Nop.Plugin.Misc.WeChat;
+using Nop.Plugin.Misc.WeChat.Handler;
 using Nop.Plugin.Misc.WeChat.Models;
 using Nop.Services.Catalog;
 using Nop.Services.Customers;
@@ -17,15 +18,17 @@ using RestSharp;
 using Senparc.Weixin;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.Entities.Request;
+using Senparc.Weixin.MP.MvcExtension;
 using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
 using Senparc.Weixin.WxOpen.Containers;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Nop.Plugin.Misc.WeChatRestService.Controllers
+namespace Nop.Plugin.Misc.WeChat.Controllers
 {
     public class WeChatApiController : BaseController
     {
@@ -77,66 +80,59 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 
         #endregion
 
-        
 
-        #region WeChat small app api
+
+        #region WeChat media plarform api
         /// <summary>
-        /// GET请求用于处理微信小程序后台的URL验证
+        /// 微信后台验证地址（使用Get），微信后台的“接口配置信息”的Url填写如：http://sdk.weixin.senparc.com/weixin
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [ActionName("Index")]
-        public ActionResult Get(PostModel postModel, string echostr)
+        public Task<ActionResult> Index(string signature, string timestamp, string nonce, string echostr)
         {
-            var token = _settings.Token;
-            if (CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, token))
+            return Task.Factory.StartNew(() =>
             {
-                return Content(echostr); //返回随机字符串则表示验证通过
-            }
-            else
-            {
-                return Content("failed:" + postModel.Signature + "," + CheckSignature.GetSignature(postModel.Timestamp, postModel.Nonce, token) + "。" +
-                    "如果你在浏览器中看到这句话，说明此地址可以被作为微信小程序后台的Url，请注意保持Token一致。");
-            }
+                if (CheckSignature.Check(signature, timestamp, nonce, _settings.Token))
+                {
+                    return echostr; //返回随机字符串则表示验证通过
+                }
+                else
+                {
+                    return "failed:" + signature + "," + CheckSignature.GetSignature(timestamp, nonce, _settings.Token) + "。" +
+                        "如果你在浏览器中看到这句话，说明此地址可以被作为微信公众账号后台的Url，请注意保持Token一致。";
+                }
+            }).ContinueWith<ActionResult>(task => Content(task.Result));
         }
+
 
         /// <summary>
-        /// wx.login登陆成功之后发送的请求
+        /// 最简化的处理流程
         /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
         [HttpPost]
-        public ActionResult OnLogin(string code)
+        [ActionName("Index")]
+        public Task<ActionResult> MiniPost(PostModel postModel)
         {
-            var jsonResult = SnsApi.JsCode2Json(_settings.AppId, _settings.AppSecret, code);
-            if (jsonResult.errcode == ReturnCode.请求成功)
+            return Task.Factory.StartNew<ActionResult>(() =>
             {
-                //Session["WxOpenUser"] = jsonResult;//使用Session保存登陆信息（不推荐）
-                //使用SessionContainer管理登录信息（推荐）
-                var sessionBag = SessionContainer.UpdateSession(null, jsonResult.openid, jsonResult.session_key);
+                if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, _settings.Token))
+                {
+                    return new WeixinResult("参数错误！");
+                }
 
-                //注意：生产环境下SessionKey属于敏感信息，不能进行传输！
-                return Json(new { success = true, msg = "OK", sessionId = sessionBag.Key, sessionKey = sessionBag.SessionKey });
-            }
-            else
-            {
-                return Json(new { success = false, msg = jsonResult.errmsg });
-            }
+                postModel.Token = _settings.Token;
+                postModel.EncodingAESKey = _settings.EncodingAESKey; //根据自己后台的设置保持一致
+                postModel.AppId = _settings.AppId; //根据自己后台的设置保持一致
+
+                var messageHandler = new NopMessageHandler(Request.InputStream, postModel, 10);
+
+                messageHandler.Execute(); //执行微信处理过程
+
+                return new FixWeixinBugWeixinResult(messageHandler);
+
+            }).ContinueWith<ActionResult>(task => task.Result);
         }
 
-        [HttpPost]
-        public ActionResult CheckWxOpenSignature(string sessionId, string rawData, string signature)
-        {
-            try
-            {
-                var checkSuccess = Senparc.Weixin.WxOpen.Helpers.EncryptHelper.CheckSignature(sessionId, rawData, signature);
-                return Json(new { success = checkSuccess, msg = checkSuccess ? "签名校验成功" : "签名校验失败" });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, msg = ex.Message });
-            }
-        }
-        #endregion     
+
+        #endregion
     }
 }
