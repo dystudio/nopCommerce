@@ -7,7 +7,6 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Infrastructure;
 using Nop.Plugin.Misc.WeChat;
-using Nop.Plugin.Misc.WeChat.Common;
 using Nop.Plugin.Misc.WeChat.Models;
 using Nop.Services.Catalog;
 using Nop.Services.Customers;

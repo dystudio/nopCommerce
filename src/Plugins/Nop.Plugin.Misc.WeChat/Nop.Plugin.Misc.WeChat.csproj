@@ -91,11 +91,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\ApiAuthorizer.cs" />
-    <Compile Include="Common\AuthorizationManager.cs" />
-    <Compile Include="Common\AuthorizationModel.cs" />
-    <Compile Include="Common\AuthParameters.cs" />
-    <Compile Include="Common\UserAccessModel.cs" />
     <Compile Include="Controllers\WeChatAdminController.cs" />
     <Compile Include="Controllers\WeChatApiController.cs" />
     <Compile Include="Models\APIResponse.cs" />
@@ -154,6 +149,9 @@
     <Content Include="Views\Configure.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
