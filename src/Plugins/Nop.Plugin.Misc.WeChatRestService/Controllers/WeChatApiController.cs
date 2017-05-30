@@ -146,8 +146,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ActionName("Index")]
-        public ActionResult Get(PostModel postModel, string echostr)
+        public ActionResult Index(PostModel postModel, string echostr)
         {
             var token = _settings.Token;
             if (CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, token))

@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Presentation\Nop.Web\Plugins\panoRazzi.RestService\</OutputPath>
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\Nop.Plugin.Misc.WeChatRestService\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -101,6 +101,7 @@
     <Compile Include="Models\APIResponse.cs" />
     <Compile Include="Models\ConfigureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteProvider.cs" />
     <Compile Include="WeChatRestServicePlugin.cs" />
     <Compile Include="WeChatRestServiceSettings.cs" />
   </ItemGroup>
