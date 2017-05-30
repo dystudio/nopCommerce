@@ -1,0 +1,9 @@
+﻿Group: Api
+FriendlyName: WeChat Media Platform
+SystemName: Nop.Plugin.Misc.WeChat
+Version: 1.00
+SupportedVersions: 3.90
+Author: dystudio.net
+DisplayOrder: 1
+FileName: Nop.Plugin.Misc.WeChat.dll
+Description: This plugin provides wechat api for media platform
