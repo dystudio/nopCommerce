@@ -170,8 +170,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
         /// 用户发送消息后，微信平台自动Post一个请求到这里，并等待响应XML。
         /// </summary>
         [HttpPost]
-        [ActionName("Index")]
-        public ActionResult Post(PostModel postModel)
+        public ActionResult Index(PostModel postModel)
         {
             if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, _settings.Token))
             {
