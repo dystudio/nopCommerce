@@ -30,7 +30,7 @@ namespace Nop.Plugin.Misc.WeChatRestService
             out RouteValueDictionary routeValues)
         {
             actionName = "Configure";
-            controllerName = "WeChatAdmin";
+            controllerName = "WeChatRestServiceAdmin";
             routeValues = new RouteValueDictionary() { { "Namespaces", "Nop.Plugin.Misc.WeChatRestService.Controllers" }, { "area", null } };
         }
 
