@@ -1,4 +1,4 @@
-﻿@model Nop.Plugin.Misc.WeChatRestService.Models.ConfigureModel
+﻿@model Nop.Plugin.Misc.WeChat.Models.ConfigureModel
 @using Nop.Web.Framework
 
 @using (Html.BeginForm())
@@ -7,13 +7,9 @@
 
     <div class="content-header clearfix">
         <h1 class="pull-left">
-            @T("Nop.Plugin.Misc.WeChatRestService.Configure.Title")
+            @T("Nop.Plugin.Misc.WeChat.Configure.Title")
         </h1>
         <div class="pull-right">
-            <button type="submit" name="save-continue" class="btn bg-blue generate-hash">
-                <i class="fa fa-floppy-o"></i>
-                @T("Nop.Plugin.Misc.WeChatRestService.GenerateHash")
-            </button>
             <button type="submit" name="save" class="btn bg-blue">
                 <i class="fa fa-floppy-o"></i>
                 @T("Admin.Common.Save")
@@ -31,15 +27,7 @@
             <div class="panel-group">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                @Html.NopLabelFor(model => model.ApiToken)
-                            </div>
-                            <div class="col-md-9">
-                                @Html.NopEditorFor(model => model.ApiToken)
-                                @Html.ValidationMessageFor(model => model.ApiToken)
-                            </div>
-                        </div>
+                       
                         <div class="form-group">
                             <div class="col-md-3">
                                 @Html.NopLabelFor(model => model.Token)
@@ -47,15 +35,6 @@
                             <div class="col-md-9">
                                 @Html.NopEditorFor(model => model.Token)
                                 @Html.ValidationMessageFor(model => model.Token)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                @Html.NopLabelFor(model => model.EncodingAESKey)
-                            </div>
-                            <div class="col-md-9">
-                                @Html.NopEditorFor(model => model.EncodingAESKey)
-                                @Html.ValidationMessageFor(model => model.EncodingAESKey)
                             </div>
                         </div>
                         <div class="form-group">
@@ -76,29 +55,18 @@
                                 @Html.ValidationMessageFor(model => model.AppSecret)
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.NopLabelFor(model => model.OriginalId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.NopEditorFor(model => model.OriginalId)
+                                @Html.ValidationMessageFor(model => model.OriginalId)
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var guid = (function () {
-                function s4() {
-                    return Math.floor((1 + Math.random()) * 0x10000)
-                        .toString(16)
-                        .substring(1);
-                }
-                return function () {
-                    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                        s4() + '-' + s4() + s4() + s4();
-                };
-            })();
-
-            $('.generate-hash').click(function (e) {
-                e.preventDefault();
-                $('#ApiToken').val(guid());
-            });
-        });
-    </script>
 }

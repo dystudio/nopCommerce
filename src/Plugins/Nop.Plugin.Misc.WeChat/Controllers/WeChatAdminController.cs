@@ -23,9 +23,8 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
         {
             var model = new ConfigureModel()
             {
-                ApiToken = _settings.ApiToken,
                 Token = _settings.Token,
-                EncodingAESKey = _settings.EncodingAESKey,
+                OriginalId = _settings.OriginalId,
                 AppId = _settings.AppId,
                 AppSecret=_settings.AppSecret
             };
@@ -36,9 +35,8 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
         [HttpPost]
         public ActionResult Configure(ConfigureModel model)
         {
-            _settings.ApiToken = model.ApiToken;
             _settings.Token = model.Token;
-            _settings.EncodingAESKey = model.EncodingAESKey;
+            _settings.OriginalId = model.OriginalId;
             _settings.AppId = model.AppId;
             _settings.AppSecret = model.AppSecret;
 
