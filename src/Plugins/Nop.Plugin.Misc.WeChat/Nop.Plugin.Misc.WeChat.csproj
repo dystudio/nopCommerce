@@ -112,12 +112,13 @@
     <Compile Include="Common\TemplateMessage\WxOpen\WxOpenTemplateMessage_PaySuccessNotice.cs" />
     <Compile Include="Common\Utilities\Server.cs" />
     <Compile Include="Controllers\WeChatAdminController.cs" />
-    <Compile Include="Controllers\WeChatApiController.cs" />
+    <Compile Include="Controllers\WeChatController.cs" />
     <Compile Include="Handlers\NopMessageContext.cs" />
     <Compile Include="Handlers\NopHandler.cs" />
     <Compile Include="Handlers\NopMessageHandler_Events.cs" />
     <Compile Include="Models\APIResponse.cs" />
     <Compile Include="Models\ConfigureModel.cs" />
+    <Compile Include="RouteProvider.cs" />
     <Compile Include="WeChatPlugin.cs" />
     <Compile Include="WeChatSettings.cs" />
   </ItemGroup>
