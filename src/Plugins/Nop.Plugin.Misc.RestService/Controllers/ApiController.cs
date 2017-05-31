@@ -10,6 +10,7 @@ using Nop.Plugin.Misc.RestService.Common;
 using Nop.Plugin.Misc.RestService.Models;
 using Nop.Services.Catalog;
 using Nop.Services.Customers;
+using Nop.Services.Logging;
 using Nop.Services.Orders;
 using Nop.Services.Vendors;
 using Nop.Web.Framework.Controllers;
@@ -38,6 +39,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         private IProductService _productService;
         private ICategoryService _categoryService;
         private ICacheManager _cacheManager;
+        private ILogger _logger;
         #endregion
 
         #region Ctor
@@ -54,7 +56,8 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             IStoreContext storeContext,
             IProductService productService,
             ICategoryService categoryService,
-            ICacheManager cacheManager)
+            ICacheManager cacheManager,
+            ILogger logger)
         {
             _customerService = customerService;
             _orderService = orderService;
@@ -68,6 +71,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             _productService = productService;
             _categoryService = categoryService;
             _cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
+            _logger = logger;
         }
 
         #endregion
@@ -82,7 +86,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
 
             var state = Guid.NewGuid();
 
-            var serverUrl = string.Format(@"{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
+            var serverUrl = string.Format(@"{0}://{1}", Request.Url.Scheme, Request.Url.Host);
             var redirectUrl = string.Format(@"{0}/api/GetToken",serverUrl);
             var client = new RestClient(serverUrl);
             var request = new RestRequest("/oauth/authorize", Method.GET);
