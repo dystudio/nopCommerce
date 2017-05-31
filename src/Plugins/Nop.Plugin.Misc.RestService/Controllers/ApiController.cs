@@ -85,8 +85,9 @@ namespace Nop.Plugin.Misc.RestService.Controllers
                 return InvalidApiToken(apiToken);
 
             var state = Guid.NewGuid();
-
-            var serverUrl = string.Format(@"{0}://{1}", Request.Url.Scheme, Request.Url.Host);
+            var sslEnabled = _settings.SslEnabled;
+            var scheme = sslEnabled ? "https" : "http";
+            var serverUrl = string.Format(@"{0}://{1}", scheme, Request.Url.Host);
             var redirectUrl = string.Format(@"{0}/api/GetToken",serverUrl);
             var client = new RestClient(serverUrl);
             var request = new RestRequest("/oauth/authorize", Method.GET);
@@ -108,6 +109,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
                 };
             });
             IRestResponse response = client.Execute(request);
+       
             var accessTokenViewModel = JsonConvert.DeserializeObject<AccessTokenViewModel>(response.Content); // raw content as json string
             return Json(accessTokenViewModel, JsonRequestBehavior.AllowGet);
         }

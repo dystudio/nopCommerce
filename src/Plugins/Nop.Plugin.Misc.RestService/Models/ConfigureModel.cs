@@ -5,5 +5,6 @@ namespace Nop.Plugin.Misc.RestService.Models
     public class ConfigureModel : BaseNopModel
     {
         public string ApiToken { get; set; }
+        public bool SslEnabled { get; set; }
     }
 }
