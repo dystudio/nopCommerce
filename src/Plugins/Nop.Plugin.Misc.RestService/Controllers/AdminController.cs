@@ -23,7 +23,8 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         {
             var model = new ConfigureModel()
             {
-                ApiToken = _settings.ApiToken
+                ApiToken = _settings.ApiToken,
+                SslEnabled = _settings.SslEnabled
             };
 
             return View("~/Plugins/Nop.Plugin.Misc.RestService/Views/Configure.cshtml", model);
@@ -33,6 +34,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         public ActionResult Configure(ConfigureModel model)
         {
             _settings.ApiToken = model.ApiToken;
+            _settings.SslEnabled = model.SslEnabled;
             
             _settingService.SaveSetting(_settings);
             SuccessNotification("Settings saved..");
