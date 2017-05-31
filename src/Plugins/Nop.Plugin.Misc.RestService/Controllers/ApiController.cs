@@ -86,8 +86,12 @@ namespace Nop.Plugin.Misc.RestService.Controllers
 
             var state = Guid.NewGuid();
             var sslEnabled = _settings.SslEnabled;
-            var scheme = sslEnabled ? "https" : "http";
-            var serverUrl = string.Format(@"{0}://{1}", scheme, Request.Url.Host);
+
+
+            var scheme = sslEnabled ? "https" : "http";      
+            var serverUrl = Request.Url.IsDefaultPort ? 
+                string.Format(@"{0}://{1}", scheme, Request.Url.Host) : string.Format(@"{0}://{1}:{2}", scheme, Request.Url.Host,Request.Url.Port);
+
             var redirectUrl = string.Format(@"{0}/api/GetToken",serverUrl);
             var client = new RestClient(serverUrl);
             var request = new RestRequest("/oauth/authorize", Method.GET);
