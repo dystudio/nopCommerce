@@ -75,6 +75,40 @@ namespace Nop.Plugin.Misc.RestService.Controllers
         #region Access Token
         [AllowAnonymous]
         [HttpGet]
+        public ActionResult Authorize(string clientId, string clientSecret, string apiToken)
+        {
+            if (!IsApiTokenValid(apiToken))
+                return InvalidApiToken(apiToken);
+
+            var state = Guid.NewGuid();
+
+            var serverUrl = string.Format(@"{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
+            var redirectUrl = string.Format(@"{0}/api/GetToken",serverUrl);
+            var client = new RestClient(serverUrl);
+            var request = new RestRequest("/oauth/authorize", Method.GET);
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("client_id", clientId); // adds to POST or URL querystring based on Method
+            request.AddParameter("redirect_uri", redirectUrl);
+            request.AddParameter("response_type", "code");
+            request.AddParameter("state", state);
+
+            var cachedUserAccessModel = _cacheManager.Get(state.ToString(), () =>
+            {
+                return new UserAccessModel
+                {
+                    ClientId = clientId,
+                    ClientSecret = clientSecret,
+                    RedirectUrl = redirectUrl,
+                    ServerUrl = serverUrl
+                };
+            });
+            IRestResponse response = client.Execute(request);
+            var accessTokenViewModel = JsonConvert.DeserializeObject<AccessTokenViewModel>(response.Content); // raw content as json string
+            return Json(accessTokenViewModel, JsonRequestBehavior.AllowGet);
+        }
+        [AllowAnonymous]
+        [HttpGet]
         public ActionResult GetAccessToken(string clientId, string clientSecret, string serverUrl, string redirectUrl, string apiToken)
         {
             if (!IsApiTokenValid(apiToken))
