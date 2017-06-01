@@ -277,7 +277,8 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 var sessionBag = SessionContainer.UpdateSession(null, jsonResult.openid, jsonResult.session_key);
 
                 //注意：生产环境下SessionKey属于敏感信息，不能进行传输！
-                return Json(new { success = true, msg = "OK", sessionId = sessionBag.Key, sessionKey = sessionBag.SessionKey });
+                //return Json(new { success = true, msg = "OK", sessionId = sessionBag.Key,openId = sessionBag.OpenId, sessionKey = sessionBag.SessionKey });
+                return Json(new { success = true, msg = "OK", sessionId = sessionBag.Key, openId = sessionBag.OpenId });
             }
             else
             {
