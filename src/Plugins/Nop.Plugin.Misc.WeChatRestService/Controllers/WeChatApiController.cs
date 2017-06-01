@@ -27,6 +27,8 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using Nop.Plugin.Misc.WeChatRestService.DTOs;
+using Nop.Services.Events;
 
 namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 {
@@ -46,6 +48,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
         private IProductService _productService;
         private ICategoryService _categoryService;
         private ICacheManager _cacheManager;
+        private IEventPublisher _eventPublisher;
 
         readonly Func<string> _getRandomFileName = () => DateTime.Now.ToString("yyyyMMdd-HHmmss") + Guid.NewGuid().ToString("n").Substring(0, 6);
 
@@ -65,7 +68,8 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             IStoreContext storeContext,
             IProductService productService,
             ICategoryService categoryService,
-            ICacheManager cacheManager)
+            ICacheManager cacheManager,
+            IEventPublisher eventPublisher)
         {
             _customerService = customerService;
             _orderService = orderService;
@@ -79,6 +83,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             _productService = productService;
             _categoryService = categoryService;
             _cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
+            _eventPublisher = eventPublisher;
         }
 
         #endregion
@@ -284,6 +289,35 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             {
                 return Json(new { success = false, msg = jsonResult.errmsg });
             }
+        }
+
+        /// <summary>
+        /// wx.login登陆成功之后发送的请求成功之后回调此函数，用来获取客户信息或者创建客户
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult GetOrCreateCustomer(UserInfoDto userInfo)
+        {
+            if (string.IsNullOrEmpty(userInfo.OpenId))
+                return Json(new { success = false, msg = "openId could not be empty" });
+
+            var currentCustomer = _customerService.InsertGuestCustomer();
+            currentCustomer.RegisteredInStoreId = _storeContext.CurrentStore.Id;
+            bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
+            currentCustomer.Active = isApproved;
+            currentCustomer.Username = userInfo.OpenId;
+            currentCustomer.CustomerGuid = Guid.NewGuid();
+            //TODO more property to be set
+            currentCustomer.SystemName = userInfo.OpenId;
+            currentCustomer.IsSystemAccount = false;
+
+            _customerService.UpdateCustomer(currentCustomer);
+            //raise event       
+            _eventPublisher.Publish(new CustomerRegisteredEvent(currentCustomer));
+
+            return Json(new { success = true, Customer = currentCustomer, msg = "OK" });
+
         }
 
         [HttpPost]

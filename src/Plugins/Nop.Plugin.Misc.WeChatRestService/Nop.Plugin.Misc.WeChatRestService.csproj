@@ -98,6 +98,7 @@
     <Compile Include="Common\UserAccessModel.cs" />
     <Compile Include="Controllers\WeChatRestServiceAdminController.cs" />
     <Compile Include="Controllers\WeChatApiController.cs" />
+    <Compile Include="DTOs\UserInfoDto.cs" />
     <Compile Include="Handlers\CustomWxOpenMessageContext.cs" />
     <Compile Include="Handlers\CustomWxOpenMessageHandler.cs" />
     <Compile Include="Models\APIResponse.cs" />
