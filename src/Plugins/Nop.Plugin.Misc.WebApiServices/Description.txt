@@ -1,0 +1,9 @@
+﻿Group: Misc
+FriendlyName: Web Api Services
+SystemName: Misc.WebApiServices
+Version: 1.00
+SupportedVersions: 3.40
+Author: Idrees Khan, Martware Team
+DisplayOrder: 0
+FileName: Nop.Plugin.Misc.WebApiServices.dll
+Description: This plugin provides base api for rest service plugin

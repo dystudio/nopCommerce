@@ -302,20 +302,25 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             if (string.IsNullOrEmpty(userInfo.OpenId))
                 return Json(new { success = false, msg = "openId could not be empty" });
 
-            var currentCustomer = _customerService.InsertGuestCustomer();
-            currentCustomer.RegisteredInStoreId = _storeContext.CurrentStore.Id;
-            bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
-            currentCustomer.Active = isApproved;
-            currentCustomer.Username = userInfo.OpenId;
-            currentCustomer.CustomerGuid = Guid.NewGuid();
-            //TODO more property to be set
-            currentCustomer.SystemName = userInfo.OpenId;
-            currentCustomer.IsSystemAccount = false;
+            var currentCustomer = _customerService.GetCustomerByUsername(userInfo.OpenId);
 
-            _customerService.UpdateCustomer(currentCustomer);
-            //raise event       
-            _eventPublisher.Publish(new CustomerRegisteredEvent(currentCustomer));
+            if (currentCustomer == null)
+            {
+                currentCustomer = _customerService.InsertGuestCustomer();
+                currentCustomer.RegisteredInStoreId = _storeContext.CurrentStore.Id;
+                bool isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
+                currentCustomer.Active = isApproved;
+                currentCustomer.Username = userInfo.OpenId;
+                currentCustomer.CustomerGuid = Guid.NewGuid();
+                //TODO more property to be set
+                currentCustomer.SystemName = userInfo.OpenId;
+                currentCustomer.IsSystemAccount = false;
 
+                _customerService.UpdateCustomer(currentCustomer);
+                //raise event       
+                _eventPublisher.Publish(new CustomerRegisteredEvent(currentCustomer));
+            }
+            
             return Json(new { success = true, Customer = currentCustomer, msg = "OK" });
 
         }
