@@ -23,7 +23,7 @@ using System.Web.Mvc;
 
 namespace Nop.Plugin.Misc.RestService.Controllers
 {
-    public class ApiController : BaseController
+    public class RestApiController : BaseController
     {
         #region Fields
 
@@ -44,7 +44,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
 
         #region Ctor
 
-        public ApiController(
+        public RestApiController(
             ICustomerService customerService,
             IOrderService orderService,
             IWorkContext workContext,
@@ -92,7 +92,7 @@ namespace Nop.Plugin.Misc.RestService.Controllers
             var serverUrl = Request.Url.IsDefaultPort ? 
                 string.Format(@"{0}://{1}", scheme, Request.Url.Host) : string.Format(@"{0}://{1}:{2}", scheme, Request.Url.Host,Request.Url.Port);
 
-            var redirectUrl = string.Format(@"{0}/api/GetToken",serverUrl);
+            var redirectUrl = string.Format(@"{0}/RestApi/GetToken",serverUrl);
             var client = new RestClient(serverUrl);
             var request = new RestRequest("/oauth/authorize", Method.GET);
             request.AddHeader("Accept", "application/json");

@@ -1,5 +1,6 @@
 ﻿using Nop.Core.Domain.Catalog;
 using Nop.Core.Infrastructure;
+using Nop.Plugin.Api.Attributes;
 using Nop.Plugin.Misc.WebApiServices.Security;
 using Nop.Services.Catalog;
 using Nop.Services.Security;
@@ -26,8 +27,8 @@ namespace Nop.Plugin.Misc.WebApiServices.Controllers
         public List<string> Get()
         {
             //valdiate whether we can access this web service
-            if (!_permissionSettings.Authorize(WebServicePermissionProvider.AccessWebApiService))
-                throw new ApplicationException("Not allowed to access web service");
+            //if (!_permissionSettings.Authorize(WebServicePermissionProvider.AccessWebApiService))
+            //    throw new ApplicationException("Not allowed to access web service");
 
             return _categoryService.GetAllCategories()
                                     .Select(c => c.Name)

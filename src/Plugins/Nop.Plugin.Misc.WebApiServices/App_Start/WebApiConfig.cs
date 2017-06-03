@@ -42,11 +42,11 @@ namespace Nop.Plugin.Misc.WebApiServices
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApiForPlugin",
-                routeTemplate: "Plugins/{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            //config.Routes.MapHttpRoute(
+            //    name: "DefaultApiForPlugin",
+            //    routeTemplate: "Plugins/{controller}/{action}/{id}",
+            //    defaults: new { id = RouteParameter.Optional }
+            //);
 
 
 
