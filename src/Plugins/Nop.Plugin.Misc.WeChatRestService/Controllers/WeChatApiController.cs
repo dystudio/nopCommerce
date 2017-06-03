@@ -321,7 +321,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 _eventPublisher.Publish(new CustomerRegisteredEvent(currentCustomer));
             }
             
-            return Json(new { success = true, Customer = currentCustomer, msg = "OK" });
+            return Json(new { success = true, Customer = new { currentCustomer.Id,currentCustomer.SystemName,currentCustomer.Username}, msg = "OK" });
 
         }
 
