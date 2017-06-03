@@ -1,4 +1,4 @@
-﻿Group: Misc
+﻿Group: Api
 FriendlyName: Web Api Services
 SystemName: Misc.WebApiServices
 Version: 1.00
