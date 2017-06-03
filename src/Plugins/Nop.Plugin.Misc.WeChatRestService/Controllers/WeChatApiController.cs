@@ -29,6 +29,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Nop.Plugin.Misc.WeChatRestService.DTOs;
 using Nop.Services.Events;
+using Nop.Services.Common;
 
 namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 {
@@ -49,6 +50,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
         private ICategoryService _categoryService;
         private ICacheManager _cacheManager;
         private IEventPublisher _eventPublisher;
+        private readonly IGenericAttributeService _genericAttributeService;
 
         readonly Func<string> _getRandomFileName = () => DateTime.Now.ToString("yyyyMMdd-HHmmss") + Guid.NewGuid().ToString("n").Substring(0, 6);
 
@@ -69,7 +71,8 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             IProductService productService,
             ICategoryService categoryService,
             ICacheManager cacheManager,
-            IEventPublisher eventPublisher)
+            IEventPublisher eventPublisher,
+            IGenericAttributeService genericAttributeService)
         {
             _customerService = customerService;
             _orderService = orderService;
@@ -84,6 +87,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             _categoryService = categoryService;
             _cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
             _eventPublisher = eventPublisher;
+            _genericAttributeService = genericAttributeService;
         }
 
         #endregion
@@ -315,6 +319,27 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 //TODO more property to be set
                 currentCustomer.SystemName = userInfo.OpenId;
                 currentCustomer.IsSystemAccount = false;
+
+                if (_customerSettings.GenderEnabled) {
+                    string gender = string.Empty;
+                    switch (userInfo.Gender)
+                    {
+                        case "1":
+                            gender = "M";
+                            break;
+                        case "2":
+                            gender = "F";
+                            break;
+                        default:
+                            gender = "M";
+                            break;
+                    }
+                    _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.Gender, gender);
+                }
+                if (_customerSettings.CityEnabled)
+                    _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.City, userInfo.City);
+                if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
+                    _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.StateProvinceId,userInfo.Province);
 
                 _customerService.UpdateCustomer(currentCustomer);
                 //raise event       
