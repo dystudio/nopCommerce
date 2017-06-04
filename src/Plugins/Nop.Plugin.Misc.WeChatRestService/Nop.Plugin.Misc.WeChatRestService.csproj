@@ -96,6 +96,7 @@
     <Compile Include="Common\AuthorizationModel.cs" />
     <Compile Include="Common\AuthParameters.cs" />
     <Compile Include="Common\UserAccessModel.cs" />
+    <Compile Include="Constants\WeChatCustomerAttributeNames.cs" />
     <Compile Include="Controllers\WeChatRestServiceAdminController.cs" />
     <Compile Include="Controllers\WeChatApiController.cs" />
     <Compile Include="DTOs\UserInfoDto.cs" />

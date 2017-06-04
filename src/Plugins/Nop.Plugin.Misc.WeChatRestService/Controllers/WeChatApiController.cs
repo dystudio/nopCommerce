@@ -30,6 +30,7 @@ using System.Web.Mvc;
 using Nop.Plugin.Misc.WeChatRestService.DTOs;
 using Nop.Services.Events;
 using Nop.Services.Common;
+using Nop.Plugin.Misc.WeChatRestService.Constants;
 
 namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 {
@@ -306,7 +307,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
             if (string.IsNullOrEmpty(userInfo.OpenId))
                 return Json(new { success = false, msg = "openId could not be empty" });
 
-            var currentCustomer = _customerService.GetCustomerByUsername(userInfo.OpenId);
+            var currentCustomer = _customerService.GetCustomerBySystemName(userInfo.OpenId);
 
             if (currentCustomer == null)
             {
@@ -316,7 +317,6 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 currentCustomer.Active = isApproved;
                 currentCustomer.Username = userInfo.OpenId;
                 currentCustomer.CustomerGuid = Guid.NewGuid();
-                //TODO more property to be set
                 currentCustomer.SystemName = userInfo.OpenId;
                 currentCustomer.IsSystemAccount = false;
 
@@ -340,6 +340,16 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                     _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.City, userInfo.City);
                 if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
                     _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.StateProvinceId,userInfo.Province);
+
+                //for wechat specific property
+                _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.OpenId, userInfo.OpenId);
+                _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.NickName, userInfo.NickName);
+                _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.Gender, userInfo.Gender);
+                _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.City, userInfo.City);
+                _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.Province, userInfo.Province);
+                _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.AvatarUrl, userInfo.AvatarUrl);
+                _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.UnionId, userInfo.UnionId);
+
 
                 _customerService.UpdateCustomer(currentCustomer);
                 //raise event       
