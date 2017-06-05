@@ -31,6 +31,7 @@ using Nop.Plugin.Misc.WeChatRestService.DTOs;
 using Nop.Services.Events;
 using Nop.Services.Common;
 using Nop.Plugin.Misc.WeChatRestService.Constants;
+using Nop.Plugin.Api.MappingExtensions;
 
 namespace Nop.Plugin.Misc.WeChatRestService.Controllers
 {
@@ -320,7 +321,8 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 currentCustomer.SystemName = userInfo.OpenId;
                 currentCustomer.IsSystemAccount = false;
 
-                if (_customerSettings.GenderEnabled) {
+                if (_customerSettings.GenderEnabled)
+                {
                     string gender = string.Empty;
                     switch (userInfo.Gender)
                     {
@@ -339,7 +341,7 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 if (_customerSettings.CityEnabled)
                     _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.City, userInfo.City);
                 if (_customerSettings.CountryEnabled && _customerSettings.StateProvinceEnabled)
-                    _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.StateProvinceId,userInfo.Province);
+                    _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.StateProvinceId, userInfo.Province);
 
                 //for wechat specific property
                 _genericAttributeService.SaveAttribute(currentCustomer, WeChatCustomerAttributeNames.OpenId, userInfo.OpenId);
@@ -355,8 +357,25 @@ namespace Nop.Plugin.Misc.WeChatRestService.Controllers
                 //raise event       
                 _eventPublisher.Publish(new CustomerRegisteredEvent(currentCustomer));
             }
-            
-            return Json(new { success = true, Customer = new { currentCustomer.Id,currentCustomer.SystemName,currentCustomer.Username}, msg = "OK" });
+
+            var customerDto = currentCustomer.ToDto();
+
+            return Json(new
+            {
+                success = true,
+                Customer = customerDto,
+                Attributes = new
+                {
+                    OpenId = currentCustomer.GetAttribute<string>(WeChatCustomerAttributeNames.OpenId),
+                    NickName = currentCustomer.GetAttribute<string>(WeChatCustomerAttributeNames.NickName),
+                    Gender = currentCustomer.GetAttribute<string>(WeChatCustomerAttributeNames.Gender),
+                    City = currentCustomer.GetAttribute<string>(WeChatCustomerAttributeNames.City),
+                    Province = currentCustomer.GetAttribute<string>(WeChatCustomerAttributeNames.Province),
+                    AvatarUrl = currentCustomer.GetAttribute<string>(WeChatCustomerAttributeNames.AvatarUrl),
+                    UnionId = currentCustomer.GetAttribute<string>(WeChatCustomerAttributeNames.UnionId)
+                },
+                msg = "OK"
+            });
 
         }
 
