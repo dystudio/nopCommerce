@@ -28,7 +28,7 @@
                         <div class="form-group">
                             <div class="col-md-3">
                                 @Html.OverrideStoreCheckboxFor(model => model.ClientKeyIdentifier_OverrideForStore, model => model.ClientKeyIdentifier, Model.ActiveStoreScopeConfiguration)
-                                @Html.NopLabelFor(model => model.ClientKeyIdentifier):
+                                @Html.NopLabelFor(model => model.ClientKeyIdentifier)
                             </div>
                             <div class="col-md-9">
                                 @Html.EditorFor(model => model.ClientKeyIdentifier)
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <div class="col-md-3">
                                 @Html.OverrideStoreCheckboxFor(model => model.ClientSecret_OverrideForStore, model => model.ClientSecret, Model.ActiveStoreScopeConfiguration)
-                                @Html.NopLabelFor(model => model.ClientSecret):
+                                @Html.NopLabelFor(model => model.ClientSecret)
                             </div>
                             <div class="col-md-9">
                                 @Html.EditorFor(model => model.ClientSecret)
