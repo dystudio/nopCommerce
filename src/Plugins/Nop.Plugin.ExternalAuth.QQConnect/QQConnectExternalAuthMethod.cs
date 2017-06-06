@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace Nop.Plugin.ExternalAuth.QQConnect
 {
-	public class QQConnectExternalAuthMethod : BasePlugin, IExternalAuthenticationMethod, IPlugin
+	public class QQConnectExternalAuthMethod : BasePlugin, IExternalAuthenticationMethod
 	{
 		private readonly ISettingService _settingService;
 
