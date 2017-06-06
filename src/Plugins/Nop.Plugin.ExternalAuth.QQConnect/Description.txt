@@ -2,7 +2,7 @@
 FriendlyName: QQConnect authentication
 SystemName: ExternalAuth.QQConnect
 Version: 1.0
-SupportedVersions: 3.70
-Author: lotosbin@gmail.com
+SupportedVersions: 3.90
+Author: dystudio.net
 DisplayOrder: 5
 FileName: Nop.Plugin.ExternalAuth.QQConnect.dll
