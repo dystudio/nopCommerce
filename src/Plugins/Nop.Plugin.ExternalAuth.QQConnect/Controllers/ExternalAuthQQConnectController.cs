@@ -9,6 +9,7 @@ using Nop.Services.Configuration;
 using Nop.Services.Localization;
 using Nop.Services.Security;
 using Nop.Services.Stores;
+using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
 using System;
 using System.Collections.Generic;
@@ -139,29 +140,53 @@ namespace Nop.Plugin.ExternalAuth.QQConnect.Controllers
 		[NonAction]
 		private ActionResult LoginInternal(string returnUrl, bool verifyResponse)
 		{
-            // 
-            // Current member / type: System.Web.Mvc.ActionResult Nop.Plugin.ExternalAuth.QQConnect.Controllers.ExternalAuthQQConnectController::LoginInternal(System.String,System.Boolean)
-            // File path: E:\cio\dystudio\nop\plugin\ExternalAuth.QQConnect\Nop.Plugin.ExternalAuth.QQConnect.dll
-            // 
-            // Product version: 2017.2.502.1
-            // Exception in: System.Web.Mvc.ActionResult LoginInternal(System.String,System.Boolean)
-            // 
-            // GoTo misplaced.
-            //    在 ..( ,  ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\StatementDecompilerStep.cs:行号 196
-            //    在 ..( ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\StatementDecompilerStep.cs:行号 114
-            //    在 ..(DecompilationContext ,  ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\StatementDecompilerStep.cs:行号 71
-            //    在 ..(MethodBody ,  , ILanguage ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\DecompilationPipeline.cs:行号 88
-            //    在 ..(MethodBody , ILanguage ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\DecompilationPipeline.cs:行号 70
-            //    在 Telerik.JustDecompiler.Decompiler.Extensions.( , ILanguage , MethodBody , DecompilationContext& ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\Extensions.cs:行号 95
-            //    在 Telerik.JustDecompiler.Decompiler.Extensions.(MethodBody , ILanguage , DecompilationContext& ,  ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\Extensions.cs:行号 58
-            //    在 ..(ILanguage , MethodDefinition ,  ) 位置 C:\Builds\556\Behemoth\ReleaseBranch Production Build NT\Sources\OpenSource\Cecil.Decompiler\Decompiler\WriterContextServices\BaseWriterContextService.cs:行号 117
-            // 
-            // mailto: JustDecompilePublicFeedback@telerik.com
-            return null;
+            IExternalAuthenticationMethod processor = this._openAuthenticationService.LoadExternalAuthenticationMethodBySystemName("ExternalAuth.QQConnect");
+            bool flag = processor == null 
+                || !OpenAuthenticationExtensions.IsMethodActive(processor, this._externalAuthenticationSettings) 
+                || !processor.PluginDescriptor.Installed 
+                || !this._pluginFinder.AuthenticateStore(processor.PluginDescriptor, this._storeContext.CurrentStore.Id);
+            if (flag)
+            {
+                throw new NopException("QQConnect module cannot be loaded");
+            }
+            LoginModel viewModel = new LoginModel();
+            base.TryUpdateModel<LoginModel>(viewModel);
+            AuthorizeState result = this._oAuthProviderQQConnectAuthorizer.Authorize(returnUrl, new bool?(verifyResponse));
+            switch (result.AuthenticationStatus)
+            {
+                case OpenAuthenticationStatus.Error:
+                    {
+                        if (!result.Success)
+                            foreach (var error in result.Errors)
+                                ExternalAuthorizerHelper.AddErrorsToDisplay(error);
 
-		}
+                        return new RedirectResult(Url.LogOn(returnUrl));
+                    }
+                case OpenAuthenticationStatus.AssociateOnLogon:
+                    {
+                        return new RedirectResult(Url.LogOn(returnUrl));
+                    }
+                case OpenAuthenticationStatus.AutoRegisteredEmailValidation:
+                    {
+                        //result
+                        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.EmailValidation });
+                    }
+                case OpenAuthenticationStatus.AutoRegisteredAdminApproval:
+                    {
+                        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.AdminApproval });
+                    }
+                case OpenAuthenticationStatus.AutoRegisteredStandard:
+                    {
+                        return RedirectToRoute("RegisterResult", new { resultId = (int)UserRegistrationType.Standard });
+                    }
+                default:
+                    break;
+            }
+            if (result.Result != null) return result.Result;
+            return HttpContext.Request.IsAuthenticated ? new RedirectResult(!string.IsNullOrEmpty(returnUrl) ? returnUrl : "~/") : new RedirectResult(Url.LogOn(returnUrl));
+        }
 
-		[ChildActionOnly]
+        [ChildActionOnly]
 		public ActionResult PublicInfo()
 		{
 			return base.View("~/Plugins/ExternalAuth.QQConnect/Views/ExternalAuthQQConnect/PublicInfo.cshtml");
