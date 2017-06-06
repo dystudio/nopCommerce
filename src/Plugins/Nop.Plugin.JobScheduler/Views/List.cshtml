@@ -1,0 +1,202 @@
+﻿@using System.Linq
+@using Nop.Plugin.JobScheduler.Domain
+@using Nop.Services
+@using Nop.Web.Framework.UI
+@{
+    var layoutViewPath = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    Layout = layoutViewPath;
+
+    ViewBag.Title = T("Plugins.JobScheduler.Admin.Page.SchedulerList.Title").Text;
+
+    Html.SetActiveMenuItemSystemName("JobScheduler-SchedulerList-Menu");
+}
+
+@Html.AntiForgeryToken()
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        @T("Plugins.JobScheduler.Admin.Page.SchedulerList.Title")
+    </h1>
+    <div class="pull-right">
+        <a href="@Url.Action("ClearAllScheduler", "JobScheduler")" class="btn bg-blue">
+            <i class="fa fa-exclamation">
+                @T("Plugins.JobScheduler.Admin.Page.ClearAllScheduler")
+            </i>
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="job-Scheduler-grid"></div>
+
+                    <script>
+
+                        $(function() {
+                            $('#job-Scheduler-grid').kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read: {
+                                            url: "@Url.Action("SchedulerList", "JobScheduler")",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        update: {
+                                            url: "@Url.Action("SchedulerUpdate","JobScheduler")",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        destroy: {
+                                            url: "@Url.Action("SchedulerDelete","JobScheduler")",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data: addAntiForgeryToken
+                                        },
+                                        parameterMap: function(data, operation) {
+                                            if (operation != "read") {
+                                                return data;
+                                            } else {
+                                                return JSON.stringify(data);
+                                            }
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors: "Errors",
+                                        model: {
+                                            id: "Id",
+                                            fields: {
+                                                Name: { editable: true, type: "string" },
+                                                IntervalValue: { editable: true, type: "number" },
+                                                TimeIntervalId:{editable:true,type:"string"},
+                                                TimeIntervalDesc:{editable:true,type:"string"},
+                                                Enabled: { editable: true, type: "boolean" },
+                                                LastRunTime: { editable: false, type: "string" },
+                                                RunJobTime: { editable: false, type: "string" },
+                                                Id: { editable: false, type: "number" }
+                                            }
+                                        }
+                                    },
+                                    requestEnd: function(e) {
+                                        if (e.type == "create" || e.type == "update") {
+                                            this.read();
+                                        }
+                                    },
+                                    error: function(e) {
+                                        display_kendoui_grid_error(e);
+                                        this.cancelChanges();
+                                    },
+                                    serverPaging: true,
+                                    serverFiltering: true,
+                                    serverSorting: true
+                                },
+                                editable: {
+                                    confirmation: "@T("Admin.Common.DeleteConfirmation")",
+                                    mode: "inline"
+                                },
+                                scrollable: false,
+                                columns: [
+                                    {
+                                        field: "Name",
+                                        title: "@T("Plugins.JobScheduler.SchedulerList.Name")",
+                                        width: 300
+                                    }, {
+                                        field: "IntervalValue",
+                                        title: "@T("Plugins.JobScheduler.SchedulerList.IntervalValue")",
+                                        format: '{0:N0}',
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        width: 150
+                                    }, {
+                                        field: "TimeIntervalId",
+                                        title: "@T("Plugins.JobScheduler.SchedulerList.TimeIntervalDesc")",
+                                        editor:IntervalValueDropDownEditor,
+                                        template:"#:TimeIntervalDesc#",
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        width: 150
+                                    }, {
+                                        field: "Enabled",
+                                        title: "@T("Plugins.JobScheduler.SchedulerList.Enabled")",
+                                        width: 100,
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        template: '# if(Enabled){# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #}#',
+                                        editable: true
+                                    }, {
+                                        field: "LastRunTime",
+                                        title: "@T("Plugins.JobScheduler.SchedulerList.LastRunTime")",
+                                        width: 150
+                                    }, {
+                                        field: "RunJobTime",
+                                        title: "@T("Plugins.JobScheduler.SchedulerList.RunJobTime")",
+                                        width: 150
+                                    }, {
+                                        field:"Id",
+                                        title:"@T("Plugins.JobScheduler.Admin.Page.BeginRunScheduler")",
+                                        headerAttributes: { style: "text-align:center" },
+                                        attributes: { style: "text-align:center" },
+                                        width:150,
+                                        template:'<a href="@Url.Content("/Plugins/JobSchedulerAdmin/RunSchecdulerNow/")#=Id#" class="btn bg-green">@T("Plugins.JobScheduler.Admin.Page.BeginRunScheduler")</a>'
+                                    },{
+                                        command: [
+                                            {
+                                                name: "edit",
+                                                text:
+                                                    {
+                                                        edit: "@T("Admin.Common.Edit")",
+                                                        update: "@T("Admin.Common.Update")",
+                                                        cancel: "@T("Admin.Common.Cancel")"
+                                                    }
+                                            }, {
+                                                name: "destroy",
+                                                text: "@T("Admin.Common.Delete")"
+                                            }
+                                        ],
+                                        width: 200
+                                    }
+                                ]
+                            });
+                        });
+
+                        var intervalValueList = [
+                            {
+                                Id: 0,
+                                Name: "所有"
+                            }
+
+                            @{ var allIntervalValueList = TimeInterval.Second.ToSelectList().ToList(); }
+
+                        @foreach (var item in allIntervalValueList)
+                        {
+                            <text>
+                            , {
+                                Id:@item.Value,
+                                Name:"@item.Text"
+                            }
+                            </text>
+                        }
+                        ];
+
+                        function IntervalValueDropDownEditor(container, options) {
+                            $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:TimeIntervalId"/>')
+                                .appendTo(container)
+                                .kendoDropDownList({
+                                    autoBind:false,
+                                    dataSource:intervalValueList
+                                });
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

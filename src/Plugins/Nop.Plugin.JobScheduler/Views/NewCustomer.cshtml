@@ -1,0 +1,180 @@
+﻿@using Nop.Core.Infrastructure
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@model Nop.Plugin.JobScheduler.Models.VisitCustomerListModel
+@{
+    var layoutViewPath = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    Layout = layoutViewPath;
+
+    ViewBag.Title = T("Plugins.JobScheduler.Admin.Page.NewCustomer.Title").Text;
+
+    Html.SetActiveMenuItemSystemName("JobScheduler-NewCustomer-Menu");
+
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugins.JobScheduler.Admin.Page.NewCustomer.Title")
+        </h1>
+        <div class="pull-right"></div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default panel-search">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(x => x.SearchDateTime)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(x => x.SearchDateTime)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-5">
+                                <button type="button" id="search-new-customer" class="btn btn-primary btn-search">
+                                    <i class="fa fa-search">
+                                        @T("Admin.Common.Search")
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="new-customer-grid"></div>
+
+                    <script>
+
+                        $(function() {
+                            $('#new-customer-grid').kendoGrid({
+                                dataSource: {
+                                    type: "json",
+                                    transport: {
+                                        read:{
+                                            url: "@Url.Action("NewCustomerList","VisitCustomer")",
+                                            type: "POST",
+                                            dataType: "json",
+                                            data:additionalData
+                                        }
+                                    },
+                                    schema: {
+                                        data: "Data",
+                                        total: "Total",
+                                        errors:"Errors"
+                                    },
+                                    requestEnd:function(e) {
+                                        if (e.type == "read") {
+                                            var response = e.response;
+                                            if (response) {
+                                                extensionModel = e.response["ExtraData"];
+                                            }
+                                        }
+                                    },
+                                    error:function(e) {
+                                        display_kendoui_grid_error(e);
+                                        this.cancelChanges();
+                                    },
+                                    pageSize:@(defaultGridPageSize),
+                                    serverPaging:true,
+                                    serverFiltering:true,
+                                    serverSorting:true
+                                },
+                                pageable: {
+                                    refresh:true,
+                                    pageSizes:[@(gridPageSizes)]
+                                },
+                                scrollable:false,
+                                dataBound:onDataBound,
+                                columns:[
+                                {
+                                    field:"Email",
+                                    title:"@T("Plugins.JobScheduler.NewCustomer.Email")",
+                                    width:100
+                                },
+                                @if (Model.UsernamesEnabled)
+                                {
+                                  <text>{
+                                     field:"Username",
+                                     title:"@T("Plugins.JobScheduler.NewCustomer.Username")",
+                                    width:100
+                                },</text>
+                                }
+                                {
+                                    field:"RealName",
+                                    title:"@T("Plugins.JobScheduler.NewCustomer.RealName")",
+                                    width:100
+                                },{
+                                    field:"IsRegisterCustomer",
+                                    title:"@T("Plugins.JobScheduler.NewCustomer.IsRegisterCustomer")",
+                                    template:'# if(IsRegisterCustomer){# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #}#',
+                                    headerAttributes:{style:"text-align:center"},
+                                    attributes:{style:"text-align:center"},
+                                    width:50
+                                }, {
+                                    field:"VisitIpAddress",
+                                    title:"@T("Plugins.JobScheduler.NewCustomer.VisitIpAddress")",
+                                    width:150
+                                }, {
+                                    field:"VisitedTime",
+                                    title:"@T("Plugins.JobScheduler.NewCustomer.VisitedTime")",
+                                    width:150,
+                                    footerTemplate:'<div><strong id=\"visit-desc\"></strong><span id=\"visit-customer-count\"></span></div>'
+                                }]
+                            });
+                        });
+
+                    </script>
+
+                    <script type="text/javascript">
+
+                        var extensionModel = "";
+
+                        function additionalData() {
+                            var data = {
+                                SearchDateTime:$('#@Html.FieldIdFor(x=>x.SearchDateTime)').val()
+                            };
+                            addAntiForgeryToken(data);
+                            return data;
+                        }
+
+                        function onDataBound(e) {
+                            if (extensionModel != "") {
+                                if (extensionModel['VisitDateTime'] != "") {
+                                    $('#visit-desc').text(extensionModel['VisitDateTime'] + " (匿名/注册)人数：");
+                                } else {
+                                    $('#visit-desc').text("总(匿名/注册)人数：");
+                                }
+
+                                $('#visit-customer-count').text(extensionModel['VisitCustomerCount']);
+                            }
+                        }
+
+                        $(document).ready(function () {
+                            $("#@Html.FieldIdFor(x=>x.SearchDateTime)").kendoDatePicker({
+                                format:'yyyy-MM-dd'
+                            });
+
+                            $('#search-new-customer').click(function() {
+                                var grid = $('#new-customer-grid').data("kendoGrid");
+                                grid.dataSource.page(1);
+                                return false;
+                            });
+                        });
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+}

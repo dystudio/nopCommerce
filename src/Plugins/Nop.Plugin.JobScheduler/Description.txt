@@ -1,0 +1,9 @@
+﻿Group: JobScheduler
+FriendlyName: JobScheduler
+SystemName: Nop.Plugin.JobScheduler
+Version: 1.00
+SupportedVersions: 3.90
+Author: Huang ZhongQiu
+DisplayOrder: 1
+FileName: Nop.Plugin.JobScheduler.dll
+Description: This plugin provides a job Scheduler for your store
