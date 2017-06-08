@@ -139,6 +139,34 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             return Configure();
         }
 
+        [HttpGet]
+        //TODO
+        public ActionResult GetVerificationCode(VerificationCodeModel model)
+        {
+            if (!ModelState.IsValid)
+                return Configure();
+
+            var pluginDescriptor = _pluginFinder.GetPluginDescriptorBySystemName("Mobile.SMS.Alidayu");
+            if (pluginDescriptor == null)
+                throw new Exception("Cannot load the plugin");
+
+            var plugin = pluginDescriptor.Instance() as AlidayuSmsProvider;
+            if (plugin == null)
+                throw new Exception("Cannot load the plugin");
+
+            //load settings for a chosen store scope
+            var storeScope = GetActiveStoreScopeConfiguration(_storeService, _workContext);
+            var alidayuSettings = _settingService.LoadSetting<AlidayuSettings>(storeScope);
+
+            //test SMS send
+            if (plugin.SendSms(model.PhoneNumber, 0, alidayuSettings))
+                SuccessNotification(_localizationService.GetResource("Plugins.Sms.Alidayu.TestSuccess"));
+            else
+                ErrorNotification(_localizationService.GetResource("Plugins.Sms.Alidayu.TestFailed"));
+
+            return Configure();
+        }
+
         #endregion
     }
 }

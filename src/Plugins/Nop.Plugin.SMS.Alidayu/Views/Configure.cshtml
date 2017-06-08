@@ -49,6 +49,24 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.SslEnabled)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.SslEnabled)
+                        @Html.ValidationMessageFor(model => model.SslEnabled)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.SandboxEnabled)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.SandboxEnabled)
+                        @Html.ValidationMessageFor(model => model.SandboxEnabled)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
                         @Html.OverrideStoreCheckboxFor(model => model.PhoneNumber_OverrideForStore, model => model.PhoneNumber, Model.ActiveStoreScopeConfiguration)
                         @Html.NopLabelFor(model => model.PhoneNumber)
                     </div>

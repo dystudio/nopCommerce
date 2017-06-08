@@ -63,6 +63,7 @@
     <Compile Include="AlidayuSmsProvider.cs" />
     <Compile Include="Controllers\SmsAlidayuController.cs" />
     <Compile Include="Models\SmsAlidayuModel.cs" />
+    <Compile Include="Models\VerificationCodeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AlidayuSettings.cs" />
     <Compile Include="Infrastructure\Cache\OrderPlacedEventConsumer.cs" />
