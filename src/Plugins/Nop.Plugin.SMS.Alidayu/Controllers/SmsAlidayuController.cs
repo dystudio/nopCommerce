@@ -48,22 +48,21 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
         {
             //load settings for a chosen store scope
             var storeScope = GetActiveStoreScopeConfiguration(_storeService, _workContext);
-            var clickatellSettings = _settingService.LoadSetting<AlidayuSettings>(storeScope);
+            var alidayuSettings = _settingService.LoadSetting<AlidayuSettings>(storeScope);
 
             var model = new SmsAlidayuModel
             {
-                Enabled = clickatellSettings.Enabled,
-                ApiId = clickatellSettings.ApiId,
-                Password = clickatellSettings.Password,
-                Username = clickatellSettings.Username,
-                PhoneNumber = clickatellSettings.PhoneNumber,
+                Enabled = alidayuSettings.Enabled,
+                AppKey = alidayuSettings.AppKey,
+                AppSecret = alidayuSettings.AppSecret,
+                PhoneNumber = alidayuSettings.PhoneNumber,
                 ActiveStoreScopeConfiguration = storeScope
             };
 
             if (storeScope > 0)
             {
-                model.Enabled_OverrideForStore = _settingService.SettingExists(clickatellSettings, x => x.Enabled, storeScope);
-                model.PhoneNumber_OverrideForStore = _settingService.SettingExists(clickatellSettings, x => x.PhoneNumber, storeScope);
+                model.Enabled_OverrideForStore = _settingService.SettingExists(alidayuSettings, x => x.Enabled, storeScope);
+                model.PhoneNumber_OverrideForStore = _settingService.SettingExists(alidayuSettings, x => x.PhoneNumber, storeScope);
             }
 
             return View("~/Plugins/SMS.Alidayu/Views/Configure.cshtml", model);
@@ -79,23 +78,22 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
 
             //load settings for a chosen store scope
             var storeScope = GetActiveStoreScopeConfiguration(_storeService, _workContext);
-            var clickatellSettings = _settingService.LoadSetting<AlidayuSettings>(storeScope);
+            var alidayuSettings = _settingService.LoadSetting<AlidayuSettings>(storeScope);
 
             //save settings
-            clickatellSettings.Enabled = model.Enabled;
-            clickatellSettings.ApiId = model.ApiId;
-            clickatellSettings.Username = model.Username;
-            clickatellSettings.Password = model.Password;
-            clickatellSettings.PhoneNumber = model.PhoneNumber;
+            alidayuSettings.Enabled = model.Enabled;
+            alidayuSettings.AppKey = model.AppKey;
+            alidayuSettings.AppSecret = model.AppSecret;
+            alidayuSettings.PhoneNumber = model.PhoneNumber;
 
             /* We do not clear cache after each setting update.
              * This behavior can increase performance because cached settings will not be cleared 
              * and loaded from database after each update */
-            _settingService.SaveSetting(clickatellSettings, x => x.ApiId, storeScope, false);
-            _settingService.SaveSetting(clickatellSettings, x => x.Username, storeScope, false);
-            _settingService.SaveSetting(clickatellSettings, x => x.Password, storeScope, false);
-            _settingService.SaveSettingOverridablePerStore(clickatellSettings, x => x.Enabled, model.Enabled_OverrideForStore, storeScope, false);
-            _settingService.SaveSettingOverridablePerStore(clickatellSettings, x => x.PhoneNumber, model.PhoneNumber_OverrideForStore, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.AppKey, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.AppSecret, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.Enabled, storeScope, false);
+            _settingService.SaveSettingOverridablePerStore(alidayuSettings, x => x.Enabled, model.Enabled_OverrideForStore, storeScope, false);
+            _settingService.SaveSettingOverridablePerStore(alidayuSettings, x => x.PhoneNumber, model.PhoneNumber_OverrideForStore, storeScope, false);
 
             //now clear settings cache
             _settingService.ClearCache();
@@ -113,7 +111,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             if (!ModelState.IsValid)
                 return Configure();
 
-            var pluginDescriptor = _pluginFinder.GetPluginDescriptorBySystemName("Mobile.SMS.Clickatell");
+            var pluginDescriptor = _pluginFinder.GetPluginDescriptorBySystemName("Mobile.SMS.Alidayu");
             if (pluginDescriptor == null)
                 throw new Exception("Cannot load the plugin");
 
@@ -127,9 +125,9 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
 
             //test SMS send
             if (plugin.SendSms(model.TestMessage, 0, alidayuSettings))
-                SuccessNotification(_localizationService.GetResource("Plugins.Sms.Clickatell.TestSuccess"));
+                SuccessNotification(_localizationService.GetResource("Plugins.Sms.Alidayu.TestSuccess"));
             else
-                ErrorNotification(_localizationService.GetResource("Plugins.Sms.Clickatell.TestFailed"));
+                ErrorNotification(_localizationService.GetResource("Plugins.Sms.Alidayu.TestFailed"));
 
             return Configure();
         }

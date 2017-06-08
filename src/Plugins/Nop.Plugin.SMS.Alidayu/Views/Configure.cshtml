@@ -14,10 +14,9 @@
             <div class="panel-body">
                 <p>
                     To receive an SMS notification when an order is placed from your store you need to follow a few simple steps, which are shown below:<br />
-                    1. Register for a <a href="http://www.clickatell.com" target='_blank'>Clickatell account</a><br />
-                       Clickatell works with all countries and includes 100 free credits so you can test SMS notifications.<br />
-                    2. Set up new SOAP API. <br />
-                    3. Fill in the form below with your Clickatell account details, including the number you want the notification messages to be sent to.<br />
+                    1. Register for a <a href="https://www.alidayu.com/center/application/test" target='_blank'>alidayu account</a><br />
+                    2. Set up new app. <br />
+                    3. Fill in the form below with your alidayu account details, including the number you want the notification messages to be sent to.<br />
                        Now when you receive a new order, an SMS text message will be sent to the number you enter below automatically.
                 </p>
                 <div class="form-group">
@@ -32,29 +31,20 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        @Html.NopLabelFor(model => model.ApiId)
+                        @Html.NopLabelFor(model => model.AppKey)
                     </div>
                     <div class="col-md-9">
-                        @Html.NopEditorFor(model => model.ApiId)
-                        @Html.ValidationMessageFor(model => model.ApiId)
+                        @Html.NopEditorFor(model => model.AppKey)
+                        @Html.ValidationMessageFor(model => model.AppKey)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
-                        @Html.NopLabelFor(model => model.Username)
+                        @Html.NopLabelFor(model => model.AppSecret)
                     </div>
                     <div class="col-md-9">
-                        @Html.NopEditorFor(model => model.Username)
-                        @Html.ValidationMessageFor(model => model.Username)
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                        @Html.NopLabelFor(model => model.Password)
-                    </div>
-                    <div class="col-md-9">
-                        @Html.NopEditorFor(model => model.Password)
-                        @Html.ValidationMessageFor(model => model.Password)
+                        @Html.NopEditorFor(model => model.AppSecret)
+                        @Html.ValidationMessageFor(model => model.AppSecret)
                     </div>
                 </div>
                 <div class="form-group">
@@ -90,7 +80,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-9 col-md-offset-3">
-                        <input type="submit" name="test" class="btn btn-primary" value="@T("Plugins.Sms.Clickatell.SendTest")" />
+                        <input type="submit" name="test" class="btn btn-primary" value="@T("Plugins.Sms.Alidayu.SendTest")" />
                     </div>
                 </div>
             </div>

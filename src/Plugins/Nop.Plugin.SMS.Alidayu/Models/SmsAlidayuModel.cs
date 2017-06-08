@@ -10,14 +10,11 @@ namespace Nop.Plugin.SMS.Alidayu.Models
         public bool Enabled { get; set; }
         public bool Enabled_OverrideForStore { get; set; }
 
-        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.ApiId")]
-        public string ApiId { get; set; }
+        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.AppKey")]
+        public string AppKey { get; set; }
 
-        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.Username")]
-        public string Username { get; set; }
-
-        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.Password")]
-        public string Password { get; set; }
+        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.AppSecret")]
+        public string AppSecret { get; set; }
 
         [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.PhoneNumber")]
         public string PhoneNumber { get; set; }
