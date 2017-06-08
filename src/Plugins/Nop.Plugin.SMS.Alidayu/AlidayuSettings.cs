@@ -8,7 +8,14 @@ namespace Nop.Plugin.SMS.Alidayu
         /// Gets or sets the value indicting whether this SMS provider is enabled
         /// </summary>
         public bool Enabled { get; set; }
-
+        /// <summary>
+        /// Gets or sets the value indicting whether ssl is enabled
+        /// </summary>
+        public bool SslEnabled { get; set; }
+        /// <summary>
+        /// Gets or sets the value indicting whether sandbox is enabled
+        /// </summary>
+        public bool SandboxEnabled { get; set; }
         /// <summary>
         /// Gets or sets the AppKey
         /// </summary>
@@ -23,5 +30,10 @@ namespace Nop.Plugin.SMS.Alidayu
         /// Gets or sets the store owner phone number
         /// </summary>
         public string PhoneNumber { get; set; }
+        /// <summary>
+        /// Gets or sets the SmsTemplateCode for alidayu
+        /// </summary>
+        public string SmsTemplateCode { get; set; }
+        
     }
 }

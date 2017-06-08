@@ -10,6 +10,9 @@ using Nop.Services.Configuration;
 using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Orders;
+using Top.Api;
+using Top.Api.Request;
+using Top.Api.Response;
 
 namespace Nop.Plugin.SMS.Alidayu
 {
@@ -49,7 +52,7 @@ namespace Nop.Plugin.SMS.Alidayu
         /// </summary>
         /// <param name="text">Text</param>
         /// <param name="orderId">Order id</param>
-        /// <param name="settings">Clickatell settings</param>
+        /// <param name="settings">alidayu settings</param>
         /// <returns>True if SMS was successfully sent; otherwise false</returns>
         public bool SendSms(string text, int orderId, AlidayuSettings settings = null)
         {
@@ -62,28 +65,38 @@ namespace Nop.Plugin.SMS.Alidayu
             if (order != null)
                 text = string.Format("New order #{0} was placed for the total amount {1:0.00}", order.Id, order.OrderTotal);
 
-            //using (var smsClient = new ClickatellSmsClient(new BasicHttpBinding(), new EndpointAddress("http://api.clickatell.com/soap/document_literal/webservice")))
-            //{
-            //    //check credentials
-            //    var authentication = smsClient.auth(int.Parse(clickatellSettings.ApiId), clickatellSettings.Username, clickatellSettings.Password);
-            //    if (!authentication.ToUpperInvariant().StartsWith("OK"))
-            //    {
-            //        _logger.Error(string.Format("Clickatell SMS error: {0}", authentication));
-            //        return false;
-            //    }
+            var url = string.Empty;
+            if (alidayuSettings.SslEnabled)
+            {
+                url = alidayuSettings.SandboxEnabled? 
+                    AlidayuRequestUrl.SandboxHttpsRequestUrl: AlidayuRequestUrl.HttpsRequestUrl;
+            }
+            else
+            {
+                url = alidayuSettings.SandboxEnabled ?
+                   AlidayuRequestUrl.SandboxHttpRequestUrl : AlidayuRequestUrl.HttpRequestUrl;
+            }
 
-            //    //send SMS
-            //    var sessionId = authentication.Substring(4);
-            //    var result = smsClient.sendmsg(sessionId, int.Parse(clickatellSettings.ApiId), clickatellSettings.Username, clickatellSettings.Password,
-            //        text, new [] { clickatellSettings.PhoneNumber }, string.Empty, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            //        string.Empty, 0, string.Empty, string.Empty, string.Empty, 0).FirstOrDefault();
-
-            //    if (result == null || !result.ToUpperInvariant().StartsWith("ID"))
-            //    {
-            //        _logger.Error(string.Format("Clickatell SMS error: {0}", result));
-            //        return false;
-            //    }
-            //}
+            ITopClient client = new DefaultTopClient(url, _alidayuSettings.AppKey, _alidayuSettings.AppSecret);
+            AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+            req.Extend = "123456";
+            req.SmsType = "normal";
+            req.SmsFreeSignName = "阿里大于";
+            //验证码${code}，您正在进行${product}身份验证，打死不要告诉别人哦！
+            //New order ${orderId} was placed for the total amount ${OrderTotal}
+            //请创建短信消息模板：新订单 ${orderId}成功下单，订单总额 ${orderTotal}。
+            req.SmsParam = string.Format("{\"orderId\":\"{0}\",\"orderTotal\":\"{1}\"}", order.Id.ToString(),string.Format("{0:0.00}",order.OrderTotal));
+            req.RecNum = _alidayuSettings.PhoneNumber;
+            req.SmsTemplateCode = "SMS_585014";
+            AlibabaAliqinFcSmsNumSendResponse response = client.Execute(req);
+            if (response.IsError)
+            {
+                _logger.Error(string.Format("Alidayu SMS error: {0}", response.ErrMsg));
+            }
+            else
+            {
+                Console.WriteLine(response.Body);
+            }           
 
             //order note
             if (order != null)
@@ -130,6 +143,8 @@ namespace Nop.Plugin.SMS.Alidayu
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret.Hint", "Specify Alidayu API AppSecret.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber", "Phone number");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber.Hint", "Enter your phone number.");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode", "SmsTemplateCode");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode.Hint", "Enter your SmsTemplateCode.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage", "Message text");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage.Hint", "Enter text of the test message.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.SendTest", "Send");
@@ -157,6 +172,8 @@ namespace Nop.Plugin.SMS.Alidayu
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber.Hint");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.SendTest");

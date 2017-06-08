@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlidayuRequestUrl.cs" />
     <Compile Include="AlidayuSmsProvider.cs" />
     <Compile Include="Controllers\SmsAlidayuController.cs" />
     <Compile Include="Models\SmsAlidayuModel.cs" />

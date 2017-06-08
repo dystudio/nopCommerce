@@ -53,6 +53,8 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             var model = new SmsAlidayuModel
             {
                 Enabled = alidayuSettings.Enabled,
+                SslEnabled = alidayuSettings.SslEnabled,
+                SandboxEnabled = alidayuSettings.SandboxEnabled,
                 AppKey = alidayuSettings.AppKey,
                 AppSecret = alidayuSettings.AppSecret,
                 PhoneNumber = alidayuSettings.PhoneNumber,
@@ -82,6 +84,8 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
 
             //save settings
             alidayuSettings.Enabled = model.Enabled;
+            alidayuSettings.SslEnabled = model.SslEnabled;
+            alidayuSettings.SandboxEnabled = model.SandboxEnabled;
             alidayuSettings.AppKey = model.AppKey;
             alidayuSettings.AppSecret = model.AppSecret;
             alidayuSettings.PhoneNumber = model.PhoneNumber;
@@ -89,9 +93,12 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             /* We do not clear cache after each setting update.
              * This behavior can increase performance because cached settings will not be cleared 
              * and loaded from database after each update */
+            _settingService.SaveSetting(alidayuSettings, x => x.Enabled, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.SslEnabled, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.SandboxEnabled, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppKey, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppSecret, storeScope, false);
-            _settingService.SaveSetting(alidayuSettings, x => x.Enabled, storeScope, false);
+            
             _settingService.SaveSettingOverridablePerStore(alidayuSettings, x => x.Enabled, model.Enabled_OverrideForStore, storeScope, false);
             _settingService.SaveSettingOverridablePerStore(alidayuSettings, x => x.PhoneNumber, model.PhoneNumber_OverrideForStore, storeScope, false);
 
