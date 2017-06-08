@@ -122,18 +122,16 @@ namespace Nop.Plugin.SMS.Alidayu
             _settingService.SaveSetting(new AlidayuSettings());
 
             //locales
-            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ApiId", "API ID");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ApiId.Hint", "Specify Alidayu API ID.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled", "Enabled");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled.Hint", "Check to enable SMS provider.");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Password", "Password");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Password.Hint", "Specify Alidayu API password.");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey", "AppKey");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey.Hint", "Specify Alidayu API AppKey.");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret", "AppSecret");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret.Hint", "Specify Alidayu API AppSecret.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber", "Phone number");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber.Hint", "Enter your phone number.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage", "Message text");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage.Hint", "Enter text of the test message.");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Username", "Username");
-            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Username.Hint", "Specify Alidayu API username.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.SendTest", "Send");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.SendTest.Hint", "Send test message");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.TestFailed", "Test message sending failed");
@@ -151,18 +149,16 @@ namespace Nop.Plugin.SMS.Alidayu
             _settingService.DeleteSetting<AlidayuSettings>();
 
             //locales
-            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ApiId");
-            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ApiId.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled.Hint");
-            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Password");
-            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Password.Hint");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey.Hint");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage.Hint");
-            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Username");
-            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Username.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.SendTest");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.SendTest.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.TestFailed");

@@ -10,19 +10,14 @@ namespace Nop.Plugin.SMS.Alidayu
         public bool Enabled { get; set; }
 
         /// <summary>
-        /// Gets or sets the Clickatell API ID
+        /// Gets or sets the AppKey
         /// </summary>
-        public string ApiId { get; set; }
+        public string AppKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the Clickatell API username
+        /// Gets or sets the AppSecret
         /// </summary>
-        public string Username { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Clickatell API password
-        /// </summary>
-        public string Password { get; set; }
+        public string AppSecret { get; set; }
 
         /// <summary>
         /// Gets or sets the store owner phone number
