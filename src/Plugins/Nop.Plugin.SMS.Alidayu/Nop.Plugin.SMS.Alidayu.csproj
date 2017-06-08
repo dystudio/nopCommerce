@@ -8,8 +8,8 @@
     <ProjectGuid>{E3362B5B-DA5A-4515-BCB0-0DF982F80E89}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nop.Plugin.SMS.Clickatell</RootNamespace>
-    <AssemblyName>Nop.Plugin.SMS.Clickatell</AssemblyName>
+    <RootNamespace>Nop.Plugin.SMS.Alidayu</RootNamespace>
+    <AssemblyName>Nop.Plugin.SMS.Alidayu</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
