@@ -1,5 +1,5 @@
 ﻿Group: SMS providers
-FriendlyName: Clickatell SMS Provider
+FriendlyName: Alidayu SMS Provider
 SystemName: Mobile.SMS.Alidayu
 Version: 1.20
 SupportedVersions: 3.90
