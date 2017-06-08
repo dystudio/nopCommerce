@@ -1,0 +1,9 @@
+﻿Group: SMS providers
+FriendlyName: Clickatell SMS Provider
+SystemName: Mobile.SMS.Alidayu
+Version: 1.20
+SupportedVersions: 3.90
+Author: dystudio.net
+DisplayOrder: 1
+FileName: Nop.Plugin.SMS.Alidayu.dll
+Description: This plugin allows to integrate with Alidayu. A store owner can receive SMS messages when a customer places an order.
