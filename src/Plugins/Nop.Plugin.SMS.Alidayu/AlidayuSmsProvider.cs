@@ -62,8 +62,14 @@ namespace Nop.Plugin.SMS.Alidayu
 
             //change text
             var order = _orderService.GetOrderById(orderId);
-            if (order != null)
-                text = string.Format("New order #{0} was placed for the total amount {1:0.00}", order.Id, order.OrderTotal);
+            if (order != null) {
+                text = "{\"orderId\":\"" + order.Id.ToString() + "\",\"orderTotal\":\"" + string.Format("{0:0.00}", order.OrderTotal) + "\"}";
+            }
+            else
+            {
+                text = "{\"orderId\":\"" + 0 + "\",\"orderTotal\":\"" + string.Format("{0:0.00}", 100) + "\"}";
+            }
+
 
             var url = string.Empty;
             if (alidayuSettings.SslEnabled)
@@ -85,13 +91,14 @@ namespace Nop.Plugin.SMS.Alidayu
             //验证码${code}，您正在进行${product}身份验证，打死不要告诉别人哦！
             //New order ${orderId} was placed for the total amount ${OrderTotal}
             //请创建短信消息模板：有邻商城通知您，新订单 ${orderId}成功下单，订单总额 ${orderTotal}。
-            req.SmsParam = "{\"orderId\":\"" + order.Id.ToString() + "\",\"orderTotal\":\""+ string.Format("{0:0.00}", order.OrderTotal) + "\"}";
+            req.SmsParam = text;
             req.RecNum = _alidayuSettings.PhoneNumber;
             req.SmsTemplateCode = _alidayuSettings.SmsTemplateCode;
             AlibabaAliqinFcSmsNumSendResponse response = client.Execute(req);
             if (response.IsError)
             {
-                _logger.Error(string.Format("Alidayu SMS error: {0}", response.ErrMsg));
+                _logger.Error(string.Format("Alidayu SMS error,ErrCode: {0}, ErrMsg: {1}", response.ErrCode, response.ErrMsg));
+                _logger.Error(string.Format("Alidayu SMS error,SubErrCode: {0},SubErrMsg: {1}", response.SubErrCode,response.SubErrMsg));
             }
             else
             {

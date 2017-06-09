@@ -68,7 +68,8 @@ namespace Nop.Plugin.SMS.Alidayu.Services
             AlibabaAliqinFcSmsNumSendResponse response = client.Execute(req);
             if (response.IsError)
             {
-                _logger.Error(string.Format("Alidayu SMS SendVerificationCode error: {0}", response.ErrMsg));
+                _logger.Error(string.Format("Alidayu SMS error,ErrCode: {0}, ErrMsg: {1}", response.ErrCode, response.ErrMsg));
+                _logger.Error(string.Format("Alidayu SMS error,SubErrCode: {0},SubErrMsg: {1}", response.SubErrCode, response.SubErrMsg));
                 return false;
             }
             else
