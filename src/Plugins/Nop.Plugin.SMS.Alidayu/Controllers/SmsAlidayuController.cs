@@ -62,6 +62,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
                 SandboxEnabled = alidayuSettings.SandboxEnabled,
                 AppKey = alidayuSettings.AppKey,
                 AppSecret = alidayuSettings.AppSecret,
+                SmsFreeSignName = alidayuSettings.SmsFreeSignName,
                 PhoneNumber = alidayuSettings.PhoneNumber,
                 SmsTemplateCode = alidayuSettings.SmsTemplateCode,
                 SmsTemplateCodeForVerificationCode = alidayuSettings.SmsTemplateCodeForVerificationCode,
