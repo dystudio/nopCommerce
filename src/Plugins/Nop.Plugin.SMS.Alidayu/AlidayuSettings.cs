@@ -35,6 +35,10 @@ namespace Nop.Plugin.SMS.Alidayu
         /// </summary>
         public string PhoneNumber { get; set; }
         /// <summary>
+        /// Gets or sets the SmsFreeSignName
+        /// </summary>
+        public string SmsFreeSignName { get; set; }
+        /// <summary>
         /// Gets or sets the SmsTemplateCode for alidayu
         /// </summary>
         public string SmsTemplateCode { get; set; }

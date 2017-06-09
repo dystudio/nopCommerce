@@ -26,7 +26,8 @@ namespace Nop.Plugin.SMS.Alidayu.Models
 
         [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.PhoneNumber")]
         public string PhoneNumber { get; set; }
-
+        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.SmsFreeSignName")]
+        public string SmsFreeSignName { get; set; }
         [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.SmsTemplateCode")]
         public string SmsTemplateCode { get; set; }
 

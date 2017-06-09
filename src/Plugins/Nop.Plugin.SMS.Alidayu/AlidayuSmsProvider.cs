@@ -145,6 +145,8 @@ namespace Nop.Plugin.SMS.Alidayu
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret.Hint", "Specify Alidayu API AppSecret.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber", "Phone number");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber.Hint", "Enter your phone number.");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsFreeSignName", "SmsFreeSignName");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsFreeSignName.Hint", "Enter your SmsFreeSignName.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode", "SmsTemplateCode");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode.Hint", "Enter your SmsTemplateCode.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage", "Message text");
@@ -176,6 +178,8 @@ namespace Nop.Plugin.SMS.Alidayu
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.PhoneNumber.Hint");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsFreeSignName");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsFreeSignName.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.SmsTemplateCode.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.TestMessage");

@@ -86,6 +86,15 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.SmsFreeSignName)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.SmsFreeSignName)
+                        @Html.ValidationMessageFor(model => model.SmsFreeSignName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
                         @Html.NopLabelFor(model => model.SmsTemplateCode)
                     </div>
                     <div class="col-md-9">
