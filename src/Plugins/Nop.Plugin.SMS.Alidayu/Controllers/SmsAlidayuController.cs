@@ -97,6 +97,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             alidayuSettings.AppKey = model.AppKey;
             alidayuSettings.AppSecret = model.AppSecret;
             alidayuSettings.PhoneNumber = model.PhoneNumber;
+            alidayuSettings.SmsFreeSignName = model.SmsFreeSignName;
             alidayuSettings.SmsTemplateCode = model.SmsTemplateCode;
             alidayuSettings.SmsTemplateCodeForVerificationCode = model.SmsTemplateCodeForVerificationCode;
             /* We do not clear cache after each setting update.
@@ -108,6 +109,8 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             _settingService.SaveSetting(alidayuSettings, x => x.SandboxEnabled, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppKey, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppSecret, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.PhoneNumber, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.SmsFreeSignName, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.SmsTemplateCode, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.SmsTemplateCodeForVerificationCode, storeScope, false);
 
