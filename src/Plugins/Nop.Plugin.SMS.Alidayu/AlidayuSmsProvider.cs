@@ -84,8 +84,8 @@ namespace Nop.Plugin.SMS.Alidayu
             req.SmsFreeSignName = _alidayuSettings.SmsFreeSignName;
             //验证码${code}，您正在进行${product}身份验证，打死不要告诉别人哦！
             //New order ${orderId} was placed for the total amount ${OrderTotal}
-            //请创建短信消息模板：新订单 ${orderId}成功下单，订单总额 ${orderTotal}。
-            req.SmsParam = string.Format("{\"orderId\":\"{0}\",\"orderTotal\":\"{1}\"}", order.Id.ToString(),string.Format("{0:0.00}",order.OrderTotal));
+            //请创建短信消息模板：有邻商城通知您，新订单 ${orderId}成功下单，订单总额 ${orderTotal}。
+            req.SmsParam = "{\"orderId\":\"" + order.Id.ToString() + "\",\"orderTotal\":\""+ string.Format("{0:0.00}", order.OrderTotal) + "\"}";
             req.RecNum = _alidayuSettings.PhoneNumber;
             req.SmsTemplateCode = _alidayuSettings.SmsTemplateCode;
             AlibabaAliqinFcSmsNumSendResponse response = client.Execute(req);
