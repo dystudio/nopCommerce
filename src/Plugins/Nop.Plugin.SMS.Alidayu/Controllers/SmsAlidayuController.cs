@@ -63,6 +63,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
                 AppKey = alidayuSettings.AppKey,
                 AppSecret = alidayuSettings.AppSecret,
                 PhoneNumber = alidayuSettings.PhoneNumber,
+                SmsTemplateCode = alidayuSettings.SmsTemplateCode,
                 SmsTemplateCodeForVerificationCode = alidayuSettings.SmsTemplateCodeForVerificationCode,
                 ActiveStoreScopeConfiguration = storeScope
             };
@@ -96,7 +97,8 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             alidayuSettings.AppKey = model.AppKey;
             alidayuSettings.AppSecret = model.AppSecret;
             alidayuSettings.PhoneNumber = model.PhoneNumber;
-
+            alidayuSettings.SmsTemplateCode = model.SmsTemplateCode;
+            alidayuSettings.SmsTemplateCodeForVerificationCode = model.SmsTemplateCodeForVerificationCode;
             /* We do not clear cache after each setting update.
              * This behavior can increase performance because cached settings will not be cleared 
              * and loaded from database after each update */
@@ -106,6 +108,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             _settingService.SaveSetting(alidayuSettings, x => x.SandboxEnabled, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppKey, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppSecret, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.SmsTemplateCode, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.SmsTemplateCodeForVerificationCode, storeScope, false);
 
             _settingService.SaveSettingOverridablePerStore(alidayuSettings, x => x.Enabled, model.Enabled_OverrideForStore, storeScope, false);
@@ -146,29 +149,6 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
                 ErrorNotification(_localizationService.GetResource("Plugins.Sms.Alidayu.TestFailed"));
 
             return Configure();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        //TODO
-        public ActionResult SendVerificationCode(VerificationCodeModel model)
-        {
-            if (string.IsNullOrEmpty(model.PhoneNumber))
-                throw new Exception("phone number is null or empty.");
-
-            //load settings for a chosen store scope
-            var storeScope = GetActiveStoreScopeConfiguration(_storeService, _workContext);
-            var alidayuSettings = _settingService.LoadSetting<AlidayuSettings>(storeScope);
-
-            //SMS Send VerificationCode
-            if (this._verificationCodeService.SendVerificationCode(storeScope, model.PhoneNumber))
-            {
-                return Json(new { msg = "ok" });
-            }
-            else
-            {
-                return Json(new { msg = "" });
-            }
         }
 
         #endregion
