@@ -9,6 +9,10 @@ namespace Nop.Plugin.SMS.Alidayu
         /// </summary>
         public bool Enabled { get; set; }
         /// <summary>
+        /// Gets or sets the value ProductName
+        /// </summary>
+        public string ProductName { get; set; }
+        /// <summary>
         /// Gets or sets the value indicting whether ssl is enabled
         /// </summary>
         public bool SslEnabled { get; set; }
@@ -34,6 +38,11 @@ namespace Nop.Plugin.SMS.Alidayu
         /// Gets or sets the SmsTemplateCode for alidayu
         /// </summary>
         public string SmsTemplateCode { get; set; }
+        /// <summary>
+        /// Gets or sets the SmsTemplateCodeForVerificationCode for alidayu
+        /// </summary>
+        public string SmsTemplateCodeForVerificationCode { get; set; }
         
+
     }
 }

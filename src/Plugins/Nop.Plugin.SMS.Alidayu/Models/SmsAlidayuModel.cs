@@ -9,6 +9,8 @@ namespace Nop.Plugin.SMS.Alidayu.Models
         [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.Enabled")]
         public bool Enabled { get; set; }
         public bool Enabled_OverrideForStore { get; set; }
+        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.ProductName")]
+        public string ProductName { get; set; }
 
         [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.SslEnabled")]
         public bool SslEnabled { get; set; }
@@ -27,6 +29,10 @@ namespace Nop.Plugin.SMS.Alidayu.Models
 
         [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.SmsTemplateCode")]
         public string SmsTemplateCode { get; set; }
+
+        [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.SmsTemplateCodeForVerificationCode")]
+        public string SmsTemplateCodeForVerificationCode { get; set; }
+        
         public bool PhoneNumber_OverrideForStore { get; set; }
 
         [NopResourceDisplayName("Plugins.Sms.Alidayu.Fields.TestMessage")]

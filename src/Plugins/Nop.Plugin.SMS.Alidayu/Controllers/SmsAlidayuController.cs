@@ -8,6 +8,7 @@ using Nop.Services.Configuration;
 using Nop.Services.Localization;
 using Nop.Services.Stores;
 using Nop.Web.Framework.Controllers;
+using Nop.Plugin.SMS.Alidayu.Services;
 
 namespace Nop.Plugin.SMS.Alidayu.Controllers
 {
@@ -21,6 +22,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
         private readonly ISettingService _settingService;
         private readonly IStoreService _storeService;
         private readonly IWorkContext _workContext;
+        private readonly IVerificationCodeService _verificationCodeService;
 
         #endregion
 
@@ -30,13 +32,15 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             IPluginFinder pluginFinder,
             ISettingService settingService,
             IStoreService storeService,
-            IWorkContext workContext)
+            IWorkContext workContext,
+            IVerificationCodeService verificationCodeService)
         {
             this._localizationService = localizationService;
             this._pluginFinder = pluginFinder;
-            this._settingService = settingService;            
+            this._settingService = settingService;
             this._storeService = storeService;
             this._workContext = workContext;
+            this._verificationCodeService = verificationCodeService;
         }
 
         #endregion
@@ -53,11 +57,13 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             var model = new SmsAlidayuModel
             {
                 Enabled = alidayuSettings.Enabled,
+                ProductName = alidayuSettings.ProductName,
                 SslEnabled = alidayuSettings.SslEnabled,
                 SandboxEnabled = alidayuSettings.SandboxEnabled,
                 AppKey = alidayuSettings.AppKey,
                 AppSecret = alidayuSettings.AppSecret,
                 PhoneNumber = alidayuSettings.PhoneNumber,
+                SmsTemplateCodeForVerificationCode = alidayuSettings.SmsTemplateCodeForVerificationCode,
                 ActiveStoreScopeConfiguration = storeScope
             };
 
@@ -84,6 +90,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
 
             //save settings
             alidayuSettings.Enabled = model.Enabled;
+            alidayuSettings.ProductName = model.ProductName;
             alidayuSettings.SslEnabled = model.SslEnabled;
             alidayuSettings.SandboxEnabled = model.SandboxEnabled;
             alidayuSettings.AppKey = model.AppKey;
@@ -94,11 +101,13 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
              * This behavior can increase performance because cached settings will not be cleared 
              * and loaded from database after each update */
             _settingService.SaveSetting(alidayuSettings, x => x.Enabled, storeScope, false);
+            _settingService.SaveSetting(alidayuSettings, x => x.ProductName, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.SslEnabled, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.SandboxEnabled, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppKey, storeScope, false);
             _settingService.SaveSetting(alidayuSettings, x => x.AppSecret, storeScope, false);
-            
+            _settingService.SaveSetting(alidayuSettings, x => x.SmsTemplateCodeForVerificationCode, storeScope, false);
+
             _settingService.SaveSettingOverridablePerStore(alidayuSettings, x => x.Enabled, model.Enabled_OverrideForStore, storeScope, false);
             _settingService.SaveSettingOverridablePerStore(alidayuSettings, x => x.PhoneNumber, model.PhoneNumber_OverrideForStore, storeScope, false);
 
@@ -139,32 +148,26 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             return Configure();
         }
 
-        [HttpGet]
+        [HttpPost]
         //TODO
-        public ActionResult GetVerificationCode(VerificationCodeModel model)
+        public ActionResult SendVerificationCode(VerificationCodeModel model)
         {
-            if (!ModelState.IsValid)
-                return Configure();
-
-            var pluginDescriptor = _pluginFinder.GetPluginDescriptorBySystemName("Mobile.SMS.Alidayu");
-            if (pluginDescriptor == null)
-                throw new Exception("Cannot load the plugin");
-
-            var plugin = pluginDescriptor.Instance() as AlidayuSmsProvider;
-            if (plugin == null)
-                throw new Exception("Cannot load the plugin");
+            if (string.IsNullOrEmpty(model.PhoneNumber))
+                throw new Exception("phone number is null or empty.");
 
             //load settings for a chosen store scope
             var storeScope = GetActiveStoreScopeConfiguration(_storeService, _workContext);
             var alidayuSettings = _settingService.LoadSetting<AlidayuSettings>(storeScope);
 
-            //test SMS send
-            if (plugin.SendSms(model.PhoneNumber, 0, alidayuSettings))
-                SuccessNotification(_localizationService.GetResource("Plugins.Sms.Alidayu.TestSuccess"));
+            //SMS Send VerificationCode
+            if (this._verificationCodeService.SendVerificationCode(storeScope, model.PhoneNumber))
+            {
+                return Json(new { msg = "ok" });
+            }
             else
-                ErrorNotification(_localizationService.GetResource("Plugins.Sms.Alidayu.TestFailed"));
-
-            return Configure();
+            {
+                return Json(new { msg = "" });
+            }
         }
 
         #endregion

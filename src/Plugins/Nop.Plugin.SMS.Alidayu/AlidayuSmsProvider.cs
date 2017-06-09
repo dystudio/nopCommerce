@@ -137,6 +137,8 @@ namespace Nop.Plugin.SMS.Alidayu
             //locales
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled", "Enabled");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled.Hint", "Check to enable SMS provider.");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ProductName", "ProductName");
+            this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ProductName.Hint", "Product Name."); 
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey", "AppKey");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey.Hint", "Specify Alidayu API AppKey.");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret", "AppSecret");
@@ -166,6 +168,8 @@ namespace Nop.Plugin.SMS.Alidayu
             //locales
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.Enabled.Hint");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ProductName");
+            this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.ProductName.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppKey.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.Fields.AppSecret");
