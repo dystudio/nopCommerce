@@ -149,6 +149,7 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         //TODO
         public ActionResult SendVerificationCode(VerificationCodeModel model)
         {

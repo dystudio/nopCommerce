@@ -27,7 +27,6 @@ namespace Nop.Plugin.SMS.Alidayu.Services
             ISettingService settingService,
             IStoreService storeService,
             IWorkContext workContext,
-            IVerificationCodeService verificationCodeService,
             ILogger logger)
         {
           
@@ -63,7 +62,7 @@ namespace Nop.Plugin.SMS.Alidayu.Services
             //验证码${code}，您正在进行${product}身份验证，打死不要告诉别人哦！
             //New order ${orderId} was placed for the total amount ${OrderTotal}
             //请创建短信消息模板：新订单 ${orderId}成功下单，订单总额 ${orderTotal}。
-            req.SmsParam = string.Format("{\"code\":\"{0}\",\"product\":\"{1}\"}", number, "");
+            req.SmsParam = string.Format("{\"code\":\"{0}\",\"product\":\"{1}\"}", number, alidayuSettings.ProductName);
             req.RecNum = phoneNumber;
             req.SmsTemplateCode = alidayuSettings.SmsTemplateCodeForVerificationCode;
             AlibabaAliqinFcSmsNumSendResponse response = client.Execute(req);
