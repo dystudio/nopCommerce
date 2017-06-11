@@ -1,0 +1,16 @@
+﻿@model Nop.Plugin.Misc.Captcha.Models.CaptchaModel
+
+
+
+<div>
+    <center>
+        @*form specific fields*@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Captcha)
+            <a href="@Url.Action("Index")">
+                <img alt="Captcha" src="@Url.Action("CaptchaImage")" style="" />
+            </a>
+        </div>
+    </center>
+</div>
+

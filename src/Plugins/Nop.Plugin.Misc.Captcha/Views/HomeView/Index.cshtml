@@ -1,0 +1,21 @@
+﻿@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //page class
+    Html.AppendPageCssClassParts("html-home-page");
+}
+
+
+<div>
+    <center>
+        @*form specific fields*@
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Captcha)
+            <a href="@Url.Action("Index")">
+                <img alt="Captcha" src="@Url.Action("CaptchaImage")" style="" />
+            </a>
+        </div>
+    </center>
+</div>

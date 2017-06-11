@@ -1,0 +1,8 @@
+﻿Group: Misc
+FriendlyName: Captcha code
+SystemName: Captcha
+Version: 1.00
+SupportedVersions: 3.90
+Author: Rashmi
+DisplayOrder: 1
+FileName: Nop.Plugin.Misc.Captcha.dll
