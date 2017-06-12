@@ -53,7 +53,7 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR.Controllers
                 model.AppSecretOverrideForStore = _settingService.SettingExists(weiXinExternalAuthSettings, x => x.AppSecret, storeScope);
             }
 
-            return View("~/Plugins/ExternalAuth.WeiXin/Views/ExternalAuthWeiXin/Configure.cshtml", model);
+            return View("~/Plugins/ExternalAuth.WeiXinQR/Views/ExternalAuthWeiXin/Configure.cshtml", model);
         }
 
         [HttpPost]
@@ -99,7 +99,7 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR.Controllers
         [ChildActionOnly]
         public ActionResult PublicInfo()
         {
-            return View("~/Plugins/ExternalAuth.WeiXin/Views/ExternalAuthWeiXin/PublicInfo.cshtml");
+            return View("~/Plugins/ExternalAuth.WeiXinQR/Views/ExternalAuthWeiXin/PublicInfo.cshtml");
         }
     }
 }
