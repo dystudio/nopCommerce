@@ -10,11 +10,18 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Nop.Plugin.Misc.Captcha.Models;
 using Nop.Web.Framework.Controllers;
+using Nop.Services.Localization;
 
 namespace Nop.Plugin.Misc.Captcha.Controllers
 {
     public class CaptchaPluginController : BasePluginController
     {
+        private readonly ILocalizationService _localizationService;
+
+        public CaptchaPluginController(ILocalizationService localizationService)
+        {
+            this._localizationService = localizationService;
+        }
         public ActionResult Configure()
         {
             return View("~/Plugins/Misc.Captcha/Views/MyCaptchaPlugin/Configure.cshtml");
@@ -29,9 +36,11 @@ namespace Nop.Plugin.Misc.Captcha.Controllers
         public ActionResult Index(CaptchaModel model)
         {
             //validate captcha 
-            if (Session["Captcha"] == null || Session["Captcha"].ToString() != model.Captcha)
+            var captcha = Session["Captcha"].ToString();
+            if (Session["Captcha"] == null || captcha != model.Captcha)
             {
-                ModelState.AddModelError("Captcha", "Wrong value of sum, please try again.");
+                //Wrong value of sum, please try again.
+                ModelState.AddModelError("Captcha", _localizationService.GetResource("Nop.Plugin.Misc.Captcha.CaptchaIsNotValid"));
                 //dispay error and generate a new captcha 
                // ViewBag.ErrorMsg = "Wrong value of sum, please try again.";
                 return View("~/Plugins/Misc.Captcha/Views/CaptchaView/CaptchaViews.cshtml",model);

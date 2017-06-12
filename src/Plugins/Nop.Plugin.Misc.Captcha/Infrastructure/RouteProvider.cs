@@ -14,8 +14,8 @@ namespace Nop.Plugin.Misc.Captcha.Infrastructure
         public void RegisterRoutes(RouteCollection routes)
         {
             routes.MapLocalizedRoute("MyHomePagePlugin",
-                            "",
-                            new { controller = "MyHomePage", action = "Index" },
+                            "Nop.Plugin.Misc.Captcha/CaptchaPlugin/Index",
+                            new { controller = "CaptchaPlugin", action = "Index" },
                             new[] { "Nop.Plugin.Misc.Captcha.Controllers" });
 
 
