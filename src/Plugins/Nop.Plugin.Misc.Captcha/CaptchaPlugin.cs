@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nop.Core.Plugins;
+using Nop.Services.Localization;
 using Nop.Services.Common;
 using System.Web.Routing;
 
@@ -23,7 +24,25 @@ namespace Nop.Plugin.Misc.Captcha
             controllerName = "CaptchaPlugin";
             routeValues = new RouteValueDictionary { { "Namespaces", "Nop.Plugin.Misc.CaptchaPlugin.Controllers" }, { "area", null } };
         }
-
+        /// <summary>
+        /// Install plugin
+        /// </summary>
+        public override void Install()
+        {
+            this.AddOrUpdatePluginLocaleResource("Nop.Plugin.Misc.Captcha.CaptchaIsNotValid", "Wrong value of sum, please try again.");
+            this.AddOrUpdatePluginLocaleResource("Nop.Plugin.Misc.Captcha.CaptchaIsNotValid.hint", "Wrong value of sum, please try again.");
+            this.AddOrUpdatePluginLocaleResource("Nop.Plugin.Misc.Captcha.Captcha", "How much is the sum");
+            this.AddOrUpdatePluginLocaleResource("Nop.Plugin.Misc.Captcha.Captcha.hint", "How much is the sum");
+            base.Install();
+        }
+        public override void Uninstall()
+        {
+            this.DeletePluginLocaleResource("Nop.Plugin.Misc.Captcha.CaptchaIsNotValid");
+            this.DeletePluginLocaleResource("Nop.Plugin.Misc.Captcha.CaptchaIsNotValid.hint");
+            this.DeletePluginLocaleResource("Nop.Plugin.Misc.Captcha.Captcha");
+            this.DeletePluginLocaleResource("Nop.Plugin.Misc.Captcha.Captcha.hint");
+            base.Uninstall();
+        }
         /// <summary>
         /// Gets widget zones where this widget should be rendered
         /// </summary>
