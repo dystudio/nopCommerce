@@ -6,3 +6,4 @@ SupportedVersions: 3.90
 Author: Rashmi
 DisplayOrder: 1
 FileName: Nop.Plugin.Misc.Captcha.dll
+Description: This plugin provides a Captcha code
