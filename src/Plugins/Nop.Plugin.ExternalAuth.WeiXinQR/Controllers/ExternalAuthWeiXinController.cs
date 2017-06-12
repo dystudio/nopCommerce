@@ -9,7 +9,7 @@ using Nop.Plugin.ExternalAuth.WeiXinQR.Models;
 
 namespace Nop.Plugin.ExternalAuth.WeiXinQR.Controllers
 {
-    public class ExternalAuthWeiXinController : BasePluginController
+    public class ExternalAuthWeiXinQRController : BasePluginController
     {
         private readonly ISettingService _settingService;
         private readonly IPermissionService _permissionService;
@@ -18,7 +18,7 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR.Controllers
         private readonly IWorkContext _workContext;
         private readonly ILocalizationService _localizationService;
 
-        public ExternalAuthWeiXinController(ISettingService settingService,
+        public ExternalAuthWeiXinQRController(ISettingService settingService,
             IPermissionService permissionService, IStoreContext storeContext,
             IStoreService storeServie, IWorkContext workContext,
             ILocalizationService localizationService)
