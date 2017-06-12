@@ -18,14 +18,14 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR
         public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
             actionName = "Configure";
-            controllerName = "ExternalAuthWeiXin";
+            controllerName = "ExternalAuthWeiXinQR";
             routeValues = new RouteValueDictionary { { "Namespaces", "Nop.Plugin.ExternalAuth.WeiXinQR.Controllers" }, { "area", null } };
         }
 
         public void GetPublicInfoRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
             actionName = "PublicInfo";
-            controllerName = "ExternalAuthWeiXin";
+            controllerName = "ExternalAuthWeiXinQR";
             routeValues = new RouteValueDictionary { { "Namespaces", "Nop.Plugin.ExternalAuth.WeiXinQR.Controllers" }, { "area", null } };
         }
 
@@ -35,7 +35,7 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR
         public override void Install()
         {
             // settings
-            var settings = new WeiXinExternalAuthSettings()
+            var settings = new WeiXinQRExternalAuthSettings()
             {
                 AppId = "",
                 AppSecret = ""
@@ -56,7 +56,7 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR
         public override void Uninstall()
         {
             // settings
-            _settingService.DeleteSetting<WeiXinExternalAuthSettings>();
+            _settingService.DeleteSetting<WeiXinQRExternalAuthSettings>();
 
             this.DeletePluginLocaleResource("Plugins.ExternalAuth.WeiXinQR.Login");
             this.DeletePluginLocaleResource("Plugins.ExternalAuth.WeiXinQR.AppId");

@@ -2,7 +2,7 @@
 
 namespace Nop.Plugin.ExternalAuth.WeiXinQR
 {
-    public class WeiXinExternalAuthSettings : ISettings
+    public class WeiXinQRExternalAuthSettings : ISettings
     {
         /// <summary>
         /// 唯一凭证

@@ -40,7 +40,7 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR.Controllers
 
             //load settings for a chosen store scope
             var storeScope = this.GetActiveStoreScopeConfiguration(_storeService, _workContext);
-            var weiXinExternalAuthSettings = _settingService.LoadSetting<WeiXinExternalAuthSettings>(storeScope);
+            var weiXinExternalAuthSettings = _settingService.LoadSetting<WeiXinQRExternalAuthSettings>(storeScope);
 
             var model = new ConfigurationModel();
             model.AppId = weiXinExternalAuthSettings.AppId;
@@ -69,7 +69,7 @@ namespace Nop.Plugin.ExternalAuth.WeiXinQR.Controllers
 
             //load settings for a chosen store scope
             var storeScope = this.GetActiveStoreScopeConfiguration(_storeService, _workContext);
-            var weiXinExternalAuthSettings = _settingService.LoadSetting<WeiXinExternalAuthSettings>(storeScope);
+            var weiXinExternalAuthSettings = _settingService.LoadSetting<WeiXinQRExternalAuthSettings>(storeScope);
 
             //save settings
             weiXinExternalAuthSettings.AppId = model.AppId;
