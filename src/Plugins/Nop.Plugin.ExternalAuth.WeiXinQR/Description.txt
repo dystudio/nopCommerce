@@ -1,0 +1,9 @@
+﻿Group: ExternalAuth methods
+FriendlyName: WeiXin authentication
+SystemName: ExternalAuth.WeiXinQR
+Version: 1.00
+SupportedVersions: 3.90
+Author: dystudio.net
+DisplayOrder: 5
+FileName: Nop.Plugin.ExternalAuth.WeiXinQR.dll
+Description: This plugin enables weixin authentication (login using weixin account)
