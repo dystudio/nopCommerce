@@ -1,0 +1,288 @@
+::-moz-selection {
+  color: #fff;
+  background: #ffff8d !important; }
+
+::selection {
+  color: #fff;
+  background: #ffff8d !important; }
+
+.cart .product .edit-item a {
+  color: #ffff8d; }
+
+.cart td.subtotal .discount {
+  color: #ffff8d; }
+
+.eu-cookie-bar-notification button {
+  background-color: #ffff8d; }
+
+.header-links a:hover {
+  color: #ffea00; }
+
+.footer-block .list a:hover {
+  color: #ffea00 !important; }
+
+.block .list li.active > a {
+  color: #ffff8d; }
+
+.block .list a.active {
+  color: #ffff8d; }
+
+.block .list a:hover {
+  color: #ffea00; }
+
+.product-filter .group li a:hover {
+  color: #ffff8d; }
+
+.filtered-items .item {
+  color: #ffff8d; }
+
+.item-box .product-title a:hover {
+  color: #ffff8d; }
+
+.item-box .tax-shipping-info a {
+  color: #ffff8d; }
+
+.manufacturer-grid .title a:hover {
+  color: #ffff8d; }
+
+.vendor-list li a {
+  color: #ffff8d; }
+
+.product-review-links a:hover {
+  color: #ffff8d; }
+
+.overview .value a,
+.variant-overview .value a {
+  color: #ffff8d; }
+
+.back-in-stock-subscription-page .notify-me-button {
+  background-color: #ffff8d;
+  color: #fff; }
+
+.overview .tax-shipping-info a,
+.variant-overview .tax-shipping-info a {
+  color: #ffff8d; }
+
+.tier-prices .item-price {
+  background-color: #f9f9f9;
+  color: #ffff8d; }
+
+.variant-overview .variant-name {
+  color: #ffff8d; }
+
+.ui-datepicker-header {
+  background-color: #ffff8d;
+  color: #fff; }
+
+.ui-datepicker-calendar .ui-state-active {
+  outline: 2px solid #ffff8d;
+  color: #ffff8d;
+  color: #ffff8d !important; }
+
+.color-squares .selected-value .color-container {
+  background-color: #ffff8d; }
+
+.wishlist-content .tax-shipping-info a {
+  color: #ffff8d; }
+
+.wishlist-page .share-info a:hover {
+  color: #ffff8d; }
+
+.compare-products-table .product-name td a:hover {
+  color: #ffff8d; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #ffff8d; }
+
+.accept-privacy-policy span {
+  color: #ffff8d; }
+
+.login-page .returning-wrapper .inputs.reversed a:hover {
+  color: #ffff8d; }
+
+.external-auth-association a {
+  color: #ffff8d; }
+
+.add-more-external-records a {
+  color: #ffff8d; }
+
+.return-request-list-page a {
+  color: #ffff8d; }
+
+.qq-upload-button {
+  color: #fff !important;
+  background: #ffff8d !important; }
+
+.cart-total .order-total {
+  color: #ffff8d; }
+
+.terms-of-service a {
+  color: #ffff8d; }
+
+.order-details-page .order-overview .order-total strong {
+  color: #ffea00; }
+
+.order-details-page .download a {
+  color: #ffff8d; }
+
+.user-agreement-page .button-1 {
+  background-color: #ffff8d; }
+
+.order-details-page .tax-shipping-info a {
+  color: #ffff8d; }
+
+.sitemap-page a:hover {
+  color: #ffff8d; }
+
+.post-title:hover,
+.news-title:hover {
+  color: #ffff8d; }
+
+.comment-info a.username:hover {
+  color: #ffff8d; }
+
+.forum-search-box .advanced a:hover {
+  color: #ffff8d; }
+
+.forums-table-section-title a:hover {
+  color: #ffff8d; }
+
+.forums-table-section .forum-title a:hover,
+.forums-table-section .topic-title a:hover {
+  color: #ffff8d; }
+
+.forums-table-section .view-all a {
+  background-color: #ffff8d;
+  color: #fff; }
+
+.topic-post a.username:hover {
+  color: #ffff8d; }
+
+.topic-post .post-actions .edit-post-button:hover,
+.topic-post .post-actions .delete-post-button:hover {
+  color: #ffff8d; }
+
+.topic-post .post-actions .post-link-button {
+  color: #ffff8d; }
+
+.private-message-send-page a {
+  color: #ffff8d; }
+
+.ui-tabs-nav li.ui-state-active a {
+  color: #ffff8d; }
+
+.private-messages-page td.subject a.pm-unread {
+  color: #ffff8d; }
+
+.latest-posts .topic-title a:hover {
+  color: #ffff8d; }
+
+.menu-toggle {
+  background: #ffff8d url("../images/menu-icon.png") right center no-repeat; }
+
+.header-menu {
+  background-color: #ffff8d; }
+
+.shipment-details-page .tracking-number .tracking-url {
+  color: #ffff8d; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #ffff8d;
+  color: #fff; }
+
+.btn, .btn-large {
+  background-color: #ffff8d;
+  color: #444; }
+
+input:focus:not([type]):not([readonly]), input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #ffff8d;
+  box-shadow: 0 1px 0 0 #ffff8d; }
+
+input:focus:not([type]):not([readonly]) + label, input[type="text"]:focus:not([readonly]) + label, input[type="password"]:focus:not([readonly]) + label, input[type="email"]:focus:not([readonly]) + label, input[type="url"]:focus:not([readonly]) + label, input[type="time"]:focus:not([readonly]) + label, input[type="date"]:focus:not([readonly]) + label, input[type="datetime-local"]:focus:not([readonly]) + label, input[type="tel"]:focus:not([readonly]) + label, input[type="number"]:focus:not([readonly]) + label, input[type="search"]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #ffea00; }
+
+.btn:hover, .btn-large:hover {
+  background-color: #ffea00; }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #ffea00; }
+
+[type="checkbox"]:checked + label::before {
+  border-right: 2px solid #ffea00;
+  border-bottom: 2px solid #ffea00; }
+
+.with-gap[type="radio"]:checked + label::before {
+  border: 2px solid #ffea00; }
+
+.with-gap[type="radio"]:checked + label::after {
+  border: 2px solid #ffea00;
+  background-color: #ffea00; }
+
+button:focus {
+  outline: none;
+  background-color: #ffea00; }
+
+input.valid:not([type]), input.valid:focus:not([type]), input.valid[type="text"], input.valid[type="text"]:focus, input.valid[type="password"], input.valid[type="password"]:focus, input.valid[type="email"], input.valid[type="email"]:focus, input.valid[type="url"], input.valid[type="url"]:focus, input.valid[type="time"], input.valid[type="time"]:focus, input.valid[type="date"], input.valid[type="date"]:focus, input.valid[type="datetime-local"], input.valid[type="datetime-local"]:focus, input.valid[type="tel"], input.valid[type="tel"]:focus, input.valid[type="number"], input.valid[type="number"]:focus, input.valid[type="search"], input.valid[type="search"]:focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus {
+  border-bottom: 1px solid #ffea00;
+  box-shadow: 0 1px 0 0 #ffea00; }
+
+.input-field .prefix.active {
+  color: #ffea00; }
+
+.waves-effect .waves-ripple {
+  background-color: #ffea00;
+  color: #fff; }
+
+.private-messages .buttons input {
+  background-color: #ffff8d !important; }
+
+.private-messages .buttons input:hover {
+  background-color: #ffea00 !important; }
+
+.tabs .tab a {
+  color: #ffea00; }
+
+.tabs .tab a:hover {
+  color: #ffff8d; }
+
+.tabs .indicator {
+  background-color: #ffea00; }
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+  color: #ffea00; }
+
+@media (max-width: 769px) {
+  .footer-block .title {
+    background: #ffff8d url("../../images/toggle-white.png") right center no-repeat; } }
+#return-to-top {
+  background: #ffff8d;
+  background: rgba(255, 255, 141, 0.7); }
+
+#return-to-top i {
+  color: #fff; }
+
+#return-to-top:hover {
+  background: rgba(255, 255, 141, 0.9); }
+
+#return-to-top:hover i {
+  color: #444; }
+
+.dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+  background-color: #ffff8d;
+  color: #fff; }
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover,
+.dropdown-content li.selected > a, .dropdown-content li.selected > span {
+  color: #fff; }
+
+time.icon strong {
+  color: #fff;
+  background-color: #ffff8d;
+  box-shadow: 0 2px 0 #444;
+  border-bottom: 1px dashed #ffea00; }
+
+time.icon em {
+  color: #ffff8d; }
+
+blockquote.pickup-points-blockquote {
+  border-left: 5px solid #ffff8d; }

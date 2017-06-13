@@ -1,0 +1,285 @@
+::-moz-selection {
+  color: #fff;
+  background: #000 !important; }
+
+::selection {
+  color: #fff;
+  background: #000 !important; }
+
+.cart .product .edit-item a {
+  color: #000; }
+
+.cart td.subtotal .discount {
+  color: #000; }
+
+.eu-cookie-bar-notification button {
+  background-color: #000; }
+
+.header-links a:hover {
+  color: #000; }
+
+.footer-block .list a:hover {
+  color: #000 !important; }
+
+.block .list li.active > a {
+  color: #000; }
+
+.block .list a.active {
+  color: #000; }
+
+.block .list a:hover {
+  color: #000; }
+
+.product-filter .group li a:hover {
+  color: #000; }
+
+.filtered-items .item {
+  color: #000; }
+
+.item-box .product-title a:hover {
+  color: #000; }
+
+.item-box .tax-shipping-info a {
+  color: #000; }
+
+.manufacturer-grid .title a:hover {
+  color: #000; }
+
+.vendor-list li a {
+  color: #000; }
+
+.product-review-links a:hover {
+  color: #000; }
+
+.overview .value a,
+.variant-overview .value a {
+  color: #000; }
+
+.back-in-stock-subscription-page .notify-me-button {
+  background-color: #000;
+  color: #fff; }
+
+.overview .tax-shipping-info a,
+.variant-overview .tax-shipping-info a {
+  color: #000; }
+
+.tier-prices .item-price {
+  background-color: #f9f9f9;
+  color: #000; }
+
+.variant-overview .variant-name {
+  color: #000; }
+
+.ui-datepicker-header {
+  background-color: #000;
+  color: #fff; }
+
+.ui-datepicker-calendar .ui-state-active {
+  outline: 2px solid #000;
+  color: #000;
+  color: #000 !important; }
+
+.color-squares .selected-value .color-container {
+  background-color: #000; }
+
+.wishlist-content .tax-shipping-info a {
+  color: #000; }
+
+.wishlist-page .share-info a:hover {
+  color: #000; }
+
+.compare-products-table .product-name td a:hover {
+  color: #000; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #000; }
+
+.accept-privacy-policy span {
+  color: #000; }
+
+.login-page .returning-wrapper .inputs.reversed a:hover {
+  color: #000; }
+
+.external-auth-association a {
+  color: #000; }
+
+.add-more-external-records a {
+  color: #000; }
+
+.return-request-list-page a {
+  color: #000; }
+
+.qq-upload-button {
+  color: #fff !important;
+  background: #000 !important; }
+
+.cart-total .order-total {
+  color: #000; }
+
+.terms-of-service a {
+  color: #000; }
+
+.order-details-page .order-overview .order-total strong {
+  color: #000; }
+
+.order-details-page .download a {
+  color: #000; }
+
+.user-agreement-page .button-1 {
+  background-color: #000; }
+
+.order-details-page .tax-shipping-info a {
+  color: #000; }
+
+.sitemap-page a:hover {
+  color: #000; }
+
+.post-title:hover,
+.news-title:hover {
+  color: #000; }
+
+.comment-info a.username:hover {
+  color: #000; }
+
+.forum-search-box .advanced a:hover {
+  color: #000; }
+
+.forums-table-section-title a:hover {
+  color: #000; }
+
+.forums-table-section .forum-title a:hover,
+.forums-table-section .topic-title a:hover {
+  color: #000; }
+
+.forums-table-section .view-all a {
+  background-color: #000;
+  color: #fff; }
+
+.topic-post a.username:hover {
+  color: #000; }
+
+.topic-post .post-actions .edit-post-button:hover,
+.topic-post .post-actions .delete-post-button:hover {
+  color: #000; }
+
+.topic-post .post-actions .post-link-button {
+  color: #000; }
+
+.private-message-send-page a {
+  color: #000; }
+
+.ui-tabs-nav li.ui-state-active a {
+  color: #000; }
+
+.private-messages-page td.subject a.pm-unread {
+  color: #000; }
+
+.latest-posts .topic-title a:hover {
+  color: #000; }
+
+.menu-toggle {
+  background: #000 url("../images/menu-icon.png") right center no-repeat; }
+
+.header-menu {
+  background-color: #000; }
+
+.shipment-details-page .tracking-number .tracking-url {
+  color: #000; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #000;
+  color: #fff; }
+
+.btn, .btn-large {
+  background-color: #000;
+  color: #fff; }
+
+input:focus:not([type]):not([readonly]), input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000; }
+
+input:focus:not([type]):not([readonly]) + label, input[type="text"]:focus:not([readonly]) + label, input[type="password"]:focus:not([readonly]) + label, input[type="email"]:focus:not([readonly]) + label, input[type="url"]:focus:not([readonly]) + label, input[type="time"]:focus:not([readonly]) + label, input[type="date"]:focus:not([readonly]) + label, input[type="datetime-local"]:focus:not([readonly]) + label, input[type="tel"]:focus:not([readonly]) + label, input[type="number"]:focus:not([readonly]) + label, input[type="search"]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #000; }
+
+.btn:hover, .btn-large:hover {
+  background-color: #000; }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #000; }
+
+[type="checkbox"]:checked + label::before {
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000; }
+
+.with-gap[type="radio"]:checked + label::before {
+  border: 2px solid #000; }
+
+.with-gap[type="radio"]:checked + label::after {
+  border: 2px solid #000;
+  background-color: #000; }
+
+button:focus {
+  outline: none;
+  background-color: #000; }
+
+input.valid:not([type]), input.valid:focus:not([type]), input.valid[type="text"], input.valid[type="text"]:focus, input.valid[type="password"], input.valid[type="password"]:focus, input.valid[type="email"], input.valid[type="email"]:focus, input.valid[type="url"], input.valid[type="url"]:focus, input.valid[type="time"], input.valid[type="time"]:focus, input.valid[type="date"], input.valid[type="date"]:focus, input.valid[type="datetime-local"], input.valid[type="datetime-local"]:focus, input.valid[type="tel"], input.valid[type="tel"]:focus, input.valid[type="number"], input.valid[type="number"]:focus, input.valid[type="search"], input.valid[type="search"]:focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000; }
+
+.input-field .prefix.active {
+  color: #000; }
+
+.waves-effect .waves-ripple {
+  background-color: #000;
+  color: #fff; }
+
+.private-messages .buttons input {
+  background-color: #000 !important; }
+
+.private-messages .buttons input:hover {
+  background-color: #000 !important; }
+
+.tabs .tab a {
+  color: #000; }
+
+.tabs .tab a:hover {
+  color: #000; }
+
+.tabs .indicator {
+  background-color: #000; }
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+  color: #000; }
+
+@media (max-width: 769px) {
+  .footer-block .title {
+    background: #000 url("../../images/toggle-white.png") right center no-repeat; } }
+#return-to-top {
+  background: black;
+  background: rgba(0, 0, 0, 0.7); }
+
+#return-to-top i {
+  color: #fff; }
+
+#return-to-top:hover {
+  background: rgba(0, 0, 0, 0.9); }
+
+#return-to-top:hover i {
+  color: #fff; }
+
+.dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+  background-color: #000;
+  color: #fff; }
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover,
+.dropdown-content li.selected > a, .dropdown-content li.selected > span {
+  color: #fff; }
+
+time.icon strong {
+  color: #fff;
+  background-color: #000;
+  box-shadow: 0 2px 0 #fff;
+  border-bottom: 1px dashed #000; }
+
+time.icon em {
+  color: #000; }

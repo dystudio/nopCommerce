@@ -1,0 +1,288 @@
+::-moz-selection {
+  color: #fff;
+  background: #fb8c00 !important; }
+
+::selection {
+  color: #fff;
+  background: #fb8c00 !important; }
+
+.cart .product .edit-item a {
+  color: #fb8c00; }
+
+.cart td.subtotal .discount {
+  color: #fb8c00; }
+
+.eu-cookie-bar-notification button {
+  background-color: #fb8c00; }
+
+.header-links a:hover {
+  color: #e65100; }
+
+.footer-block .list a:hover {
+  color: #e65100 !important; }
+
+.block .list li.active > a {
+  color: #fb8c00; }
+
+.block .list a.active {
+  color: #fb8c00; }
+
+.block .list a:hover {
+  color: #e65100; }
+
+.product-filter .group li a:hover {
+  color: #fb8c00; }
+
+.filtered-items .item {
+  color: #fb8c00; }
+
+.item-box .product-title a:hover {
+  color: #fb8c00; }
+
+.item-box .tax-shipping-info a {
+  color: #fb8c00; }
+
+.manufacturer-grid .title a:hover {
+  color: #fb8c00; }
+
+.vendor-list li a {
+  color: #fb8c00; }
+
+.product-review-links a:hover {
+  color: #fb8c00; }
+
+.overview .value a,
+.variant-overview .value a {
+  color: #fb8c00; }
+
+.back-in-stock-subscription-page .notify-me-button {
+  background-color: #fb8c00;
+  color: #fff; }
+
+.overview .tax-shipping-info a,
+.variant-overview .tax-shipping-info a {
+  color: #fb8c00; }
+
+.tier-prices .item-price {
+  background-color: #f9f9f9;
+  color: #fb8c00; }
+
+.variant-overview .variant-name {
+  color: #fb8c00; }
+
+.ui-datepicker-header {
+  background-color: #fb8c00;
+  color: #fff; }
+
+.ui-datepicker-calendar .ui-state-active {
+  outline: 2px solid #fb8c00;
+  color: #fb8c00;
+  color: #fb8c00 !important; }
+
+.color-squares .selected-value .color-container {
+  background-color: #fb8c00; }
+
+.wishlist-content .tax-shipping-info a {
+  color: #fb8c00; }
+
+.wishlist-page .share-info a:hover {
+  color: #fb8c00; }
+
+.compare-products-table .product-name td a:hover {
+  color: #fb8c00; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #fb8c00; }
+
+.accept-privacy-policy span {
+  color: #fb8c00; }
+
+.login-page .returning-wrapper .inputs.reversed a:hover {
+  color: #fb8c00; }
+
+.external-auth-association a {
+  color: #fb8c00; }
+
+.add-more-external-records a {
+  color: #fb8c00; }
+
+.return-request-list-page a {
+  color: #fb8c00; }
+
+.qq-upload-button {
+  color: #fff !important;
+  background: #fb8c00 !important; }
+
+.cart-total .order-total {
+  color: #fb8c00; }
+
+.terms-of-service a {
+  color: #fb8c00; }
+
+.order-details-page .order-overview .order-total strong {
+  color: #e65100; }
+
+.order-details-page .download a {
+  color: #fb8c00; }
+
+.user-agreement-page .button-1 {
+  background-color: #fb8c00; }
+
+.order-details-page .tax-shipping-info a {
+  color: #fb8c00; }
+
+.sitemap-page a:hover {
+  color: #fb8c00; }
+
+.post-title:hover,
+.news-title:hover {
+  color: #fb8c00; }
+
+.comment-info a.username:hover {
+  color: #fb8c00; }
+
+.forum-search-box .advanced a:hover {
+  color: #fb8c00; }
+
+.forums-table-section-title a:hover {
+  color: #fb8c00; }
+
+.forums-table-section .forum-title a:hover,
+.forums-table-section .topic-title a:hover {
+  color: #fb8c00; }
+
+.forums-table-section .view-all a {
+  background-color: #fb8c00;
+  color: #fff; }
+
+.topic-post a.username:hover {
+  color: #fb8c00; }
+
+.topic-post .post-actions .edit-post-button:hover,
+.topic-post .post-actions .delete-post-button:hover {
+  color: #fb8c00; }
+
+.topic-post .post-actions .post-link-button {
+  color: #fb8c00; }
+
+.private-message-send-page a {
+  color: #fb8c00; }
+
+.ui-tabs-nav li.ui-state-active a {
+  color: #fb8c00; }
+
+.private-messages-page td.subject a.pm-unread {
+  color: #fb8c00; }
+
+.latest-posts .topic-title a:hover {
+  color: #fb8c00; }
+
+.menu-toggle {
+  background: #fb8c00 url("../images/menu-icon.png") right center no-repeat; }
+
+.header-menu {
+  background-color: #fb8c00; }
+
+.shipment-details-page .tracking-number .tracking-url {
+  color: #fb8c00; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #fb8c00;
+  color: #fff; }
+
+.btn, .btn-large {
+  background-color: #fb8c00;
+  color: #fff; }
+
+input:focus:not([type]):not([readonly]), input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #fb8c00;
+  box-shadow: 0 1px 0 0 #fb8c00; }
+
+input:focus:not([type]):not([readonly]) + label, input[type="text"]:focus:not([readonly]) + label, input[type="password"]:focus:not([readonly]) + label, input[type="email"]:focus:not([readonly]) + label, input[type="url"]:focus:not([readonly]) + label, input[type="time"]:focus:not([readonly]) + label, input[type="date"]:focus:not([readonly]) + label, input[type="datetime-local"]:focus:not([readonly]) + label, input[type="tel"]:focus:not([readonly]) + label, input[type="number"]:focus:not([readonly]) + label, input[type="search"]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #e65100; }
+
+.btn:hover, .btn-large:hover {
+  background-color: #e65100; }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #e65100; }
+
+[type="checkbox"]:checked + label::before {
+  border-right: 2px solid #e65100;
+  border-bottom: 2px solid #e65100; }
+
+.with-gap[type="radio"]:checked + label::before {
+  border: 2px solid #e65100; }
+
+.with-gap[type="radio"]:checked + label::after {
+  border: 2px solid #e65100;
+  background-color: #e65100; }
+
+button:focus {
+  outline: none;
+  background-color: #e65100; }
+
+input.valid:not([type]), input.valid:focus:not([type]), input.valid[type="text"], input.valid[type="text"]:focus, input.valid[type="password"], input.valid[type="password"]:focus, input.valid[type="email"], input.valid[type="email"]:focus, input.valid[type="url"], input.valid[type="url"]:focus, input.valid[type="time"], input.valid[type="time"]:focus, input.valid[type="date"], input.valid[type="date"]:focus, input.valid[type="datetime-local"], input.valid[type="datetime-local"]:focus, input.valid[type="tel"], input.valid[type="tel"]:focus, input.valid[type="number"], input.valid[type="number"]:focus, input.valid[type="search"], input.valid[type="search"]:focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus {
+  border-bottom: 1px solid #e65100;
+  box-shadow: 0 1px 0 0 #e65100; }
+
+.input-field .prefix.active {
+  color: #e65100; }
+
+.waves-effect .waves-ripple {
+  background-color: #e65100;
+  color: #fff; }
+
+.private-messages .buttons input {
+  background-color: #fb8c00 !important; }
+
+.private-messages .buttons input:hover {
+  background-color: #e65100 !important; }
+
+.tabs .tab a {
+  color: #e65100; }
+
+.tabs .tab a:hover {
+  color: #fb8c00; }
+
+.tabs .indicator {
+  background-color: #e65100; }
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+  color: #e65100; }
+
+@media (max-width: 769px) {
+  .footer-block .title {
+    background: #fb8c00 url("../../images/toggle-white.png") right center no-repeat; } }
+#return-to-top {
+  background: #fb8c00;
+  background: rgba(251, 140, 0, 0.7); }
+
+#return-to-top i {
+  color: #fff; }
+
+#return-to-top:hover {
+  background: rgba(251, 140, 0, 0.9); }
+
+#return-to-top:hover i {
+  color: #fff; }
+
+.dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+  background-color: #fb8c00;
+  color: #fff; }
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover,
+.dropdown-content li.selected > a, .dropdown-content li.selected > span {
+  color: #fff; }
+
+time.icon strong {
+  color: #fff;
+  background-color: #fb8c00;
+  box-shadow: 0 2px 0 #fff;
+  border-bottom: 1px dashed #e65100; }
+
+time.icon em {
+  color: #fb8c00; }
+
+blockquote.pickup-points-blockquote {
+  border-left: 5px solid #fb8c00; }

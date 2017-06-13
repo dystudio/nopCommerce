@@ -1,0 +1,30 @@
+﻿@model PrivateMessageIndexModel
+@using Nop.Web.Models.PrivateMessages;
+@{    
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.PrivateMessages").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-private-messages");
+    Html.AppendPageCssClassParts("html-private-messages-page");
+}
+<div class="page private-messages private-messages-page">
+    <div class="page-title">
+        <h1>@T("PrivateMessages.PrivateMessages")</h1>
+    </div>
+    <div class="page-body">
+
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#inbox">@T("PrivateMessages.Inbox")</a></li>
+                    <li class="tab col s3"><a href="#sent">@T("PrivateMessages.SentItems")</a></li>
+                </ul>
+            </div>
+            <div id="inbox" class="col s12">@Html.Action("Inbox", new { page = Model.InboxPage, tab = "inbox" })</div>
+            <div id="sent" class="col s12">@Html.Action("SentItems", new { page = Model.SentItemsPage, tab = "sent" })</div>
+        </div>
+
+    </div>
+</div>
