@@ -1,0 +1,288 @@
+::-moz-selection {
+  color: #fff;
+  background: #8e24aa !important; }
+
+::selection {
+  color: #fff;
+  background: #8e24aa !important; }
+
+.cart .product .edit-item a {
+  color: #8e24aa; }
+
+.cart td.subtotal .discount {
+  color: #8e24aa; }
+
+.eu-cookie-bar-notification button {
+  background-color: #8e24aa; }
+
+.header-links a:hover {
+  color: #4a148c; }
+
+.footer-block .list a:hover {
+  color: #4a148c !important; }
+
+.block .list li.active > a {
+  color: #8e24aa; }
+
+.block .list a.active {
+  color: #8e24aa; }
+
+.block .list a:hover {
+  color: #4a148c; }
+
+.product-filter .group li a:hover {
+  color: #8e24aa; }
+
+.filtered-items .item {
+  color: #8e24aa; }
+
+.item-box .product-title a:hover {
+  color: #8e24aa; }
+
+.item-box .tax-shipping-info a {
+  color: #8e24aa; }
+
+.manufacturer-grid .title a:hover {
+  color: #8e24aa; }
+
+.vendor-list li a {
+  color: #8e24aa; }
+
+.product-review-links a:hover {
+  color: #8e24aa; }
+
+.overview .value a,
+.variant-overview .value a {
+  color: #8e24aa; }
+
+.back-in-stock-subscription-page .notify-me-button {
+  background-color: #8e24aa;
+  color: #fff; }
+
+.overview .tax-shipping-info a,
+.variant-overview .tax-shipping-info a {
+  color: #8e24aa; }
+
+.tier-prices .item-price {
+  background-color: #f9f9f9;
+  color: #8e24aa; }
+
+.variant-overview .variant-name {
+  color: #8e24aa; }
+
+.ui-datepicker-header {
+  background-color: #8e24aa;
+  color: #fff; }
+
+.ui-datepicker-calendar .ui-state-active {
+  outline: 2px solid #8e24aa;
+  color: #8e24aa;
+  color: #8e24aa !important; }
+
+.color-squares .selected-value .color-container {
+  background-color: #8e24aa; }
+
+.wishlist-content .tax-shipping-info a {
+  color: #8e24aa; }
+
+.wishlist-page .share-info a:hover {
+  color: #8e24aa; }
+
+.compare-products-table .product-name td a:hover {
+  color: #8e24aa; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #8e24aa; }
+
+.accept-privacy-policy span {
+  color: #8e24aa; }
+
+.login-page .returning-wrapper .inputs.reversed a:hover {
+  color: #8e24aa; }
+
+.external-auth-association a {
+  color: #8e24aa; }
+
+.add-more-external-records a {
+  color: #8e24aa; }
+
+.return-request-list-page a {
+  color: #8e24aa; }
+
+.qq-upload-button {
+  color: #fff !important;
+  background: #8e24aa !important; }
+
+.cart-total .order-total {
+  color: #8e24aa; }
+
+.terms-of-service a {
+  color: #8e24aa; }
+
+.order-details-page .order-overview .order-total strong {
+  color: #4a148c; }
+
+.order-details-page .download a {
+  color: #8e24aa; }
+
+.user-agreement-page .button-1 {
+  background-color: #8e24aa; }
+
+.order-details-page .tax-shipping-info a {
+  color: #8e24aa; }
+
+.sitemap-page a:hover {
+  color: #8e24aa; }
+
+.post-title:hover,
+.news-title:hover {
+  color: #8e24aa; }
+
+.comment-info a.username:hover {
+  color: #8e24aa; }
+
+.forum-search-box .advanced a:hover {
+  color: #8e24aa; }
+
+.forums-table-section-title a:hover {
+  color: #8e24aa; }
+
+.forums-table-section .forum-title a:hover,
+.forums-table-section .topic-title a:hover {
+  color: #8e24aa; }
+
+.forums-table-section .view-all a {
+  background-color: #8e24aa;
+  color: #fff; }
+
+.topic-post a.username:hover {
+  color: #8e24aa; }
+
+.topic-post .post-actions .edit-post-button:hover,
+.topic-post .post-actions .delete-post-button:hover {
+  color: #8e24aa; }
+
+.topic-post .post-actions .post-link-button {
+  color: #8e24aa; }
+
+.private-message-send-page a {
+  color: #8e24aa; }
+
+.ui-tabs-nav li.ui-state-active a {
+  color: #8e24aa; }
+
+.private-messages-page td.subject a.pm-unread {
+  color: #8e24aa; }
+
+.latest-posts .topic-title a:hover {
+  color: #8e24aa; }
+
+.menu-toggle {
+  background: #8e24aa url("../images/menu-icon.png") right center no-repeat; }
+
+.header-menu {
+  background-color: #8e24aa; }
+
+.shipment-details-page .tracking-number .tracking-url {
+  color: #8e24aa; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #8e24aa;
+  color: #fff; }
+
+.btn, .btn-large {
+  background-color: #8e24aa;
+  color: #f3e5f5; }
+
+input:focus:not([type]):not([readonly]), input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #8e24aa;
+  box-shadow: 0 1px 0 0 #8e24aa; }
+
+input:focus:not([type]):not([readonly]) + label, input[type="text"]:focus:not([readonly]) + label, input[type="password"]:focus:not([readonly]) + label, input[type="email"]:focus:not([readonly]) + label, input[type="url"]:focus:not([readonly]) + label, input[type="time"]:focus:not([readonly]) + label, input[type="date"]:focus:not([readonly]) + label, input[type="datetime-local"]:focus:not([readonly]) + label, input[type="tel"]:focus:not([readonly]) + label, input[type="number"]:focus:not([readonly]) + label, input[type="search"]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #4a148c; }
+
+.btn:hover, .btn-large:hover {
+  background-color: #4a148c; }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #4a148c; }
+
+[type="checkbox"]:checked + label::before {
+  border-right: 2px solid #4a148c;
+  border-bottom: 2px solid #4a148c; }
+
+.with-gap[type="radio"]:checked + label::before {
+  border: 2px solid #4a148c; }
+
+.with-gap[type="radio"]:checked + label::after {
+  border: 2px solid #4a148c;
+  background-color: #4a148c; }
+
+button:focus {
+  outline: none;
+  background-color: #4a148c; }
+
+input.valid:not([type]), input.valid:focus:not([type]), input.valid[type="text"], input.valid[type="text"]:focus, input.valid[type="password"], input.valid[type="password"]:focus, input.valid[type="email"], input.valid[type="email"]:focus, input.valid[type="url"], input.valid[type="url"]:focus, input.valid[type="time"], input.valid[type="time"]:focus, input.valid[type="date"], input.valid[type="date"]:focus, input.valid[type="datetime-local"], input.valid[type="datetime-local"]:focus, input.valid[type="tel"], input.valid[type="tel"]:focus, input.valid[type="number"], input.valid[type="number"]:focus, input.valid[type="search"], input.valid[type="search"]:focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus {
+  border-bottom: 1px solid #4a148c;
+  box-shadow: 0 1px 0 0 #4a148c; }
+
+.input-field .prefix.active {
+  color: #4a148c; }
+
+.waves-effect .waves-ripple {
+  background-color: #4a148c;
+  color: #fff; }
+
+.private-messages .buttons input {
+  background-color: #8e24aa !important; }
+
+.private-messages .buttons input:hover {
+  background-color: #4a148c !important; }
+
+.tabs .tab a {
+  color: #4a148c; }
+
+.tabs .tab a:hover {
+  color: #8e24aa; }
+
+.tabs .indicator {
+  background-color: #4a148c; }
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+  color: #4a148c; }
+
+@media (max-width: 769px) {
+  .footer-block .title {
+    background: #8e24aa url("../../images/toggle-white.png") right center no-repeat; } }
+#return-to-top {
+  background: #8e24aa;
+  background: rgba(142, 36, 170, 0.7); }
+
+#return-to-top i {
+  color: #fff; }
+
+#return-to-top:hover {
+  background: rgba(142, 36, 170, 0.9); }
+
+#return-to-top:hover i {
+  color: #f3e5f5; }
+
+.dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+  background-color: #8e24aa;
+  color: #fff; }
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover,
+.dropdown-content li.selected > a, .dropdown-content li.selected > span {
+  color: #fff; }
+
+time.icon strong {
+  color: #fff;
+  background-color: #8e24aa;
+  box-shadow: 0 2px 0 #f3e5f5;
+  border-bottom: 1px dashed #4a148c; }
+
+time.icon em {
+  color: #8e24aa; }
+
+blockquote.pickup-points-blockquote {
+  border-left: 5px solid #8e24aa; }

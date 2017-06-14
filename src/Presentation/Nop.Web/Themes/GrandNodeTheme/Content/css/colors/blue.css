@@ -1,0 +1,288 @@
+::-moz-selection {
+  color: #fff;
+  background: #448aff !important; }
+
+::selection {
+  color: #fff;
+  background: #448aff !important; }
+
+.cart .product .edit-item a {
+  color: #448aff; }
+
+.cart td.subtotal .discount {
+  color: #448aff; }
+
+.eu-cookie-bar-notification button {
+  background-color: #448aff; }
+
+.header-links a:hover {
+  color: #0d47a1; }
+
+.footer-block .list a:hover {
+  color: #0d47a1 !important; }
+
+.block .list li.active > a {
+  color: #448aff; }
+
+.block .list a.active {
+  color: #448aff; }
+
+.block .list a:hover {
+  color: #0d47a1; }
+
+.product-filter .group li a:hover {
+  color: #448aff; }
+
+.filtered-items .item {
+  color: #448aff; }
+
+.item-box .product-title a:hover {
+  color: #448aff; }
+
+.item-box .tax-shipping-info a {
+  color: #448aff; }
+
+.manufacturer-grid .title a:hover {
+  color: #448aff; }
+
+.vendor-list li a {
+  color: #448aff; }
+
+.product-review-links a:hover {
+  color: #448aff; }
+
+.overview .value a,
+.variant-overview .value a {
+  color: #448aff; }
+
+.back-in-stock-subscription-page .notify-me-button {
+  background-color: #448aff;
+  color: #fff; }
+
+.overview .tax-shipping-info a,
+.variant-overview .tax-shipping-info a {
+  color: #448aff; }
+
+.tier-prices .item-price {
+  background-color: #f9f9f9;
+  color: #448aff; }
+
+.variant-overview .variant-name {
+  color: #448aff; }
+
+.ui-datepicker-header {
+  background-color: #448aff;
+  color: #fff; }
+
+.ui-datepicker-calendar .ui-state-active {
+  outline: 2px solid #448aff;
+  color: #448aff;
+  color: #448aff !important; }
+
+.color-squares .selected-value .color-container {
+  background-color: #448aff; }
+
+.wishlist-content .tax-shipping-info a {
+  color: #448aff; }
+
+.wishlist-page .share-info a:hover {
+  color: #448aff; }
+
+.compare-products-table .product-name td a:hover {
+  color: #448aff; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #448aff; }
+
+.accept-privacy-policy span {
+  color: #448aff; }
+
+.login-page .returning-wrapper .inputs.reversed a:hover {
+  color: #448aff; }
+
+.external-auth-association a {
+  color: #448aff; }
+
+.add-more-external-records a {
+  color: #448aff; }
+
+.return-request-list-page a {
+  color: #448aff; }
+
+.qq-upload-button {
+  color: #fff !important;
+  background: #448aff !important; }
+
+.cart-total .order-total {
+  color: #448aff; }
+
+.terms-of-service a {
+  color: #448aff; }
+
+.order-details-page .order-overview .order-total strong {
+  color: #0d47a1; }
+
+.order-details-page .download a {
+  color: #448aff; }
+
+.user-agreement-page .button-1 {
+  background-color: #448aff; }
+
+.order-details-page .tax-shipping-info a {
+  color: #448aff; }
+
+.sitemap-page a:hover {
+  color: #448aff; }
+
+.post-title:hover,
+.news-title:hover {
+  color: #448aff; }
+
+.comment-info a.username:hover {
+  color: #448aff; }
+
+.forum-search-box .advanced a:hover {
+  color: #448aff; }
+
+.forums-table-section-title a:hover {
+  color: #448aff; }
+
+.forums-table-section .forum-title a:hover,
+.forums-table-section .topic-title a:hover {
+  color: #448aff; }
+
+.forums-table-section .view-all a {
+  background-color: #448aff;
+  color: #fff; }
+
+.topic-post a.username:hover {
+  color: #448aff; }
+
+.topic-post .post-actions .edit-post-button:hover,
+.topic-post .post-actions .delete-post-button:hover {
+  color: #448aff; }
+
+.topic-post .post-actions .post-link-button {
+  color: #448aff; }
+
+.private-message-send-page a {
+  color: #448aff; }
+
+.ui-tabs-nav li.ui-state-active a {
+  color: #448aff; }
+
+.private-messages-page td.subject a.pm-unread {
+  color: #448aff; }
+
+.latest-posts .topic-title a:hover {
+  color: #448aff; }
+
+.menu-toggle {
+  background: #448aff url("../images/menu-icon.png") right center no-repeat; }
+
+.header-menu {
+  background-color: #448aff; }
+
+.shipment-details-page .tracking-number .tracking-url {
+  color: #448aff; }
+
+.enter-password-form input[type="submit"] {
+  background-color: #448aff;
+  color: #fff; }
+
+.btn, .btn-large {
+  background-color: #448aff;
+  color: #fff; }
+
+input:focus:not([type]):not([readonly]), input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #448aff;
+  box-shadow: 0 1px 0 0 #448aff; }
+
+input:focus:not([type]):not([readonly]) + label, input[type="text"]:focus:not([readonly]) + label, input[type="password"]:focus:not([readonly]) + label, input[type="email"]:focus:not([readonly]) + label, input[type="url"]:focus:not([readonly]) + label, input[type="time"]:focus:not([readonly]) + label, input[type="date"]:focus:not([readonly]) + label, input[type="datetime-local"]:focus:not([readonly]) + label, input[type="tel"]:focus:not([readonly]) + label, input[type="number"]:focus:not([readonly]) + label, input[type="search"]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: #0d47a1; }
+
+.btn:hover, .btn-large:hover {
+  background-color: #0d47a1; }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #0d47a1; }
+
+[type="checkbox"]:checked + label::before {
+  border-right: 2px solid #0d47a1;
+  border-bottom: 2px solid #0d47a1; }
+
+.with-gap[type="radio"]:checked + label::before {
+  border: 2px solid #0d47a1; }
+
+.with-gap[type="radio"]:checked + label::after {
+  border: 2px solid #0d47a1;
+  background-color: #0d47a1; }
+
+button:focus {
+  outline: none;
+  background-color: #0d47a1; }
+
+input.valid:not([type]), input.valid:focus:not([type]), input.valid[type="text"], input.valid[type="text"]:focus, input.valid[type="password"], input.valid[type="password"]:focus, input.valid[type="email"], input.valid[type="email"]:focus, input.valid[type="url"], input.valid[type="url"]:focus, input.valid[type="time"], input.valid[type="time"]:focus, input.valid[type="date"], input.valid[type="date"]:focus, input.valid[type="datetime-local"], input.valid[type="datetime-local"]:focus, input.valid[type="tel"], input.valid[type="tel"]:focus, input.valid[type="number"], input.valid[type="number"]:focus, input.valid[type="search"], input.valid[type="search"]:focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus {
+  border-bottom: 1px solid #0d47a1;
+  box-shadow: 0 1px 0 0 #0d47a1; }
+
+.input-field .prefix.active {
+  color: #0d47a1; }
+
+.waves-effect .waves-ripple {
+  background-color: #0d47a1;
+  color: #fff; }
+
+.private-messages .buttons input {
+  background-color: #448aff !important; }
+
+.private-messages .buttons input:hover {
+  background-color: #0d47a1 !important; }
+
+.tabs .tab a {
+  color: #0d47a1; }
+
+.tabs .tab a:hover {
+  color: #448aff; }
+
+.tabs .indicator {
+  background-color: #0d47a1; }
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+  color: #0d47a1; }
+
+@media (max-width: 769px) {
+  .footer-block .title {
+    background: #448aff url("../../images/toggle-white.png") right center no-repeat; } }
+#return-to-top {
+  background: #448aff;
+  background: rgba(68, 138, 255, 0.7); }
+
+#return-to-top i {
+  color: #fff; }
+
+#return-to-top:hover {
+  background: rgba(68, 138, 255, 0.9); }
+
+#return-to-top:hover i {
+  color: #fff; }
+
+.dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+  background-color: #448aff;
+  color: #fff; }
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover,
+.dropdown-content li.selected > a, .dropdown-content li.selected > span {
+  color: #fff; }
+
+time.icon strong {
+  color: #fff;
+  background-color: #448aff;
+  box-shadow: 0 2px 0 #fff;
+  border-bottom: 1px dashed #0d47a1; }
+
+time.icon em {
+  color: #448aff; }
+
+blockquote.pickup-points-blockquote {
+  border-left: 5px solid #448aff; }

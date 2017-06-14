@@ -1,0 +1,262 @@
+﻿@model CustomerOrderListModel
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Account").Text);
+    //page class
+    Html.AppendPageCssClassParts("html-account-page");
+    Html.AppendPageCssClassParts("html-order-list-page");
+
+    var settings = Nop.Core.Infrastructure.EngineContext.Current.Resolve<Nop4you.Plugin.Widgets.ThemeGrandNode.ThemeGrandNodeSettings>();
+}
+@using Nop.Web.Models.Customer
+@using Nop.Web.Models.Order;
+@section left
+{
+    @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.Orders })
+}
+<div class="page account-page order-list-page">
+    <div class="page-title">
+        <h1>@T("Account.MyAccount") - @T("Account.CustomerOrders")</h1>
+    </div>
+    <div class="page-body">
+        @if (Model.RecurringOrders.Count > 0)
+        {
+            <div class="section recurring-payments">
+                <div class="title">
+                    <strong>@T("Account.CustomerOrders.RecurringOrders")</strong>
+                </div>
+                @using (Html.BeginForm())
+                {
+                    var canRetryRecurringOrders = Model.RecurringOrders.Any(recurring => recurring.CanRetryLastPayment);
+                    @Html.AntiForgeryToken()
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <colgroup>
+                                <col />
+                                <col />
+                                <col />
+                                <col />
+                                <col />
+                                <col />
+                                @if (canRetryRecurringOrders) { <col /> }
+                                <col />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="start-date">
+                                        @T("Account.CustomerOrders.RecurringOrders.StartDate")
+                                    </th>
+                                    <th class="cycle-info">
+                                        @T("Account.CustomerOrders.RecurringOrders.CycleInfo")
+                                    </th>
+                                    <th class="next-payment">
+                                        @T("Account.CustomerOrders.RecurringOrders.NextPayment")
+                                    </th>
+                                    <th class="total-cycles">
+                                        @T("Account.CustomerOrders.RecurringOrders.TotalCycles")
+                                    </th>
+                                    <th class="cycles-remaining">
+                                        @T("Account.CustomerOrders.RecurringOrders.CyclesRemaining")
+                                    </th>
+                                    <th class="initial-order">
+                                        @T("Account.CustomerOrders.RecurringOrders.InitialOrder")
+                                    </th>
+                                    @if (canRetryRecurringOrders)
+                                    {
+                                        <th class="retry">
+                                            @T("Account.CustomerOrders.RecurringOrders.RetryLastPayment")
+                                        </th>
+                                    }
+                                    <th class="cancel">
+                                        @T("Account.CustomerOrders.RecurringOrders.Cancel")
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.RecurringOrders)
+                                {
+                                    <tr>
+                                        <td class="start-date">
+                                            @item.StartDate
+                                        </td>
+                                        <td class="cycle-info">
+                                            @item.CycleInfo
+                                        </td>
+                                        <td class="next-payment">
+                                            @item.NextPayment
+                                        </td>
+                                        <td class="total-cycles">
+                                            @item.TotalCycles
+                                        </td>
+                                        <td class="cycles-remaining">
+                                            @item.CyclesRemaining
+                                        </td>
+                                        <td class="initial-order">
+                                            <a href="@Url.RouteUrl("OrderDetails", new { orderId = item.InitialOrderId })">@string.Format(T("Account.CustomerOrders.RecurringOrders.ViewInitialOrder").Text, item.InitialOrderNumber)</a>
+                                        </td>
+                                        @if (canRetryRecurringOrders)
+                                        {
+                                            <td class="retry">
+                                                @if (item.CanRetryLastPayment)
+                                                {
+                                                    <input type="submit" name="retryLastPayment_@(item.Id)" value="@T("Account.CustomerOrders.RecurringOrders.RetryLastPayment")" class="button-2 retry-recurring-order-button" />
+                                                }
+                                            </td>
+                                        }
+                                        <td class="cancel">
+                                            @if (item.CanCancel)
+                                            {
+                                                <input type="submit" name="cancelRecurringPayment@(item.Id)" value="@T("Account.CustomerOrders.RecurringOrders.Cancel")" class="button-2 cancel-recurring-order-button" />
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+            if (Model.RecurringPaymentErrors.Any())
+            {
+            <div class="message-error">
+                <ul>
+                    @foreach (var error in Model.RecurringPaymentErrors)
+                    {
+                        <li>@error</li>
+                    }
+                </ul>
+            </div>
+            }
+        }
+        
+        @if (Model.Orders.Count > 0)
+        {
+            <div class="order-list">
+                @if (settings.useCustomOrdersTemplate && settings.storeCustomOrdersTemplate == "cards")
+                {
+                    <div class="row">
+                        @foreach (var order in Model.Orders)
+                        {
+                            <div class="col s12 m4">
+                                <div class="card">
+                                    <div class="ribbon-wrapper-green"><div class="ribbon-@order.OrderStatusEnum.ToString().ToLowerInvariant()">@order.OrderStatus</div></div>
+                                    <div class="card-content">
+                                        <span class="card-title">@T("Account.CustomerOrders.OrderNumber"): @order.CustomOrderNumber</span>
+                                        <p>
+                                            <ul class="info">
+                                                <li>
+                                                    <time datetime="@order.CreatedOn.Year-@order.CreatedOn.Month-@order.CreatedOn.Day" class="icon">
+                                                        
+                                                        @if (@order.CreatedOn.DayOfWeek.ToString() == "Monday")
+                                                        {
+                                                            <em>
+                                                                @T("Nop4you.Theme.GrandNode.Monday")
+                                                            </em>
+                                                        }
+                                                        @if (@order.CreatedOn.DayOfWeek.ToString() == "Tuesday")
+                                                        {
+                                                            <em>
+                                                                @T("Nop4you.Theme.GrandNode.Tuesday")
+                                                            </em>
+                                                        }
+                                                        @if (@order.CreatedOn.DayOfWeek.ToString() == "Wednesday")
+                                                        {
+                                                            <em>
+                                                                @T("Nop4you.Theme.GrandNode.Wednesday")
+                                                            </em>
+                                                        }
+                                                        @if (@order.CreatedOn.DayOfWeek.ToString() == "Thursday")
+                                                        {
+                                                            <em>
+                                                                @T("Nop4you.Theme.GrandNode.Thursday")
+                                                            </em>
+                                                        }
+                                                        @if (@order.CreatedOn.DayOfWeek.ToString() == "Friday")
+                                                        {
+                                                            <em>
+                                                                @T("Nop4you.Theme.GrandNode.Friday")
+                                                            </em>
+                                                        }
+                                                        @if (@order.CreatedOn.DayOfWeek.ToString() == "Saturday")
+                                                        {
+                                                            <em>
+                                                                @T("Nop4you.Theme.GrandNode.Saturday")
+                                                            </em>
+                                                        }
+                                                        @if (@order.CreatedOn.DayOfWeek.ToString() == "Sunday")
+                                                        {
+                                                            <em>
+                                                                @T("Nop4you.Theme.GrandNode.Sunday")
+                                                            </em>
+                                                        }
+                                                        <strong>@order.CreatedOn.ToString("MMMM")</strong>
+                                                        <span>@order.CreatedOn.Day</span>
+                                                    </time>
+                                                </li>
+                                                <li>@T("Account.CustomerOrders.OrderTotal"): <span class="order-total"><strong>@order.OrderTotal</strong></span></li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                    <div class="card-action">
+                                        @if (order.IsReturnRequestAllowed)
+                                        {
+                                            <button type="button" class="btn-flat waves-effect" onclick="setLocation('@Url.RouteUrl("ReturnRequest", new { orderId = order.Id })')">
+                                                <i class="material-icons left">keyboard_return</i>
+                                                @T("Account.CustomerOrders.ReturnItems")
+                                            </button>
+                                        }
+
+                                        <button class="btn-flat waves-effect" onclick="setLocation('@Url.RouteUrl("OrderDetails", new { orderId = order.Id })')">
+                                            <i class="material-icons left">subject</i>
+                                            @T("Account.CustomerOrders.OrderDetails")
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    foreach (var order in Model.Orders)
+                    {
+                        <div class="section order-item">
+                                <div class="title">
+                                    <strong>@T("Account.CustomerOrders.OrderNumber"): @order.CustomOrderNumber</strong>
+                                </div>
+                                <ul class="info">
+                                    <li>@T("Account.CustomerOrders.OrderStatus"): <span class="order-status @order.OrderStatusEnum.ToString().ToLowerInvariant()">@order.OrderStatus</span></li>
+                                    <li>@T("Account.CustomerOrders.OrderDate"): <span class="order-date">@order.CreatedOn.ToString()</span></li>
+                                    <li>@T("Account.CustomerOrders.OrderTotal"): <span class="order-total">@order.OrderTotal</span></li>
+                                </ul>
+                                <div class="buttons">
+                                    @if (order.IsReturnRequestAllowed)
+                                    {
+                                        <button type="button" class="btn-flat waves-effect" onclick="setLocation('@Url.RouteUrl("ReturnRequest", new { orderId = order.Id })')">
+                                            <i class="material-icons left">keyboard_return</i>
+                                            @T("Account.CustomerOrders.ReturnItems")
+                                        </button>
+                                    }
+
+                                    <button class="btn-flat waves-effect" onclick="setLocation('@Url.RouteUrl("OrderDetails", new { orderId = order.Id })')">
+                                        <i class="material-icons left">subject</i>
+                                        @T("Account.CustomerOrders.OrderDetails")
+                                    </button>
+
+                                </div>
+                            </div>
+                        }
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="no-data">
+                @T("Account.CustomerOrders.NoOrders")
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,304 @@
+$light: #ef5350;
+$dark: #b71c1c;
+$textlight: #fff;
+$textdark: #fff;
+$lightrgb: rgb(239, 83, 80);
+$lightrgba: rgba(239, 83, 80, 0.7);
+$lightrgbahover: rgba(239, 83, 80, 0.9);
+
+@mixin selection {
+    ::-moz-selection { @content; }
+    ::selection { @content; }
+}
+
+@include selection {
+    color: $textlight;
+    background: $light !important;
+}
+
+.cart .product .edit-item a {
+	color: $light;
+}
+.cart td.subtotal .discount {
+    color: $light;
+}
+.eu-cookie-bar-notification button {
+    background-color: $light;
+}
+.header-links a:hover {
+	color: $dark;
+}
+.footer-block .list a:hover {
+	color: $dark !important;
+}
+.block .list li.active>a {
+    color: $light;
+}
+.block .list a.active {
+	color: $light;
+}
+.block .list a:hover {
+	color: $dark;
+}
+.product-filter .group li a:hover {
+	color: $light;
+}
+.filtered-items .item {
+	color: $light;
+}
+.item-box .product-title a:hover {
+	color: $light;
+}
+.item-box .tax-shipping-info a {
+	color: $light;
+}
+.manufacturer-grid .title a:hover {
+	color: $light;
+}
+.vendor-list li a {
+	color: $light;
+}
+.product-review-links a:hover {
+	color: $light;
+}
+.overview .value a,
+.variant-overview .value a {
+	color: $light;
+}
+.back-in-stock-subscription-page .notify-me-button {
+	background-color: $light;
+	color: $textlight;
+}
+.overview .tax-shipping-info a,
+.variant-overview .tax-shipping-info a {
+	color: $light;
+}
+.tier-prices .item-price {
+	background-color: #f9f9f9;
+	color: $light;
+}
+.variant-overview .variant-name {
+	color: $light;
+}
+.ui-datepicker-header {
+    background-color: $light;
+    color: $textlight;
+}
+.ui-datepicker-calendar .ui-state-active {
+	outline: 2px solid $light;
+	color: $light;
+	color: $light !important;
+}
+.color-squares .selected-value .color-container {
+	background-color: $light;
+}
+.wishlist-content .tax-shipping-info a {
+	color: $light;
+}
+.wishlist-page .share-info a:hover {
+	color: $light;
+}
+.compare-products-table .product-name td a:hover {
+    color: $light;
+}
+.enter-password-form input[type="submit"] {
+	background-color: $light;
+}
+.accept-privacy-policy span {
+	color: $light;
+}
+.login-page .returning-wrapper .inputs.reversed a:hover {
+	color: $light;
+}
+.external-auth-association a {
+	color: $light;
+}
+.add-more-external-records a {
+	color: $light;
+}
+.return-request-list-page a {
+	color: $light;
+}
+.qq-upload-button {
+    color: $textlight !important;
+    background: $light !important;
+}
+.cart-total .order-total {
+	color: $light;
+}
+.terms-of-service a {
+	color: $light;
+}
+.order-details-page .order-overview .order-total strong {
+	color: $dark;
+}
+
+.order-details-page .download a {
+	color: $light;
+}
+.user-agreement-page .button-1 {
+    background-color: $light;
+}
+.order-details-page .tax-shipping-info a {
+	color: $light;
+}
+.sitemap-page a:hover {
+	color: $light;
+}
+.post-title:hover,
+.news-title:hover {
+	color: $light;
+}
+.comment-info a.username:hover {
+	color: $light;
+}
+.forum-search-box .advanced a:hover {
+	color: $light;
+}
+.forums-table-section-title a:hover {
+	color: $light;
+}
+.forums-table-section .forum-title a:hover,
+.forums-table-section .topic-title a:hover {
+	color: $light;
+}
+.forums-table-section .view-all a {
+	background-color: $light;
+	color: $textlight;
+}
+.topic-post a.username:hover {
+	color: $light;
+}
+.topic-post .post-actions .edit-post-button:hover,
+.topic-post .post-actions .delete-post-button:hover {
+	color: $light;
+}
+.topic-post .post-actions .post-link-button {
+	color: $light;
+}
+.private-message-send-page a {
+	color: $light;
+}
+.ui-tabs-nav li.ui-state-active a {
+	color: $light;
+}
+.private-messages-page td.subject a.pm-unread {
+	color: $light;
+}
+.latest-posts .topic-title a:hover {
+	color: $light;
+}
+.menu-toggle {
+	background: $light url('../images/menu-icon.png') right center no-repeat;
+}
+.header-menu {
+    background-color: $light;
+}
+.shipment-details-page .tracking-number .tracking-url {
+    color: $light;
+}
+.enter-password-form input[type="submit"] {
+	background-color: $light;
+	color: $textlight;
+}
+.btn, .btn-large {
+    background-color: $light;
+    color: $textdark;
+}
+input:focus:not([type]):not([readonly]), input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid $light;
+    box-shadow: 0 1px 0 0 $light;
+}
+input:focus:not([type]):not([readonly]) + label, input[type="text"]:focus:not([readonly]) + label, input[type="password"]:focus:not([readonly]) + label, input[type="email"]:focus:not([readonly]) + label, input[type="url"]:focus:not([readonly]) + label, input[type="time"]:focus:not([readonly]) + label, input[type="date"]:focus:not([readonly]) + label, input[type="datetime-local"]:focus:not([readonly]) + label, input[type="tel"]:focus:not([readonly]) + label, input[type="number"]:focus:not([readonly]) + label, input[type="search"]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+    color: $dark;
+}
+.btn:hover, .btn-large:hover {
+    background-color: $dark;
+}
+.dropdown-content li > a, .dropdown-content li > span {
+    color: $dark;
+}
+[type="checkbox"]:checked + label::before {
+    border-right: 2px solid $dark;
+    border-bottom: 2px solid $dark;
+}
+.with-gap[type="radio"]:checked + label::before {
+    border: 2px solid $dark;
+}
+.with-gap[type="radio"]:checked + label::after {
+    border: 2px solid $dark;
+    background-color: $dark;
+}
+button:focus {
+    outline: none;
+    background-color: $dark;
+}
+input.valid:not([type]), input.valid:focus:not([type]), input.valid[type="text"], input.valid[type="text"]:focus, input.valid[type="password"], input.valid[type="password"]:focus, input.valid[type="email"], input.valid[type="email"]:focus, input.valid[type="url"], input.valid[type="url"]:focus, input.valid[type="time"], input.valid[type="time"]:focus, input.valid[type="date"], input.valid[type="date"]:focus, input.valid[type="datetime-local"], input.valid[type="datetime-local"]:focus, input.valid[type="tel"], input.valid[type="tel"]:focus, input.valid[type="number"], input.valid[type="number"]:focus, input.valid[type="search"], input.valid[type="search"]:focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus {
+    border-bottom: 1px solid $dark;
+    box-shadow: 0 1px 0 0 $dark;
+}
+.input-field .prefix.active {
+	color: $dark;
+}
+.waves-effect .waves-ripple {
+  background-color: $dark;
+  color: $textlight;
+}  
+.private-messages .buttons input {
+	background-color: $light !important;
+}
+.private-messages .buttons input:hover {
+	background-color: $dark !important;
+}
+.tabs .tab a {
+	color: $dark;
+}
+.tabs .tab a:hover {
+	color: $light;
+}
+.tabs .indicator {
+	background-color: $dark;
+}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+	color: $dark;
+}
+
+@media (max-width: 769px) {
+    .footer-block .title {
+        background: $light url('../../images/toggle-white.png') right center no-repeat;
+    }
+}
+#return-to-top {
+    background: $lightrgb;
+    background: $lightrgba;
+}
+#return-to-top i {
+    color: $textlight;
+}
+#return-to-top:hover {
+    background: $lightrgbahover;
+}
+#return-to-top:hover i {
+    color: $textdark;
+}
+
+.dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+	background-color: $light;
+	color: $textlight;
+}
+.dropdown-content li > a:hover, .dropdown-content li > span:hover,
+.dropdown-content li.selected > a, .dropdown-content li.selected > span {
+    color: $textlight;
+}
+time.icon strong {
+	color: #fff;
+	background-color: $light;
+	box-shadow: 0 2px 0 $textdark;
+	border-bottom: 1px dashed $dark;
+}
+time.icon em {
+	color: $light;
+}
+blockquote.pickup-points-blockquote {
+	border-left: 5px solid $light;
+}
