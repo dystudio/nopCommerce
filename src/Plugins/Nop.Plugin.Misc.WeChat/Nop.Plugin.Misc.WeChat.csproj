@@ -167,6 +167,14 @@
       <Project>{814092cd-9cd0-4fb7-91e8-d147f476f1fb}</Project>
       <Name>Senparc.Weixin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Nop.Plugin.Api\Nop.Plugin.Api.csproj">
+      <Project>{6a13d01b-5b1a-4932-9a9d-4117ac27011f}</Project>
+      <Name>Nop.Plugin.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nop.Plugin.ExternalAuth.Weixin\Nop.Plugin.ExternalAuth.Weixin.csproj">
+      <Project>{446FED73-BCA1-4D8F-BC13-EA1507C7EF28}</Project>
+      <Name>Nop.Plugin.ExternalAuth.Weixin</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Common\Download\readme.txt" />

@@ -7,10 +7,15 @@ using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Infrastructure;
+using Nop.Plugin.Api.MappingExtensions;
+using Nop.Plugin.ExternalAuth.Weixin.Core;
 using Nop.Plugin.Misc.WeChat;
 using Nop.Plugin.Misc.WeChat.Handler;
 using Nop.Plugin.Misc.WeChat.Models;
+using Nop.Services.Authentication;
+using Nop.Services.Authentication.External;
 using Nop.Services.Catalog;
+using Nop.Services.Common;
 using Nop.Services.Customers;
 using Nop.Services.Orders;
 using Nop.Services.Vendors;
@@ -18,6 +23,7 @@ using Nop.Web.Framework.Controllers;
 using RestSharp;
 using Senparc.Weixin;
 using Senparc.Weixin.MP;
+using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MvcExtension;
 using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
@@ -50,6 +56,10 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
         private ICacheManager _cacheManager;
         private HttpContextBase _httpContextBase;
         private NopMessageHandler _nopMessageHandler;
+
+        private readonly IOpenAuthenticationService _openAuthenticationService;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly IGenericAttributeService _genericAttributeService;
         #endregion
 
         #region Ctor
@@ -67,7 +77,10 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
             IProductService productService,
             ICategoryService categoryService,
             ICacheManager cacheManager,
-            HttpContextBase httpContextBase)
+            HttpContextBase httpContextBase,
+            IOpenAuthenticationService openAuthenticationService,
+            IAuthenticationService authenticationService,
+            IGenericAttributeService genericAttributeService)
         {
             _customerService = customerService;
             _orderService = orderService;
@@ -82,6 +95,9 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
             _categoryService = categoryService;
             _cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
             _httpContextBase = httpContextBase;
+            this._openAuthenticationService = openAuthenticationService;
+            this._authenticationService = authenticationService;
+            this._genericAttributeService = genericAttributeService;
         }
 
         #endregion
@@ -143,7 +159,61 @@ namespace Nop.Plugin.Misc.WeChat.Controllers
             }).ContinueWith<ActionResult>(task => task.Result);
         }
 
+        /// <summary>
+        /// weixin mobile app 登陆成功之后发送的请求
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> GetUserInfoAsync(string code)
+        {
+            var oAuthAccessTokenResult = await OAuthApi.GetAccessTokenAsync(
+                _settings.AppId, _settings.AppSecret, code);
+            var userInfo = await OAuthApi.GetUserInfoAsync(
+                oAuthAccessTokenResult.access_token, oAuthAccessTokenResult.openid);
 
+            //TODO test when a web user login to system, to check if the openid is the user name???
+            var parameters = new OAuthAuthenticationParameters(Provider.SystemName)
+            {
+                ExternalIdentifier = userInfo.openid,
+                OAuthToken = oAuthAccessTokenResult.access_token,
+                OAuthAccessToken = oAuthAccessTokenResult.access_token,
+            };
+
+            var userFound = _openAuthenticationService.GetUser(parameters);
+            var currentCustomer = _workContext.CurrentCustomer;
+            if (userFound == null)
+            {
+                var randomPassword = CommonHelper.GenerateRandomDigitCode(20);
+
+                var registrationRequest = new CustomerRegistrationRequest(
+                    currentCustomer, string.Empty, userInfo.openid, randomPassword, PasswordFormat.Clear, _storeContext.CurrentStore.Id, true);
+
+                var registrationResult = _customerRegistrationService.RegisterCustomer(registrationRequest);
+                if (registrationResult.Success)
+                {
+                    //store other parameters (form fields)
+                    if (!String.IsNullOrEmpty(userInfo.nickname))
+                        _genericAttributeService.SaveAttribute(currentCustomer, SystemCustomerAttributeNames.FirstName, userInfo.nickname);
+
+                    userFound = currentCustomer;
+                    _openAuthenticationService.AssociateExternalAccountWithUser(currentCustomer, parameters);
+                    ExternalAuthorizerHelper.RemoveParameters();
+
+                    //authenticate
+                    _authenticationService.SignIn(userFound, false);
+
+                }
+            }
+            var customerDto = currentCustomer.ToDto();
+            return Json(new
+            {
+                success = true,
+                Customer = customerDto,
+                msg = "OK"
+            });
+        }
         #endregion
+
     }
 }
