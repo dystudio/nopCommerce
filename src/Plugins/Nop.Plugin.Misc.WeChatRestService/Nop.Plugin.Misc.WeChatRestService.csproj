@@ -144,6 +144,7 @@
     <ProjectReference Include="..\Nop.Plugin.Api\Nop.Plugin.Api.csproj">
       <Project>{6a13d01b-5b1a-4932-9a9d-4117ac27011f}</Project>
       <Name>Nop.Plugin.Api</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
