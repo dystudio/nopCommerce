@@ -14,6 +14,7 @@ using Nop.Web.Framework.Kendoui;
 using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework.Security;
 using Quartz;
+using Nop.Services.Security;
 
 namespace Nop.Plugin.JobScheduler.Controllers
 {
@@ -21,13 +22,16 @@ namespace Nop.Plugin.JobScheduler.Controllers
     {
         private readonly ISchedulerService _schedulerService;
         private readonly ILocalizationService _localizationService;
+        private readonly IPermissionService _permissionService;
 
         public JobSchedulerController(
             ISchedulerService schedulerService,
-            ILocalizationService localizationService)
+            ILocalizationService localizationService,
+            IPermissionService permissionService)
         {
             _schedulerService = schedulerService;
             _localizationService = localizationService;
+            _permissionService = permissionService;
         }
 
         /// <summary>
@@ -47,6 +51,8 @@ namespace Nop.Plugin.JobScheduler.Controllers
         [AdminAuthorize]
         public ActionResult List()
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
             return View("~/Plugins/Nop.Plugin.JobScheduler/Views/List.cshtml");
         }
 
@@ -54,6 +60,8 @@ namespace Nop.Plugin.JobScheduler.Controllers
         [AdminAuthorize]
         public ActionResult SchedulerList(DataSourceRequest command)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
             var schedulerList = _schedulerService.GetSchedulers().Where(x => !x.Deleted).ToList();
 
             var gridModel = new DataSourceResult
@@ -91,6 +99,8 @@ namespace Nop.Plugin.JobScheduler.Controllers
         [AdminAntiForgery]
         public ActionResult SchedulerUpdate(SchedulerModel model)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
             if (model.Name != null)
                 model.Name = model.Name.Trim();
 
@@ -142,6 +152,8 @@ namespace Nop.Plugin.JobScheduler.Controllers
         [AdminAntiForgery]
         public ActionResult SchedulerDelete(int id)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
             var currentScheduler = _schedulerService.GetSchedulerById(id);
             if (currentScheduler == null)
                 return Content("未找到相关记录");
@@ -164,6 +176,8 @@ namespace Nop.Plugin.JobScheduler.Controllers
 
         public ActionResult RunSchecdulerNow(int id)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
             var scheduler = EngineContext.Current.Resolve<IScheduler>();
 
             var currentScheduler = _schedulerService.GetSchedulerById(id);
@@ -198,6 +212,8 @@ namespace Nop.Plugin.JobScheduler.Controllers
         [AdminAuthorize]
         public ActionResult ClearAllScheduler()
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
             var scheduler = EngineContext.Current.Resolve<IScheduler>();
 
             scheduler.Clear(); // 清除Quartz作业列表的所有作业
