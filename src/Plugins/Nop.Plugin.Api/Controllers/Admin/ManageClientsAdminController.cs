@@ -11,6 +11,7 @@ using Nop.Plugin.Api.Services;
 using Nop.Services.Localization;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Kendoui;
+using Nop.Services.Security;
 
 namespace Nop.Plugin.Api.Controllers.Admin
 {
@@ -19,23 +20,32 @@ namespace Nop.Plugin.Api.Controllers.Admin
     {
         private readonly IClientService _clientService;
         private readonly ILocalizationService _localizationService;
+        private readonly IPermissionService _permissionService;
 
         public ManageClientsAdminController(IClientService clientService,
-            ILocalizationService localizationService)
+            ILocalizationService localizationService,
+            IPermissionService permissionService)
         {
             _clientService = clientService;
             _localizationService = localizationService;
-        }
+            _permissionService = permissionService;
+    }
 
         [HttpGet]
         public ActionResult List()
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             return View(ViewNames.AdminApiClientsList);
         }
 
         [HttpPost]
         public ActionResult List(DataSourceRequest command)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             IList<ClientModel> gridModel = PrepareListModel();
 
             var grids = new DataSourceResult()
@@ -49,6 +59,9 @@ namespace Nop.Plugin.Api.Controllers.Admin
 
         public ActionResult Create()
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             ClientModel clientModel = PrepareClientModel();
 
             return View(ViewNames.AdminApiClientsCreate, clientModel);
@@ -57,6 +70,9 @@ namespace Nop.Plugin.Api.Controllers.Admin
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         public ActionResult Create(ClientModel model, bool continueEditing)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             if (ModelState.IsValid)
             {
                 Client client = model.ToEntity();
@@ -72,6 +88,9 @@ namespace Nop.Plugin.Api.Controllers.Admin
 
         public ActionResult Edit(int id)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             Client client = _clientService.GetClientById(id);
 
             var clientModel = new ClientModel();
@@ -87,6 +106,9 @@ namespace Nop.Plugin.Api.Controllers.Admin
         [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
         public ActionResult Edit(ClientModel model, bool continueEditing)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             if (ModelState.IsValid)
             {
                 Client editedClient = _clientService.GetClientById(model.Id);
@@ -104,6 +126,9 @@ namespace Nop.Plugin.Api.Controllers.Admin
 
         public ActionResult DeleteClient(int id, DataSourceRequest command)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             Client client = _clientService.GetClientById(id);
             if (client == null)
                 throw new ArgumentException("No client found with the specified id");
@@ -116,6 +141,9 @@ namespace Nop.Plugin.Api.Controllers.Admin
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             Client client = _clientService.GetClientById(id);
             _clientService.DeleteClient(client);
 

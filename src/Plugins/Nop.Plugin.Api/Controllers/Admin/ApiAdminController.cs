@@ -10,9 +10,13 @@ using Nop.Services.Localization;
 using Nop.Services.Logging;
 using Nop.Services.Stores;
 using Nop.Web.Framework.Controllers;
+using Nop.Services.Security;
 
 namespace Nop.Plugin.Api.Controllers.Admin
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AdminAuthorize]
     public class ApiAdminController : BaseAdminController
     {
@@ -21,24 +25,30 @@ namespace Nop.Plugin.Api.Controllers.Admin
         private readonly ISettingService _settingService;
         private readonly ICustomerActivityService _customerActivityService;
         private readonly ILocalizationService _localizationService;
+        private readonly IPermissionService _permissionService;
 
         public ApiAdminController(
             IStoreService storeService,
             IWorkContext workContext,
             ISettingService settingService,
             ICustomerActivityService customerActivityService,
-            ILocalizationService localizationService)
+            ILocalizationService localizationService,
+            IPermissionService permissionService)
         {
             _storeService = storeService;
             _workContext = workContext;
             _settingService = settingService;
             _customerActivityService = customerActivityService;
             _localizationService = localizationService;
+            _permissionService = permissionService;
         }
         
         [HttpGet]
         public ActionResult Settings()
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
+
             var storeScope = this.GetActiveStoreScopeConfiguration(_storeService, _workContext);
 
             ApiSettings apiSettings = _settingService.LoadSetting<ApiSettings>(storeScope);
@@ -62,6 +72,8 @@ namespace Nop.Plugin.Api.Controllers.Admin
         [HttpPost]
         public ActionResult Settings(ConfigurationModel configurationModel)
         {
+            if (!_permissionService.Authorize(StandardPermissionProvider.ManagePlugins))
+                return Content("Access denied");
             //load settings for a chosen store scope
             var storeScope = this.GetActiveStoreScopeConfiguration(_storeService, _workContext);
 
