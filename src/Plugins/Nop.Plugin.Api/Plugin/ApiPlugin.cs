@@ -5,6 +5,7 @@ using Nop.Plugin.Api.Data;
 using Nop.Plugin.Api.Helpers;
 using Nop.Web.Framework.Menu;
 using Nop.Services.Localization;
+using Nop.Services.Security;
 
 namespace Nop.Plugin.Api.Plugin
 {
@@ -17,6 +18,7 @@ namespace Nop.Plugin.Api.Plugin
         private ILocalizationService _localizationService;
         private IWebHelper _webHelper;
         private IWorkContext _workContext;
+        private readonly IPermissionService _permissionService;
 
         protected ILocalizationService LocalizationService
         {
@@ -57,10 +59,13 @@ namespace Nop.Plugin.Api.Plugin
             }
         }
 
-        public ApiPlugin(ApiObjectContext objectContext, IWebConfigMangerHelper webConfigMangerHelper)
+        public ApiPlugin(ApiObjectContext objectContext, 
+            IWebConfigMangerHelper webConfigMangerHelper,
+            IPermissionService permissionService)
         {
             _objectContext = objectContext;
             _webConfigMangerHelper = webConfigMangerHelper;
+            _permissionService = permissionService;
         }
 
         public override void Install()
@@ -204,7 +209,7 @@ namespace Nop.Plugin.Api.Plugin
             var pluginMainMenu = new SiteMapNode
             {
                 Title = pluginMenuName,
-                Visible = true,
+                Visible = _permissionService.Authorize(StandardPermissionProvider.ManagePlugins),
                 SystemName = "Api-Main-Menu",
                 IconClass = "fa-genderless"
             };
