@@ -227,19 +227,6 @@ namespace Nop.Plugin.Api.Plugin
                 IconClass = "fa-genderless"
             });
             
-
-            string pluginDocumentationUrl = "https://github.com/SevenSpikes/api-plugin-for-nopcommerce";
-            
-            pluginMainMenu.ChildNodes.Add(new SiteMapNode
-                {
-                    Title = LocalizationService.GetResource("Plugins.Api.Admin.Menu.Docs.Title"),
-                    Url = pluginDocumentationUrl,
-                    Visible = true,
-                    SystemName = "Api-Docs-Menu",
-                    IconClass = "fa-genderless"
-                });//TODO: target="_blank"
-            
-
             rootNode.ChildNodes.Add(pluginMainMenu);
         }
     }
