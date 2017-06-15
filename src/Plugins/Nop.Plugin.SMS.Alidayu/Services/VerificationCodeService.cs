@@ -1,5 +1,7 @@
 ﻿using Nop.Core;
+using Nop.Plugin.SMS.Alidayu.Domain;
 using Nop.Services.Configuration;
+using Nop.Services.Events;
 using Nop.Services.Logging;
 using Nop.Services.Stores;
 using System;
@@ -21,19 +23,22 @@ namespace Nop.Plugin.SMS.Alidayu.Services
         private readonly IStoreService _storeService;
         private readonly IWorkContext _workContext;
         private readonly ILogger _logger;
+        private readonly IEventPublisher _eventPublisher;
 
         #endregion
         public VerificationCodeService(
             ISettingService settingService,
             IStoreService storeService,
             IWorkContext workContext,
-            ILogger logger)
+            ILogger logger,
+            IEventPublisher eventPublisher)
         {
           
             this._settingService = settingService;
             this._storeService = storeService;
             this._workContext = workContext;
             this._logger = logger;
+            this._eventPublisher = eventPublisher;
         }
 
         public bool SendVerificationCode(int storeScope, string phoneNumber)
@@ -74,6 +79,8 @@ namespace Nop.Plugin.SMS.Alidayu.Services
             }
             else
             {
+                //raise event       
+                _eventPublisher.Publish(new VerificationCodeSentEvent(phoneNumber, number.ToString()));
                 return true;
             }
         }

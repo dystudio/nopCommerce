@@ -67,6 +67,7 @@
     <Compile Include="Controllers\SmsAlidayuController.cs" />
     <Compile Include="Controllers\VerificationCodeController.cs" />
     <Compile Include="DependencyRegistrar.cs" />
+    <Compile Include="Domain\Events.cs" />
     <Compile Include="Models\SmsAlidayuModel.cs" />
     <Compile Include="Models\VerificationCodeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
