@@ -8,6 +8,7 @@ using Nop.Plugin.JobScheduler.SchedulerJobs;
 using Nop.Plugin.JobScheduler.Services;
 using Nop.Services.Localization;
 using Nop.Web.Framework.Menu;
+using Nop.Services.Security;
 
 namespace Nop.Plugin.JobScheduler
 {
@@ -18,17 +19,20 @@ namespace Nop.Plugin.JobScheduler
         private readonly IWebHelper _webHelper;
         private readonly ILocalizationService _localizationService;
         private readonly IWorkContext _workContext;
+        private readonly IPermissionService _permissionService;
 
         public JobSchedulerPlugin(JobSchedulerObjectContext objectContext,
             IWebHelper webHelper,
             ILocalizationService localizationService,
-            IWorkContext workContext)
+            IWorkContext workContext,
+            IPermissionService permissionService)
         {
             _objectContext = objectContext;
             _webHelper = webHelper;
             _localizationService = localizationService;
 
             _workContext = workContext;
+            _permissionService = permissionService;
         }
 
         private string FormatEnumResourceName(TimeInterval timeInterval)
@@ -169,7 +173,7 @@ namespace Nop.Plugin.JobScheduler
             var pluginMainMenu = new SiteMapNode
             {
                 Title = pluginMenuName,
-                Visible = true,
+                Visible = _permissionService.Authorize(StandardPermissionProvider.ManagePlugins),
                 SystemName = "JobScheduler-Main-Menu",
                 IconClass = "fa-plug"
             };
