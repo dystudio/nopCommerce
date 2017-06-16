@@ -97,9 +97,9 @@ namespace Nop.Plugin.JobScheduler
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.RunJobTime", "Start run on", "en-US");
 
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.NewCustomer.Title", "New Customer", "en-US");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.AutoBackupDatabase", "Auto Backup Database", "zh-CN");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.YesterdayRegisteredCustomers", "Yesterday Registered Customers", "zh-CN");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.CleanUnenabledOrDeletedJobs", "Clean Unenabled/DeletedJobs", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.AutoBackupDatabase", "Auto Backup Database", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.YesterdayRegisteredCustomers", "Yesterday Registered Customers", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.CleanUnenabledOrDeletedJobs", "Clean Unenabled/DeletedJobs", "en-US");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.NewCustomer.Title", "Customer List", "en-US");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Username", "Username", "en-US");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Email", "Email", "en-US");
