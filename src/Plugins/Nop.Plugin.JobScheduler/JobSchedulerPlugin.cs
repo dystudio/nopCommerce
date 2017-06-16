@@ -45,6 +45,9 @@ namespace Nop.Plugin.JobScheduler
             _objectContext.Install();
 
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.Title", "作业调度", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.AutoBackupDatabase", "自动备份数据库", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.YesterdayRegisteredCustomers", "统计昨日（匿名/注册）用户信息", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.CleanUnenabledOrDeletedJobs", "定时清理未启用或已删除的作业", "zh-CN");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.SchedulerList.Title", "作业列表","zh-CN");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.SchedulerList.Title", "作业调度列表", "zh-CN");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.ClearAllScheduler", "清除所有作业", "zh-CN");
@@ -73,6 +76,7 @@ namespace Nop.Plugin.JobScheduler
 
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.VisitCustomer.Fields.SearchDateTime", "访问日期", "zh-CN");
 
+
             this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Second), "秒", "zh-CN");
             this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Minute), "分钟", "zh-CN");
             this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Hour), "小时", "zh-CN");
@@ -93,6 +97,9 @@ namespace Nop.Plugin.JobScheduler
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.RunJobTime", "Start run on", "en-US");
 
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.NewCustomer.Title", "New Customer", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.AutoBackupDatabase", "Auto Backup Database", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.YesterdayRegisteredCustomers", "Yesterday Registered Customers", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.CleanUnenabledOrDeletedJobs", "Clean Unenabled/DeletedJobs", "zh-CN");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.NewCustomer.Title", "Customer List", "en-US");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Username", "Username", "en-US");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Email", "Email", "en-US");
@@ -107,21 +114,21 @@ namespace Nop.Plugin.JobScheduler
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.ClearJob.Done", "Success", "en-US");
             this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.RunCurrentJob.Done", "Start run", "en-US");
 
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.VisitCustomer.Fields.SearchDateTime", "Search Time", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.VisitCustomer.Fields.SearchDateTime", "Search Time", "en-US");
 
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Second), "Second", "zh-CN");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Minute), "Minute", "zh-CN");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Hour), "Hour", "zh-CN");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Day), "Day", "zh-CN");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Month), "Month", "zh-CN");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Year), "Year", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Second), "Second", "en-US");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Minute), "Minute", "en-US");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Hour), "Hour", "en-US");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Day), "Day", "en-US");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Month), "Month", "en-US");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Year), "Year", "en-US");
             base.Install();
 
             var schedulerList = new List<Scheduler>
             {
                 new Scheduler
                 {
-                    Name = "自动备份数据库",
+                    Name = _localizationService.GetResource("Plugins.JobScheduler.Admin.Menu.AutoBackupDatabase"),
                     SystemName = typeof(BackupDatabaseJob).FullName,
                     IntervalValue = 5,
                     TimeInterval = TimeInterval.Minute,
@@ -130,7 +137,7 @@ namespace Nop.Plugin.JobScheduler
                 },
                 new Scheduler
                 {
-                    Name = "统计昨日（匿名/注册）用户信息",
+                    Name = _localizationService.GetResource("Plugins.JobScheduler.Admin.Menu.YesterdayRegisteredCustomers"),
                     SystemName = typeof(ReportYesterdayCustomerJob).FullName,
                     IntervalValue = 1,
                     TimeInterval = TimeInterval.Day,
@@ -139,7 +146,7 @@ namespace Nop.Plugin.JobScheduler
                 },
                 new  Scheduler
                 {
-                    Name = "定时清理未启用或已删除的作业",
+                    Name = _localizationService.GetResource("Plugins.JobScheduler.Admin.Menu.CleanUnenabledOrDeletedJobs"),
                     SystemName = typeof(MaintenanceAllJobs).FullName,
                     IntervalValue = 5,
                     TimeInterval = TimeInterval.Day,
@@ -157,6 +164,10 @@ namespace Nop.Plugin.JobScheduler
             _objectContext.UnInstall();
 
             this.DeletePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.Title");
+            this.DeletePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.AutoBackupDatabase");
+            this.DeletePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.YesterdayRegisteredCustomers");
+            this.DeletePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.CleanUnenabledOrDeletedJobs");
+
             this.DeletePluginLocaleResource("Plugins.JobScheduler.Menu.SchedulerList.Title");
             this.DeletePluginLocaleResource("Plugins.JobScheduler.Admin.Page.SchedulerList.Title");
             this.DeletePluginLocaleResource("Plugins.JobScheduler.Admin.Page.BeginRunScheduler");
@@ -198,10 +209,10 @@ namespace Nop.Plugin.JobScheduler
 
         public void ManageSiteMap(SiteMapNode rootNode)
         {
-            string pluginMenuName = _localizationService.GetResource("Plugin.JobScheduler.Admin.Menu.Title", _workContext.WorkingLanguage.Id, false, "作业调度");
+            string pluginMenuName = _localizationService.GetResource("Plugins.JobScheduler.Admin.Menu.Title");
 
-            string listMenuName = _localizationService.GetResource("Plugin.JobScheduler.Menu.SchedulerList.Title", _workContext.WorkingLanguage.Id, false, "作业列表");
-            string newCustomerMenuName = _localizationService.GetResource("Plugin.JobScheduler.Menu.NewCustomer.Title", _workContext.WorkingLanguage.Id, false, "(匿名/注册)用户");
+            string listMenuName = _localizationService.GetResource("Plugins.JobScheduler.Menu.SchedulerList.Title");
+            string newCustomerMenuName = _localizationService.GetResource("Plugins.JobScheduler.Menu.NewCustomer.Title");
 
             const string adminUrlPart = "Plugins/";
 
