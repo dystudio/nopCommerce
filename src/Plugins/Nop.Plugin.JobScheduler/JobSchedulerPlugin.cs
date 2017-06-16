@@ -44,42 +44,77 @@ namespace Nop.Plugin.JobScheduler
         {
             _objectContext.Install();
 
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.Title", "作业调度");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.SchedulerList.Title", "作业列表");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.SchedulerList.Title", "作业调度列表");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.ClearAllScheduler", "清除所有作业");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.BeginRunScheduler", "开始执行");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.Name", "名称");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.IntervalValue", "调度值");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.TimeIntervalDesc", "间隔单位");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.Enabled", "是否启用");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.LastRunTime", "上次执行时间");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.RunJobTime", "开始执行时间");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.Title", "作业调度", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.SchedulerList.Title", "作业列表","zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.SchedulerList.Title", "作业调度列表", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.ClearAllScheduler", "清除所有作业", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.BeginRunScheduler", "开始执行", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.Name", "名称", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.IntervalValue", "调度值", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.TimeIntervalDesc", "间隔单位", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.Enabled", "是否启用", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.LastRunTime", "上次执行时间", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.RunJobTime", "开始执行时间", "zh-CN");
 
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.NewCustomer.Title", "(匿名/注册)用户");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.NewCustomer.Title", "(匿名/注册)用户列表");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Username", "用户名");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Email", "邮箱");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.RealName", "真实姓名");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.IsRegisterCustomer", "是否注册");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.VisitIpAddress", "IP地址");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.VisitedTime", "访问/注册时间");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.NewCustomer.Title", "(匿名/注册)用户", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.NewCustomer.Title", "(匿名/注册)用户列表", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Username", "用户名", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Email", "邮箱", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.RealName", "真实姓名", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.IsRegisterCustomer", "是否注册", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.VisitIpAddress", "IP地址", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.VisitedTime", "访问/注册时间", "zh-CN");
 
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.CreatedJob.Done", "新建作业成功");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.UpdatedJob.Done", "修改作业成功");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.DeletedJob.Done", "删除作业成功");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.ClearJob.Done", "清除所有作业成功");
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.RunCurrentJob.Done", "已开始执行该作业");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.CreatedJob.Done", "新建作业成功", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.UpdatedJob.Done", "修改作业成功", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.DeletedJob.Done", "删除作业成功", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.ClearJob.Done", "清除所有作业成功", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.RunCurrentJob.Done", "已开始执行该作业", "zh-CN");
 
-            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.VisitCustomer.Fields.SearchDateTime", "访问日期");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.VisitCustomer.Fields.SearchDateTime", "访问日期", "zh-CN");
 
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Second), "秒");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Minute), "分钟");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Hour), "小时");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Day), "天");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Month), "月");
-            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Year), "年");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Second), "秒", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Minute), "分钟", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Hour), "小时", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Day), "天", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Month), "月", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Year), "年", "zh-CN");
 
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Menu.Title", "Job", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.SchedulerList.Title", "Job List", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.SchedulerList.Title", "Job List", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.ClearAllScheduler", "Clear All Schedulers", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.BeginRunScheduler", "Start", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.Name", "Name", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.IntervalValue", "Interval", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.TimeIntervalDesc", "Description", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.Enabled", "Enalbed", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.LastRunTime", "Last run on", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.SchedulerList.RunJobTime", "Start run on", "en-US");
+
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Menu.NewCustomer.Title", "New Customer", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.Page.NewCustomer.Title", "Customer List", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Username", "Username", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.Email", "Email", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.RealName", "Real Name", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.IsRegisterCustomer", "Registered", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.VisitIpAddress", "IP", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.NewCustomer.VisitedTime", "Visited Time", "en-US");
+
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.CreatedJob.Done", "Success", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.UpdatedJob.Done", "Success", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.DeletedJob.Done", "Success", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.ClearJob.Done", "Success", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.Admin.RunCurrentJob.Done", "Start run", "en-US");
+
+            this.AddOrUpdatePluginLocaleResource("Plugins.JobScheduler.VisitCustomer.Fields.SearchDateTime", "Search Time", "zh-CN");
+
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Second), "Second", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Minute), "Minute", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Hour), "Hour", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Day), "Day", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Month), "Month", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource(FormatEnumResourceName(TimeInterval.Year), "Year", "zh-CN");
             base.Install();
 
             var schedulerList = new List<Scheduler>
