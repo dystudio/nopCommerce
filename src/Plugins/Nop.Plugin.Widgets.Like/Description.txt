@@ -1,0 +1,8 @@
+﻿Group: Widgets
+FriendlyName: Like View
+SystemName: Widgets.Like
+Version: 1.20
+SupportedVersions: 3.90
+Author: Anik Saha,dystudio.net
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.Like.dll

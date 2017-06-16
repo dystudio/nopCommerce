@@ -1,0 +1,32 @@
+﻿@{
+   // Html.AppendScriptParts("~/Scripts/jquery-1.10.2.min.js");
+    Html.AddCssFileParts("~/Plugins/Widgets.Like/Content/Style/Like.css");
+    Html.AddScriptParts("~/Plugins/Widgets.Like/Script/public.product-like.js");
+    //var isGuestCustomer = EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.IsGuest();
+    var urlLike = Url.RouteUrl("Widgets.Like.CustomerProductLike", new { productId = Model.ProductId });
+    var urlUnLike = Url.RouteUrl("Widgets.Like.CustomerProductUnLike", new { productId = Model.ProductId });
+}
+@model LikeProductBoxModel
+@using Nop.Core
+@using Nop.Core.Domain.Customers
+@using Nop.Core.Infrastructure
+@using Nop.Plugin.Widgets.Like.Models;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+<div class="like-block-window" style="display: none">
+</div>
+<div class="un-like-block-window" style="display: none">
+</div>
+@if (Model.IsGuestCustomer)
+{
+    <a style="@(!(Model.IsLikedByCurrentCustomer) ? "display:block" : "display:none")" title="@T("Widgets.Like.GuestTitle")" class="item-like-counter_@(Model.ProductId) like-btn item-like-counter disabled" onclick="ProductLike.guestlike()">@Model.LikeCout</a>
+    <a style="@(!(Model.IsLikedByCurrentCustomer) ? "display:none" : "display:block")" title="@T("Widgets.Like.GuestTitle")" class="item-like-counter_@(Model.ProductId) unlike-btn item-like-counter disabled" onclick="ProductLike.guestlike()">@Model.LikeCout</a>
+
+}
+else
+{
+    <a style="@(!(Model.IsLikedByCurrentCustomer) ? "display:block" : "display:none")" title="@T("Widgets.Like.LikeTitle")" class="item-like-counter_@(Model.ProductId) like-btn item-like-counter" onclick="ProductLike.like('@urlLike','.item-like-counter_@(Model.ProductId)');return false; ">@Model.LikeCout</a>
+    <a style="@(!(Model.IsLikedByCurrentCustomer) ? "display:none" : "display:block")" title="@T("Widgets.Like.UnLikeTitle")" class="item-like-counter_@(Model.ProductId) unlike-btn item-like-counter" onclick="ProductLike.unlike('@urlUnLike','.item-like-counter_@(Model.ProductId)');return false; ">@Model.LikeCout</a>
+
+}

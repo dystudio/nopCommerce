@@ -1,0 +1,54 @@
+﻿ .unlike-btn {
+    background: url(../img/heart.png)no-repeat;
+    line-height: 16px;
+    height: 21px;
+    font-size: 16px;
+    margin-top: 5px;
+    padding: 0;
+    float: right;
+    color: #B4B5C4 !important;
+    text-align: right;
+    padding-top:3px;
+    padding-left:28px;
+}
+
+    .like-btn {
+    background: url(../img/heart-hover.png) no-repeat;
+    line-height: 16px;
+    height: 21px;
+    font-size: 16px;
+    margin-top: 5px;
+    padding: 0;
+    float: right;
+    color: #B4B5C4 !important;
+    text-align: right;
+    padding-top:3px;
+    padding-left:28px;
+}
+
+.un-like-block-window {
+	position: fixed;
+	top: 40%;
+	left: 45%;
+	z-index: 999;
+	width: 200px;
+	height: 200px;
+	margin: -16px 0 0 -16px;
+	background: url('../Img/heary-broken.png') center no-repeat;
+}
+
+.like-block-window {
+	position: fixed;
+	top: 40%;
+	left: 45%;
+	z-index: 999;
+	width: 200px;
+	height: 200px;
+	margin: -16px 0 0 -16px;
+	background: url('../Img/heary-full.png') center no-repeat;
+}
+
+
+@media screen and (max-width:480px) {
+    .un-like-block-window, .like-block-window{ display: none !important;}
+}

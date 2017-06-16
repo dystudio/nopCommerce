@@ -1,0 +1,77 @@
+﻿@using Nop.Core.Infrastructure
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+@using System.Globalization;
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    var defaultGridPageSize = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().DefaultGridPageSize;
+    var gridPageSizes = EngineContext.Current.Resolve<Nop.Core.Domain.Common.AdminAreaSettings>().GridPageSizes;
+
+    //page title
+    ViewBag.Title = T("Admin.System.Log").Text;
+}
+   <table class="adminContent">
+    <tr>
+        <td>
+            <div id="products-grid"></div>
+
+            <script>
+                    $(document).ready(function() {
+                        $("#products-grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: {
+                                        url: "@Html.Raw(Url.Action("AdminLikeList", "WidgetsLike"))",
+                                        type: "POST",
+                                        dataType: "json"
+                                    }
+                                },
+                                schema: {
+                                    data: "Data",
+                                    total: "Total",
+                                    errors: "Errors"
+                                },
+                                error: function(e) {
+                                    display_kendoui_grid_error(e);
+                                    // Cancel the changes
+                                    this.cancelChanges();
+                                },
+                                pageSize: @(defaultGridPageSize),
+                                serverPaging: true,
+                                serverFiltering: true,
+                                serverSorting: true
+                            },
+                            pageable: {
+                                refresh: true,
+                                pageSizes: [@(gridPageSizes)]
+                            },
+                            editable: {
+                                confirmation: false,
+                                mode: "inline"
+                            },
+                            scrollable: false,
+                           // dataBound: onDataBound,
+                            columns: [
+                                {
+                                    field: "PictureThumbnailUrl",
+                                    title: "@T("Admin.Catalog.Products.Fields.PictureThumbnailUrl")",
+                                    template: '<img src="#=PictureThumbnailUrl#" />',
+                                    width: 100
+                                },
+                                {
+                                    field: "Name",
+                                    title: "@T("Admin.Catalog.Products.Fields.Name")",
+                                    width: 300
+                                }, {
+                                    field: "Count",
+                                    title: "@T("Widget.Like.Count")",
+                                    width: 100
+                                }
+                            ]
+                        } );
+                    });
+            </script>
+        </td>
+    </tr>
+</table>

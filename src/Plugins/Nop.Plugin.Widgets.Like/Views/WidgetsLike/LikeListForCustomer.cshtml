@@ -1,0 +1,98 @@
+@model LikeListModelForCustomer
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Infrastructure
+@using Nop.Plugin.Widgets.Like.Models;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Extensions;
+@{
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Wishlist").Text);
+}
+<div class="page wishlist-page">
+    <div class="page-title">
+        <h1>
+            @*@T("Wishlist")*@
+           @T("Widgets.Like.List")
+        </h1>
+    </div>
+    <div class="page-body">
+        @if (Model.LikeList.Count > 0)
+        {
+            <div class="wishlist-content">
+                @using (Html.BeginRouteForm("Widgets.Like.LikelistForCustomer", FormMethod.Post))
+                {
+                    <div class="table-wrapper">
+                        <table class="cart">
+                            <colgroup>
+                                <col width="1" />
+                                <col width="1" />
+                                <col />
+                                <col width="1" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+
+                                    <th class="remove-from-cart">
+                                        @T("ShoppingCart.Remove")
+                                    
+                                    </th>
+
+                                    <th class="product-picture">
+                                        @T("ShoppingCart.Image")
+                                    </th>
+
+                                    <th class="product">
+                                        @T("ShoppingCart.Product(s)")
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.LikeList)
+                                {
+                                    <tr>
+                                       
+                                            <td class="remove-from-cart">
+                                                <label class="td-title">@T("ShoppingCart.Remove"):</label>
+                                                <input type="checkbox" name="removefromcart" value="@(item.Id)" />
+                                            </td>
+       
+                                        
+                                            <td class="product-picture">
+                                                <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })"><img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" /></a>
+                                            </td>
+                                        
+                                        <td class="product">
+                                            <a href="@Url.RouteUrl("Product", new { SeName = item.ProductSeName })" class="product-name">@item.ProductName</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    var pager = Html.Pager(Model.PagerModel);
+                    if (!MvcHtmlString.IsNullOrEmpty(pager))
+                    {
+                        <div class="pager">
+                            @pager
+                        </div>
+                    }
+                    <div class="buttons">
+                            <input type="submit" name="updatecart" value="@T("Widgets.Lke.DeleteSelected")" class="button-2 update-wishlist-button" />
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="no-data">
+                @T("Widgets.Lke.ListEmpty")
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@{
+   
+    var LikeList = Url.RouteUrl("Widgets.Like.LikelistForCustomer");
+    //var urlUnLike = Url.RouteUrl("Widgets.Like.CustomerProductUnLike", new { productId = Model.ProductId });
+}
+@model LikeHeaderModel
+@using Nop.Core
+@using Nop.Core.Domain.Customers
+@using Nop.Core.Infrastructure
+@using Nop.Plugin.Widgets.Like.Models;
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+
+
+@if (!(Model.IsGuest))
+{
+    <li>
+        <a href="@LikeList" class="ico-wishlist">
+            <span class="wishlist-label">@T("Widget.Like.Liked")</span>
+            <span class="liked-qty">@T("Wishlist.HeaderQuantity", Model.Count)</span>
+        </a>
+    </li>
+
+}
+
