@@ -102,15 +102,25 @@ namespace Nop.Plugin.Widgets.Like
         {
             _objectContext.Install();
 
-            this.AddOrUpdatePluginLocaleResource("Widget.Like.Liked", "Liked");
-            this.AddOrUpdatePluginLocaleResource("Widget.Like.Count", "Count");
-            this.AddOrUpdatePluginLocaleResource("Widgets.Like.List", "Like List");
-            this.AddOrUpdatePluginLocaleResource("Widgets.Lke.DeleteSelected", "Delete Selected");
-            this.AddOrUpdatePluginLocaleResource("Widgets.Lke.ListEmpty", "Empty Like List");
-            this.AddOrUpdatePluginLocaleResource("Widgets.Like.LikeTitle", "Like");
-            this.AddOrUpdatePluginLocaleResource("Widgets.Like.UnLikeTitle", "Unlike");
-            this.AddOrUpdatePluginLocaleResource("Widgets.Like.GuestTitle", "Log in to like");
-            this.AddOrUpdatePluginLocaleResource("Widget.Like.MostLikedProduct", "Most Liked Product"); 
+            this.AddOrUpdatePluginLocaleResource("Widget.Like.Liked", "Liked", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widget.Like.Count", "Count", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.List", "Like List", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.DeleteSelected", "Delete Selected", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.ListEmpty", "Empty Like List", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.LikeTitle", "Like", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.UnLikeTitle", "Unlike", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.GuestTitle", "Log in to like", "en-US");
+            this.AddOrUpdatePluginLocaleResource("Widget.Like.MostLikedProduct", "Most Liked Product", "en-US");
+
+            this.AddOrUpdatePluginLocaleResource("Widget.Like.Liked", "赞过", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widget.Like.Count", "个数", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.List", "我赞过的", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.DeleteSelected", "删除选中", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.ListEmpty", "清空列表", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.LikeTitle", "赞", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.UnLikeTitle", "取消赞", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widgets.Like.GuestTitle", "登陆", "zh-CN");
+            this.AddOrUpdatePluginLocaleResource("Widget.Like.MostLikedProduct", "赞数最多", "zh-CN");
             base.Install();
         }
 
@@ -123,9 +133,9 @@ namespace Nop.Plugin.Widgets.Like
             this.DeletePluginLocaleResource("Widget.Like.Liked");
             this.DeletePluginLocaleResource("Widget.Like.Count");
             this.DeletePluginLocaleResource("Widgets.Like.List");
-            this.DeletePluginLocaleResource("Widgets.Lke.DeleteSelected");
-            this.DeletePluginLocaleResource("Widgets.Lke.ListEmpty");
-            this.DeletePluginLocaleResource("Widgets.Like.LikeTitle");
+            this.DeletePluginLocaleResource("Widgets.Like.DeleteSelected");
+            this.DeletePluginLocaleResource("Widgets.Like.ListEmpty");
+            this.DeletePluginLocaleResource("Widgets.Liike.LikeTitle");
             this.DeletePluginLocaleResource("Widgets.Like.UnLikeTitle");
             this.DeletePluginLocaleResource("Widgets.Like.GuestTitle");
             this.DeletePluginLocaleResource("Widget.Like.MostLikedProduct");
