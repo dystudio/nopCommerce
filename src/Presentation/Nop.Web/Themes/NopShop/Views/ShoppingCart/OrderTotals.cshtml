@@ -10,14 +10,7 @@
         {
             <li>
                 
-                @T("ShoppingCart.Totals.SubTotalDiscount")
-                @if (Model.AllowRemovingSubTotalDiscount)
-                {
-                    /*empty value (little hack for FormValueExistsAttribute)*/
-                    <input type="submit" name="removesubtotaldiscount" value=" " title="@T("Common.Remove")" class="remove-discount-button" />
-                }
-                : 
-                
+                <label>@T("ShoppingCart.Totals.SubTotalDiscount"):</label>
                 <span >@Model.SubTotalDiscount</span> 
                 
             </li>
@@ -98,13 +91,7 @@
         {
             <li>
                 
-                @T("ShoppingCart.Totals.OrderTotalDiscount")
-                @if (Model.AllowRemovingOrderTotalDiscount)
-                {
-                    /*empty value (little hack for FormValueExistsAttribute)*/
-                    <input type="submit" name="removeordertotaldiscount" value=" " title="@T("Common.Remove")" class="remove-discount-button" />
-                }
-                : 
+                @T("ShoppingCart.Totals.OrderTotalDiscount"): 
                 
                 <span>@Model.OrderTotalDiscount</span> 
                 
