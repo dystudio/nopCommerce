@@ -97,7 +97,7 @@ namespace Nop.Plugin.Widgets.PriceForSize
                 //sb.Append("var kTabs = $('#product-edit').data('kendoTabStrip');");
                 sb.Append("var kTabs = $('#product-edit').kendoTabStrip().data('kendoTabStrip');");
                 sb.Append(Environment.NewLine);
-                sb.Append(" kTabs.append({ encoded: false, text: \"" + tabName + "\", contentUrl: \"" + url + "\" };");
+                sb.Append(" kTabs.append({ encoded: false, text: \"" + tabName + "\", contentUrl: \"" + url + "\" });");
                 sb.Append(Environment.NewLine);
                 sb.Append("});");
                 sb.Append(Environment.NewLine);
