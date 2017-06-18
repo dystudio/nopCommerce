@@ -1,0 +1,307 @@
+﻿@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework.Localization;
+@using Nop.Services.Localization;
+@using Nop.Core;
+@model Nop4you.Plugin.Widgets.ThemeGrandNode.Models.ConfigurationModel
+
+<style>
+::-moz-selection {
+  color: @Model.setCustomTextColor;
+  background: color: @Model.setCustomTextColor !important; }
+
+::selection {
+  color: @Model.setCustomTextColor;
+  background: @Model.setCustomBackground !important; }
+
+.cart .product .edit-item a {
+  color: @Model.setCustomBackground; }
+
+.cart td.subtotal .discount {
+  color: @Model.setCustomBackground; }
+
+.eu-cookie-bar-notification button {
+  background-color: @Model.setCustomBackground; }
+
+.header-links a:hover {
+  color: @Model.setCustomDarkColor; }
+
+.footer-block .list a:hover {
+  color: @Model.setCustomDarkColor !important; }
+
+.block .list li.active > a {
+  color: @Model.setCustomBackground; }
+
+.block .list a.active {
+  color: @Model.setCustomBackground; }
+
+.block .list a:hover {
+  color: @Model.setCustomDarkColor; }
+
+.product-filter .group li a:hover {
+  color: @Model.setCustomBackground; }
+
+.filtered-items .item {
+  color: @Model.setCustomBackground; }
+
+.item-box .product-title a:hover {
+  color: @Model.setCustomBackground; }
+
+.item-box .tax-shipping-info a {
+  color: @Model.setCustomBackground; }
+
+.manufacturer-grid .title a:hover {
+  color: @Model.setCustomBackground; }
+
+.vendor-list li a {
+  color: @Model.setCustomBackground; }
+
+.product-review-links a:hover {
+  color: @Model.setCustomBackground; }
+
+.overview .value a,
+.variant-overview .value a {
+  color: @Model.setCustomBackground; }
+
+.back-in-stock-subscription-page .notify-me-button {
+  background-color: @Model.setCustomBackground;
+  color: @Model.setCustomTextColor; }
+
+.overview .tax-shipping-info a,
+.variant-overview .tax-shipping-info a {
+  color: @Model.setCustomBackground; }
+
+.tier-prices .item-price {
+  background-color: #f9f9f9;
+  color: @Model.setCustomBackground; }
+
+.variant-overview .variant-name {
+  color: @Model.setCustomBackground; }
+
+.ui-datepicker-header {
+  background-color: @Model.setCustomBackground;
+  color: @Model.setCustomTextColor; }
+
+.ui-datepicker-calendar .ui-state-active {
+  outline: 2px solid @Model.setCustomBackground;
+  color: @Model.setCustomBackground;
+  color: @Model.setCustomBackground !important; }
+
+.color-squares .selected-value .color-container {
+  background-color: @Model.setCustomBackground; }
+
+.wishlist-content .tax-shipping-info a {
+  color: @Model.setCustomBackground; }
+
+.wishlist-page .share-info a:hover {
+  color: @Model.setCustomBackground; }
+
+.compare-products-table .product-name td a:hover {
+  color: @Model.setCustomBackground; }
+
+.enter-password-form input[type="submit"] {
+  background-color: @Model.setCustomBackground; }
+
+.accept-privacy-policy span {
+  color: @Model.setCustomBackground; }
+
+.login-page .returning-wrapper .inputs.reversed a:hover {
+  color: @Model.setCustomBackground; }
+
+.external-auth-association a {
+  color: @Model.setCustomBackground; }
+
+.add-more-external-records a {
+  color: @Model.setCustomBackground; }
+
+.return-request-list-page a {
+  color: @Model.setCustomBackground; }
+
+.qq-upload-button {
+  color: @Model.setCustomTextColor !important;
+  background: @Model.setCustomBackground !important; }
+
+.cart-total .order-total {
+  color: @Model.setCustomBackground; }
+
+.terms-of-service a {
+  color: @Model.setCustomBackground; }
+
+.order-details-page .order-overview .order-total strong {
+  color: @Model.setCustomDarkColor; }
+
+.order-details-page .download a {
+  color: @Model.setCustomBackground; }
+
+.user-agreement-page .button-1 {
+  background-color: @Model.setCustomBackground; }
+
+.order-details-page .tax-shipping-info a {
+  color: @Model.setCustomBackground; }
+
+.sitemap-page a:hover {
+  color: @Model.setCustomBackground; }
+
+.post-title:hover,
+.news-title:hover {
+  color: @Model.setCustomBackground; }
+
+.comment-info a.username:hover {
+  color: @Model.setCustomBackground; }
+
+.forum-search-box .advanced a:hover {
+  color: @Model.setCustomBackground; }
+
+.forums-table-section-title a:hover {
+  color: @Model.setCustomBackground; }
+
+.forums-table-section .forum-title a:hover,
+.forums-table-section .topic-title a:hover {
+  color: @Model.setCustomBackground; }
+
+.forums-table-section .view-all a {
+  background-color: @Model.setCustomBackground;
+  color: @Model.setCustomTextColor; }
+
+.topic-post a.username:hover {
+  color: @Model.setCustomBackground; }
+
+.topic-post .post-actions .edit-post-button:hover,
+.topic-post .post-actions .delete-post-button:hover {
+  color: @Model.setCustomBackground; }
+
+.topic-post .post-actions .post-link-button {
+  color: @Model.setCustomBackground; }
+
+.private-message-send-page a {
+  color: @Model.setCustomBackground; }
+
+.ui-tabs-nav li.ui-state-active a {
+  color: @Model.setCustomBackground; }
+
+.private-messages-page td.subject a.pm-unread {
+  color: @Model.setCustomBackground; }
+
+.latest-posts .topic-title a:hover {
+  color: @Model.setCustomBackground; }
+
+.menu-toggle {
+  background: @Model.setCustomBackground url("../images/menu-icon.png") right center no-repeat; }
+
+.header-menu {
+  background-color: @Model.setCustomBackground; }
+
+.shipment-details-page .tracking-number .tracking-url {
+  color: @Model.setCustomBackground; }
+
+.enter-password-form input[type="submit"] {
+  background-color: @Model.setCustomBackground;
+  color: @Model.setCustomTextColor; }
+
+.btn, .btn-large {
+  background-color: @Model.setCustomBackground;
+  color: @Model.setCustomTextColor; }
+
+input:focus:not([type]):not([readonly]), input[type="text"]:focus:not([readonly]), input[type="password"]:focus:not([readonly]), input[type="email"]:focus:not([readonly]), input[type="url"]:focus:not([readonly]), input[type="time"]:focus:not([readonly]), input[type="date"]:focus:not([readonly]), input[type="datetime-local"]:focus:not([readonly]), input[type="tel"]:focus:not([readonly]), input[type="number"]:focus:not([readonly]), input[type="search"]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid @Model.setCustomBackground;
+  box-shadow: 0 1px 0 0 @Model.setCustomBackground; }
+
+input:focus:not([type]):not([readonly]) + label, input[type="text"]:focus:not([readonly]) + label, input[type="password"]:focus:not([readonly]) + label, input[type="email"]:focus:not([readonly]) + label, input[type="url"]:focus:not([readonly]) + label, input[type="time"]:focus:not([readonly]) + label, input[type="date"]:focus:not([readonly]) + label, input[type="datetime-local"]:focus:not([readonly]) + label, input[type="tel"]:focus:not([readonly]) + label, input[type="number"]:focus:not([readonly]) + label, input[type="search"]:focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
+  color: @Model.setCustomDarkColor; }
+
+.btn:hover, .btn-large:hover {
+  background-color: @Model.setCustomDarkColor; }
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: @Model.setCustomDarkColor; }
+
+[type="checkbox"]:checked + label::before {
+  border-right: 2px solid @Model.setCustomDarkColor;
+  border-bottom: 2px solid @Model.setCustomDarkColor; }
+
+.with-gap[type="radio"]:checked + label::before {
+  border: 2px solid @Model.setCustomDarkColor; }
+
+.with-gap[type="radio"]:checked + label::after {
+  border: 2px solid @Model.setCustomDarkColor;
+  background-color: @Model.setCustomDarkColor; }
+
+button:focus {
+  outline: none;
+  background-color: @Model.setCustomDarkColor; }
+
+input.valid:not([type]), input.valid:focus:not([type]), input.valid[type="text"], input.valid[type="text"]:focus, input.valid[type="password"], input.valid[type="password"]:focus, input.valid[type="email"], input.valid[type="email"]:focus, input.valid[type="url"], input.valid[type="url"]:focus, input.valid[type="time"], input.valid[type="time"]:focus, input.valid[type="date"], input.valid[type="date"]:focus, input.valid[type="datetime-local"], input.valid[type="datetime-local"]:focus, input.valid[type="tel"], input.valid[type="tel"]:focus, input.valid[type="number"], input.valid[type="number"]:focus, input.valid[type="search"], input.valid[type="search"]:focus, textarea.materialize-textarea.valid, textarea.materialize-textarea.valid:focus {
+  border-bottom: 1px solid @Model.setCustomDarkColor;
+  box-shadow: 0 1px 0 0 @Model.setCustomDarkColor; }
+
+.input-field .prefix.active {
+  color: @Model.setCustomDarkColor; }
+
+.waves-effect .waves-ripple {
+  background-color: @Model.setCustomDarkColor;
+  color: @Model.setCustomTextColor; }
+
+.private-messages .buttons input {
+  background-color: @Model.setCustomBackground !important; }
+
+.private-messages .buttons input:hover {
+  background-color: @Model.setCustomDarkColor !important; }
+
+.tabs .tab a {
+  color: @Model.setCustomDarkColor; }
+
+.tabs .tab a:hover {
+  color: @Model.setCustomBackground; }
+
+.tabs .indicator {
+  background-color: @Model.setCustomDarkColor; }
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+	color: @Model.setCustomDarkColor;
+}
+
+#return-to-top {
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+
+#return-to-top i {
+  color: @Model.setCustomTextColor; }
+
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+
+#return-to-top:hover i {
+  color: @Model.setCustomDarkColor; }
+
+.dropdown-content li:hover, .dropdown-content li.active, .dropdown-content li.selected {
+  background-color: @Model.setCustomBackground;
+  color: @Model.setCustomTextColor; }
+
+.dropdown-content li > a:hover, .dropdown-content li > span:hover {
+  color: @Model.setCustomTextColor; }
+
+blockquote.pickup-points-blockquote {
+  border-left: 5px solid @Model.setCustomBackground; }
+</style>
+
+
+@*Add media query for mobile view only!*@
+@if (Model.setMenuBarColor)
+{
+    <style>
+    .header-menu nav {
+        background-color: @Model.setCustomBackground !important;
+    }
+    </style>
+}
+
+<style>
+    time.icon strong {
+	    color: #fff;
+	    background-color: @Model.setCustomBackground;
+	    box-shadow: 0 2px 0 @Model.setCustomTextColor;
+	    border-bottom: 1px dashed  @Model.setCustomDarkColor;
+    }
+    time.icon em {
+	    color: @Model.setCustomBackground;
+    }
+</style>

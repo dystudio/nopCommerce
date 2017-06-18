@@ -1,0 +1,8 @@
+﻿Group: nop4you
+FriendlyName: Theme GrandNode
+SystemName: Theme.GrandNode
+Version: 1.06
+SupportedVersions: 3.90
+Author: nop4you.com
+DisplayOrder: 1
+FileName: Nop4you.Plugin.Widgets.ThemeGrandNode.dll

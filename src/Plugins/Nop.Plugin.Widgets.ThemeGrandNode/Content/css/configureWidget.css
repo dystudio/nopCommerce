@@ -1,0 +1,9 @@
+﻿.template img {
+    max-width: 100%;
+    max-height: 100px;
+}
+.template .col-md-2 input {
+    display: block;
+    text-align: center;
+    width: 100%;
+}

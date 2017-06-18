@@ -1,0 +1,133 @@
+﻿@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework.Localization;
+@using Nop.Services.Localization;
+@using Nop.Core;
+@model Nop4you.Plugin.Widgets.ThemeGrandNode.Models.ConfigurationModel
+@{
+    Html.AddCssFileParts("~/Plugins/Widgets.ThemeGrandNode/Content/css/widgetThemeGrandNode.css");
+    if (Model.setCustomValues)
+    {
+        Html.RenderPartial("~/Plugins/Widgets.ThemeGrandNode/Views/customValues.cshtml");
+    }
+    else
+    {
+        Html.AddCssFileParts("~/Themes/GrandNodeTheme/Content/css/colors/" + Model.Color + ".css");
+        if (Model.setMenuBarColor)
+        {
+            Html.AddCssFileParts("~/Themes/GrandNodeTheme/Content/css/colors/nav-" + Model.Color + ".css");
+        }
+    }
+
+
+    Html.AddScriptParts("~/Plugins/Widgets.ThemeGrandNode/Content/js/switchstylesheet.js");
+}
+
+@if (!Model.setCustomValues)
+{
+    if (Model.showSwitchStyle)
+    {
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/green.css" rel="stylesheet">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/blue.css" rel="alternate stylesheet" title="Blue color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/red.css" rel="alternate stylesheet" title="Red color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/orange.css" rel="alternate stylesheet" title="Orange color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/lightblue.css" rel="alternate stylesheet" title="Lightblue color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/purple.css" rel="alternate stylesheet" title="Purple color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/yellow.css" rel="alternate stylesheet" title="Yellow color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/gray.css" rel="alternate stylesheet" title="Gray color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/bluegray.css" rel="alternate stylesheet" title="Bluegray color">
+        <link href="~/Themes/GrandNodeTheme/Content/css/colors/blackwhite.css" rel="alternate stylesheet" title="Black and white color">
+
+        if (Model.setMenuBarColor)
+        {
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-green.css" rel="stylesheet">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-blue.css" rel="alternate stylesheet" title="Blue color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-blue.css" rel="alternate stylesheet" title="Blue color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-red.css" rel="alternate stylesheet" title="Red color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-orange.css" rel="alternate stylesheet" title="Orange color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-lightblue.css" rel="alternate stylesheet" title="Lightblue color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-purple.css" rel="alternate stylesheet" title="Purple color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-yellow.css" rel="alternate stylesheet" title="Yellow color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-gray.css" rel="alternate stylesheet" title="Gray color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-bluegray.css" rel="alternate stylesheet" title="Bluegray color">
+            <link href="~/Themes/GrandNodeTheme/Content/css/colors/nav-blackwhite.css" rel="alternate stylesheet" title="Black and white color">
+        }
+
+    <div class="config open">
+        <div class="config-options">
+            <h4>@T("Nop4you.Theme.GrandNode.showColorsBar")</h4>
+            <ul class="list-unstyled">
+                <li><a class="changecolor green-text" href="#" title="Green color">Green</a></li>
+                <li><a class="changecolor blue-text" href="#" title="Blue color">Blue</a></li>
+                <li><a class="changecolor red-text" href="#" title="Red color">Red</a></li>
+                <li><a class="changecolor orange-text" href="#" title="Orange color">Orange</a></li>
+                <li><a class="changecolor blue-text" href="#" title="Lightblue color">Lightblue</a></li>
+                <li><a class="changecolor purple-text" href="#" title="Purple color">Purple</a></li>
+                <li><a class="changecolor yellow-text" href="#" title="Yellow color">Yellow</a></li>
+                <li><a class="changecolor grey-text" href="#" title="Gray color">Gray</a></li>
+                <li><a class="changecolor grey-text" href="#" title="Bluegray color">Bluegray</a></li>
+                <li><a class="changecolor black-text" href="#" title="Black and white color">Black and white</a></li>
+            </ul>
+        </div>
+        <a class="show-theme-options" href="#"><i class="fa fa-gear"></i></a>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".changecolor").switchstylesheet({ seperator: "color" });
+            $(".list-unstyled li a").click(function () {
+                $('.header-menu').css("background", "#000");
+            })
+            $('.show-theme-options').click(function () {
+                $(this).parent().toggleClass('open');
+                return false;
+            });
+        });
+
+        $(window).bind("load", function () {
+            $('.show-theme-options').delay(2000).trigger('click');
+        });
+    </script>
+
+    }
+}
+@if (Model.showBackToTop)
+{
+    if (!Model.showBackToTopFaIcon)
+    {
+        <a href="javascript:" id="return-to-top"><i class="material-icons">@Model.setBackToTopIcon</i></a>
+    }
+    if (Model.showBackToTopFaIcon)
+    {
+        <a href="javascript:" id="return-to-top"><i class="fa @Model.setBackToTopFaIcon"></i></a>
+    }
+}
+
+@if(Model.fixedNav)
+{
+    <script>
+        $(document).scroll(function () {
+
+            //fix shopping cart button
+            var b = $(document).scrollTop(), 
+                header = $(".topcart");
+            if (b >= 200) {
+                header.css({ position: "fixed", "top": "0", "right": "0" });
+                $('.master-wrapper-page .header').css({ "z-index": "1010" });
+                $('.topcart>a').css("right", "15px");
+            } else {
+                header.attr("style", "");
+            }
+
+            //fix navigation bar
+            var y = $(document).scrollTop(), 
+                header = $("#header-menu-desktop nav");
+            if (y >= 300) {
+                header.css({ position: "fixed", "top": "0", "left": "0", "width": "100%", "z-index": "1000" });
+            } else {
+                header.css("position", "relative");
+            }
+
+
+        });
+    </script>
+}

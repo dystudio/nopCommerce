@@ -1,0 +1,295 @@
+﻿@{
+    Layout = "";
+    Html.AddScriptParts("~/Plugins/Widgets.ThemeGrandNode/Content/js/farbtastic.theme.js");
+    Html.AddCssFileParts("~/Administration/Content/farbtastic/farbtastic.css");
+    Html.AddCssFileParts("~/Plugins/Widgets.ThemeGrandNode/Content/css/configureWidget.css");
+
+}
+@model Nop4you.Plugin.Widgets.ThemeGrandNode.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI;
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Nop4you.Theme.GrandNode.widgetConfiguration")
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+
+    <div class="plugin-intro-table">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <strong>If you found any bug or have any development proposal, please visit <a href="http://nop4you.com/grandnode-theme-nopcommerce" target="_blank">product page</a> and create ticket to send us information.</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div id="pdf-edit" class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    @Html.RenderBootstrapTabHeader("tab-colors", @T("Nop4you.Theme.GrandNode.configurationTabColors"), true)
+                    @Html.RenderBootstrapTabHeader("tab-settings", @T("Nop4you.Theme.GrandNode.configurationTabSettings"))
+                    @Html.RenderBootstrapTabHeader("tab-storeclosed", @T("Nop4you.Theme.GrandNode.configurationTabStoreClosed"))
+                    @Html.RenderBootstrapTabHeader("tab-customorders", @T("Nop4you.Theme.GrandNode.configurationCustomOrders"))
+
+                </ul>
+                <div class="tab-content">
+                    @Html.RenderBootstrapTabContent("tab-colors", @TabColors(), true)
+                    @Html.RenderBootstrapTabContent("tab-settings", @TabSettings())
+                    @Html.RenderBootstrapTabContent("tab-storeclosed", @TabStoreClosed())
+                    @Html.RenderBootstrapTabContent("tab-customorders", @TabCustomOrders())
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    @helper TabColors()
+    {
+
+var setBackgroundVar = (!String.IsNullOrEmpty(Model.setCustomBackground) ? Model.setCustomBackground : "#654321");
+var setTextColorVar = (!String.IsNullOrEmpty(Model.setCustomTextColor) ? Model.setCustomTextColor : "#654321");
+var setDarkColorVar = (!String.IsNullOrEmpty(Model.setCustomDarkColor) ? Model.setCustomDarkColor : "#654321");
+
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.Color)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopDropDownListFor(model => model.Color, Model.Colors)
+                    </div>
+                </div>
+                <div class="form-group setCustmValues">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.setCustomValues)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.setCustomValues)
+                    </div>
+                </div>
+                <div class="form-group customValuesOn">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.setCustomBackground)
+                    </div>
+                    <div class="col-md-3">
+                        <input class="text-box single-line valid colorwell" id="setCustomBackground" name="setCustomBackground" type="text" value="@setBackgroundVar">
+                    </div>
+                </div>
+                <div class="form-group customValuesOn">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.setCustomTextColor)
+                    </div>
+                    <div class="col-md-3">
+                        <input class="text-box single-line valid colorwell" id="setCustomTextColor" name="setCustomTextColor" type="text" value="@setTextColorVar">
+                    </div>
+                </div>
+                <div class="form-group customValuesOn">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.setCustomDarkColor)
+                    </div>
+                    <div class="col-md-3">
+                        <input class="text-box single-line valid colorwell" id="setCustomDarkColor" name="setCustomDarkColor" type="text" value="@setDarkColorVar">
+                    </div>
+                    <div class="col-md-6">
+                        <div id="picker"></div>
+                    </div>
+                </div>
+                <div class="form-group styleSwitcher">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.showSwitchStyle)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.showSwitchStyle)
+                    </div>
+                </div>
+                <div class="form-group styleSwitcher">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.showWidgetZone)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.showWidgetZone)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.setMenuBarColor)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.setMenuBarColor)
+                    </div>
+                </div>
+                <div class="form-group backtotopsetting">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.showBackToTop)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.showBackToTop)
+                    </div>
+                </div>
+                <div class="form-group backtotopiconeditor">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.setBackToTopIcon)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.setBackToTopIcon)
+                    </div>
+                </div>
+                <div class="form-group backtotopiconeditor">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.showBackToTopFaIcon)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.showBackToTopFaIcon)
+                    </div>
+                </div>
+                <div class="form-group backtotopiconeditor">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.setBackToTopFaIcon)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.setBackToTopFaIcon)
+                    </div>
+                </div>
+                @*<div class="form-group">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-9">
+                            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+                        </div>
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+}
+
+    @helper TabSettings()
+    {
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.fixedNav)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopEditorFor(model => model.fixedNav)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @helper TabStoreClosed()
+    {
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.useStoreClosed)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopEditorFor(model => model.useStoreClosed)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.storeClosedTemplate)
+                        </div>
+                        <div class="col-md-9 template">
+                            <div class="row">
+                                <div class="col-md-2"><label><img src="~/Plugins/Widgets.ThemeGrandNode/Content/images/pure.png" /> @Html.RadioButtonFor(model => model.storeClosedTemplate, "pure")</label></div>
+                                <div class="col-md-2"><label><img src="~/Plugins/Widgets.ThemeGrandNode/Content/images/wallbrick.png" />@Html.RadioButtonFor(model => model.storeClosedTemplate, "wallbrick")</label></div>
+                                <div class="col-md-2"><label><img src="~/Plugins/Widgets.ThemeGrandNode/Content/images/airport.png" />@Html.RadioButtonFor(model => model.storeClosedTemplate, "airport")</label></div>
+                            </div> 
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    }
+
+    @helper TabCustomOrders()
+    {
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.useCustomOrdersTemplate)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.useCustomOrdersTemplate)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.storeCustomOrdersTemplate)
+                    </div>
+                    <div class="col-md-9 template">
+                        <div class="row">
+                            <div class="col-md-2"><label><img src="~/Plugins/Widgets.ThemeGrandNode/Content/images/standard.png" /> @Html.RadioButtonFor(model => model.storeCustomOrdersTemplate, "standard")</label></div>
+                            <div class="col-md-2"><label><img src="~/Plugins/Widgets.ThemeGrandNode/Content/images/cards.png" />@Html.RadioButtonFor(model => model.storeCustomOrdersTemplate, "cards")</label></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+}
+<style>
+    .customValuesOn, .backtotopiconeditor {
+        display: none;
+    }
+
+    .adminCustomValuesToggleSet {
+        display: block;
+    }
+
+    .hideIfOwnOn {
+        display: none;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("#setCustomValues").change(function () {
+            $(".customValuesOn").toggleClass("adminCustomValuesToggleSet", this.checked)
+        }).change();
+
+        $("#setCustomValues").change(function () {
+            $(".styleSwitcher").toggleClass("hideIfOwnOn", this.checked)
+        }).change();
+
+        $('#showBackToTop').change(function () {
+            $(".backtotopiconeditor").toggleClass("adminCustomValuesToggleSet", this.checked)
+        }).change();
+    })
+</script>
+
