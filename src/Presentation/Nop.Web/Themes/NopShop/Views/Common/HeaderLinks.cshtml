@@ -14,7 +14,7 @@
         @Html.Action("AdminHeaderLinks", "Common")
         @if (Model.IsAuthenticated)
         {
-            <li><a href="@Url.RouteUrl("CustomerInfo")"><i class="fa fa-user"></i> @Model.CustomerEmailUsername</a></li>
+            <li><a href="@Url.RouteUrl("CustomerInfo")"><i class="fa fa-user"></i> @*@Model.CustomerEmailUsername*@</a></li>
             <li><a href="@Url.RouteUrl("Logout")"><i class="fa fa-power-off"></i> @T("Account.Logout")</a></li>
         }
         else

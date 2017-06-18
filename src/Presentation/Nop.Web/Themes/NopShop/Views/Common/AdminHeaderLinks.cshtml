@@ -5,7 +5,7 @@
     <li>
         @if (Model.IsCustomerImpersonated)
         {
-            <span class="impersonate">@string.Format(T("Account.ImpersonatedAs").Text, Model.ImpersonatedCustomerEmailUsername)
+            <span class="impersonate">@string.Format(T("Account.ImpersonatedAs").Text, Model.ImpersonatedCustomerName)
                 - <a href="@Url.RouteUrl("Logout")" title="@T("Account.ImpersonatedAs.Finish.Hint")">@T("Account.ImpersonatedAs.Finish")</a>
             </span>
         }
