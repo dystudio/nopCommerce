@@ -12,140 +12,131 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.HasPriceForSize)
                     </div>
-                    <div class="">
+                    <div class="col-md-10">
                         @Html.NopEditorFor(model => model.HasPriceForSize)
                         @Html.ValidationMessageFor(model => model.HasPriceForSize)
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.StandardPriceType)
                     </div>
-                    <div class="">
+                    <div class="col-md-4">
                         @Html.NopEditorFor(model => model.StandardPriceType)
                         @Html.ValidationMessageFor(model => model.StandardPriceType)
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MeasureDimensionId)
                     </div>
-                    <div class="">
+                    <div class="col-md-4">
                         @Html.DropDownListFor(model => model.MeasureDimensionId, ViewData["measureDimension"] as SelectList)
                         @Html.ValidationMessageFor(model => model.MeasureDimensionId)
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.WidthAttributeId)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.DropDownListFor(model => model.WidthAttributeId, ViewData["attributes"] as SelectList, "--Unmanaged--")
                         @Html.ValidationMessageFor(model => model.WidthAttributeId)
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MinimumWidthManageable)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                        @Html.NopEditorFor(model => model.MinimumWidthManageable)
                        @Html.ValidationMessageFor(model => model.MinimumWidthManageable)
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MaximumWidthManageable)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.NopEditorFor(model => model.MaximumWidthManageable)
                         @Html.ValidationMessageFor(model => model.MaximumWidthManageable)
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.HeightAttributeId)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.DropDownListFor(model => model.HeightAttributeId, ViewData["attributes"] as SelectList, "--Unmanaged--")
                         @Html.ValidationMessageFor(model => model.HeightAttributeId)
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MinimumHeightManageable)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.NopEditorFor(model => model.MinimumHeightManageable)
                         @Html.ValidationMessageFor(model => model.MinimumHeightManageable)
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                        @Html.NopLabelFor(model => model.MaximumHeightManageable)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.NopEditorFor(model => model.MaximumHeightManageable)
                         @Html.ValidationMessageFor(model => model.MaximumHeightManageable)
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.DepthAttributeId)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.DropDownListFor(model => model.DepthAttributeId, ViewData["attributes"] as SelectList, "--Unmanaged--")
                         @Html.ValidationMessageFor(model => model.DepthAttributeId)
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MinimumDepthManageable)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.NopEditorFor(model => model.MinimumDepthManageable)
                         @Html.ValidationMessageFor(model => model.MinimumDepthManageable)
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MaximumDepthManageable)
                     </div>
-                    <div class="">
+                    <div class="col-md-2">
                         @Html.NopEditorFor(model => model.MaximumDepthManageable)
                         @Html.ValidationMessageFor(model => model.MaximumDepthManageable)
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MinimumBillablePerimeter) (size):
                     </div>
-                    <div class="">
+                    <div class="col-md-10">
                         @Html.NopEditorFor(model => model.MinimumBillablePerimeter)
                         @Html.ValidationMessageFor(model => model.MinimumBillablePerimeter)
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MinimumBillableArea) (size)
                     </div>
-                    <div class="">
+                    <div class="col-md-10">
                         @Html.NopEditorFor(model => model.MinimumBillableArea)
                         @Html.ValidationMessageFor(model => model.MinimumBillableArea)
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.NopLabelFor(model => model.MinimumBillableVolume) (size)
                     </div>
-                    <div class="">
+                    <div class="col-md-10">
                         @Html.NopEditorFor(model => model.MinimumBillableVolume)
                         @Html.ValidationMessageFor(model => model.MinimumBillableVolume)
                     </div>
                 </div>
-                
                 <div class="form-group">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         &nbsp;
                     </div>
-                    <div class="col-md-9">
-                        <input id="priceForSizeAdminFormSave" type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                        &nbsp;
-                    </div>
-                    <div class="col-md-9 saveResult">
+                    <div class="col-md-10 saveResult">
                         <input id="priceForSizeAdminFormSave" type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")" />
                     </div>
                 </div>
