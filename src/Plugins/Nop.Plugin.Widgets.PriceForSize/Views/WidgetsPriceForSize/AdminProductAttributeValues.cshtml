@@ -42,29 +42,29 @@
                     @for (int i = 0; i < Model.Count; i++)
                 {
                         @Html.Hidden("prices[" + @i + "].ProductAttributeValueId", Model[i].ProductAttributeValueId, new { @readonly = "readonly" })
-                        <tr class="form-group">
+                        <tr>
                             <td class="">
                                 @Html.Label("prices[" + @i + "].AttributeName", Model[i].AttributeName, new { @readonly = "readonly" })
                             </td>
                             <td class="">
                                 @Html.Label("prices[" + @i + "].ValueName", Model[i].ValueName, new { @readonly = "readonly" })
                             </td>
-                            <td class="col-md-1.5 attributePrice">
+                            <td class="attributePrice">
                                 @Html.TextBox("prices[" + @i + "].PriceForM1", Model[i].PriceForM1)
                             </td>
-                            <td class="col-md-1.5 attributePrice">
+                            <td class="attributePrice">
                                 @Html.TextBox("prices[" + @i + "].PriceForM2", Model[i].PriceForM2)
                             </td>
-                            <td class="col-md-1.5 attributePrice">
+                            <td class="attributePrice">
                                 @Html.TextBox("prices[" + @i + "].PriceForM3", Model[i].PriceForM3)
                             </td>
-                            <td class="col-md-1.5 attributePrice">
+                            <td class="attributePrice">
                                 @Html.TextBox("prices[" + @i + "].PriceForBaseLength", Model[i].PriceForBaseLength)
                             </td>
-                            <td class="col-md-1.5 attributePrice">
+                            <td class="attributePrice">
                                 @Html.TextBox("prices[" + @i + "].PriceForHeightLength", Model[i].PriceForHeightLength)
                             </td>
-                            <td class="col-md-1.5 attributePrice">
+                            <td class="attributePrice">
                                 @Html.TextBox("prices[" + @i + "].PriceForDepthLength", Model[i].PriceForDepthLength)
                             </td>
                         </tr>
