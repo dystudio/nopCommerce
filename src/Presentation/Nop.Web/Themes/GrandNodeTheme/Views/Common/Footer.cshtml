@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <div class="col 14 offset-12 l3 m4 s12 footer-block">
-                <h5 class ="title waves-effect">@T("Footer.CustomerService")</h5>
+                <h5 class="title waves-effect">@T("Footer.CustomerService")</h5>
                 <ul class="list">
                     <li><a class="grey-text text-darken-1" href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
                     @if (Model.NewsEnabled)
@@ -82,7 +82,7 @@
             </div>
             <div class="col 14 offset-12 l3 m12 s12 follow-us">
                 <h5 class="">@T("Footer.FollowUs")</h5>
-                @Html.Action("Social", "Common")                            
+                @Html.Action("Social", "Common")
                 @Html.Action("NewsletterBox", "Newsletter")
             </div>
         </div>
@@ -97,17 +97,17 @@
                     @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteUrl("Topic", new { SeName = Html.GetTopicSeName("shippinginfo") }))
                 </span>
             }
-            
+
             <span class="grey-text text-darken-2 left">@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</span>
-            
-	    <span class="grey-text text-darken-2 right">
-            <a href="http://www.grandNode.com/">GrandNode. </a>
-            @if (!Model.HidePoweredByNopCommerce)
-            {               
+
+            <span class="grey-text text-darken-2 right">
+                <a href="http://www.dystudio.net/">dystudio</a>
+                @if (!Model.HidePoweredByNopCommerce)
+                {
                     <text>&nbsp;Powered by</text>
-                    <a href="http://www.nopcommerce.com/"> nopCommerce </a>  
-            }
-	    </span>
+                    <a href="http://www.dystudio.net/"> dystudio.net </a>
+                }
+            </span>
 
         </div>
         @Html.Action("StoreThemeSelector", "Common")

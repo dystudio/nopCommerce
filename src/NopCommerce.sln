@@ -135,6 +135,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.Widgets.Like", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop4you.Plugin.Widgets.ThemeGrandNode", "Plugins\Nop.Plugin.Widgets.ThemeGrandNode\Nop4you.Plugin.Widgets.ThemeGrandNode.csproj", "{5948EA74-08F2-4AA4-975F-72496E997561}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.Widgets.PriceForSize", "Plugins\Nop.Plugin.Widgets.PriceForSize\Nop.Plugin.Widgets.PriceForSize.csproj", "{E2532C8C-54CE-4085-B723-C3C15225F516}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1194,6 +1196,24 @@ Global
 		{5948EA74-08F2-4AA4-975F-72496E997561}.Test|Mixed Platforms.Build.0 = Release|Any CPU
 		{5948EA74-08F2-4AA4-975F-72496E997561}.Test|x86.ActiveCfg = Release|Any CPU
 		{5948EA74-08F2-4AA4-975F-72496E997561}.Test|x86.Build.0 = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Debug|x86.Build.0 = Debug|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Release|x86.ActiveCfg = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Release|x86.Build.0 = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Test|Any CPU.Build.0 = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Test|Mixed Platforms.Build.0 = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Test|x86.ActiveCfg = Release|Any CPU
+		{E2532C8C-54CE-4085-B723-C3C15225F516}.Test|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1260,6 +1280,7 @@ Global
 		{0DE96A8E-F057-4DB5-9789-721F23CC61DE} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
 		{AF29B528-48A2-40F0-BFEB-78DD95C34794} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
 		{5948EA74-08F2-4AA4-975F-72496E997561} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
+		{E2532C8C-54CE-4085-B723-C3C15225F516} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
 		Project = ".\NopCommerce.ndproj"
