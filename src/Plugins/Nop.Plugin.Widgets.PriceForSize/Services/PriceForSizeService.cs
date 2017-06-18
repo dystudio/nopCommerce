@@ -83,7 +83,7 @@ namespace Nop.Plugin.Widgets.PriceForSize.Services
     {
       var retVal = (from p in _productRepository.Table
                     where p.ProductId == productId
-                    select p).SingleOrDefault();
+                    select p).FirstOrDefault();
 			if (retVal == null)
 				retVal = new Product_PriceForSize()
 				{
