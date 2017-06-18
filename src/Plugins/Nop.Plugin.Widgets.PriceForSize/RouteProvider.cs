@@ -9,7 +9,7 @@ namespace Nop.Plugin.Widgets.PriceForSize
         public void RegisterRoutes(RouteCollection routes)
         {
            var routek = routes.MapRoute("Nop.Plugin.Widgets.PriceForSize",
-               "admin/plugins/priceforsize/{action}/{Id}",
+               "WidgetsPriceForSize/{action}/{Id}",
                new { controller = "WidgetsPriceForSize", action = "AdminProduct", Id = UrlParameter.Optional },
               // new { Id = @"\d+" },
                new[] { "Nop.Plugin.Widgets.PriceForSize.Controllers" }
