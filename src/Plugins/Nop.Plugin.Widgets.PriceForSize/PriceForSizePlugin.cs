@@ -16,12 +16,12 @@ using System.Web.Routing;
 
 namespace Nop.Plugin.Widgets.PriceForSize
 {
-  public class PriceForSizePlugin : BasePlugin, IWidgetPlugin, IConsumer<AdminTabStripCreated>
+    public class PriceForSizePlugin : BasePlugin, IWidgetPlugin, IConsumer<AdminTabStripCreated>
     {
-    private readonly PriceForSizeObjectContext _context;
-    private readonly IWebHelper _webHelper;
+        private readonly PriceForSizeObjectContext _context;
+        private readonly IWebHelper _webHelper;
 
-    public PriceForSizePlugin(PriceForSizeObjectContext context, IWebHelper webHelper)
+        public PriceForSizePlugin(PriceForSizeObjectContext context, IWebHelper webHelper)
         {
             _context = context;
             this._webHelper = webHelper;
@@ -45,7 +45,7 @@ namespace Nop.Plugin.Widgets.PriceForSize
         /// <returns>Widget zones</returns>
         public IList<string> GetWidgetZones()
         {
-          return new List<string> { "productdetails_overview_top" };
+            return new List<string> { "productdetails_overview_top" };
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace Nop.Plugin.Widgets.PriceForSize
         /// <param name="routeValues">Route values</param>
         public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
-          actionName = null;
-          controllerName = null;
-          routeValues = null;
+            actionName = null;
+            controllerName = null;
+            routeValues = null;
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace Nop.Plugin.Widgets.PriceForSize
         /// <param name="routeValues">Route values</param>
         public void GetDisplayWidgetRoute(string widgetZone, out string actionName, out string controllerName, out RouteValueDictionary routeValues)
         {
-          actionName = "PublicInfo";
-          controllerName = "WidgetsPriceForSize";
-          routeValues = new RouteValueDictionary
+            actionName = "PublicInfo";
+            controllerName = "WidgetsPriceForSize";
+            routeValues = new RouteValueDictionary
             {
                 {"Namespaces", "Nop.Plugin.Widgets.PriceForSize.Controllers"},
                 {"area", null},
@@ -82,29 +82,30 @@ namespace Nop.Plugin.Widgets.PriceForSize
 
         public void HandleEvent(AdminTabStripCreated eventMessage)
         {
-          if (eventMessage.TabStripName == "product-edit")
-          {
-            var id = ((Nop.Web.Framework.Mvc.BaseNopEntityModel)eventMessage.Helper.ViewData.Model).Id;
+            if (eventMessage.TabStripName == "product-edit")
+            {
+                var id = ((Nop.Web.Framework.Mvc.BaseNopEntityModel)eventMessage.Helper.ViewData.Model).Id;
 
-            string url = "/admin/plugins/priceforsize/AdminProduct/" + id.ToString(); //"/ProductKey/GetProductKey?productId=" + productId;
-            string tabName = "Price for size" ; //_localizationService.GetResource("Nop.Plugin.Misc.LicenseKey");
-            var sb = new StringBuilder();
+                string url = "/admin/plugins/priceforsize/AdminProduct/" + id.ToString(); //"/ProductKey/GetProductKey?productId=" + productId;
+                string tabName = "Price for size"; //_localizationService.GetResource("Nop.Plugin.Misc.LicenseKey");
+                var sb = new StringBuilder();
 
-            sb.Append("<script language=\"javascript\" type=\"text/javascript\">");
-            sb.Append(Environment.NewLine);
-            sb.Append("$(document).ready(function () {");
-            sb.Append(Environment.NewLine);
-            sb.Append("var kTabs = $('#product-edit').data('kendoTabStrip');");
-            sb.Append(Environment.NewLine);
-            sb.Append(" kTabs.append({ text: \"" + tabName + "\", contentUrl: \"" + url + "\" });");
-            sb.Append(Environment.NewLine);
-            sb.Append("});");
-            sb.Append(Environment.NewLine);
-            sb.Append("</script>");
-            sb.Append(Environment.NewLine);
-            eventMessage.BlocksToRender.Add(MvcHtmlString.Create(sb.ToString()));
+                sb.Append("<script language=\"javascript\" type=\"text/javascript\">");
+                sb.Append(Environment.NewLine);
+                sb.Append("$(document).ready(function () {");
+                sb.Append(Environment.NewLine);
+                //sb.Append("var kTabs = $('#product-edit').data('kendoTabStrip');");
+                sb.Append("var kTabs = $('#product-edit').kendoTabStrip().data('kendoTabStrip');");
+                sb.Append(Environment.NewLine);
+                sb.Append(" kTabs.append({ encoded: false, text: \"" + tabName + "\", contentUrl: \"" + url + "\" };");
+                sb.Append(Environment.NewLine);
+                sb.Append("});");
+                sb.Append(Environment.NewLine);
+                sb.Append("</script>");
+                sb.Append(Environment.NewLine);
+                eventMessage.BlocksToRender.Add(MvcHtmlString.Create(sb.ToString()));
 
-          }
+            }
 
         }
 
