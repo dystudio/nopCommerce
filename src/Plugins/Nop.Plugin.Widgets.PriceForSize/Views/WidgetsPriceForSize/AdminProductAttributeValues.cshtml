@@ -7,56 +7,76 @@
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "attributesPriceForSizeAdminForm" }))
 {
-  <table class="adminContent">
-    <tr>
-      <th class="adminTitle">Attribute</th>
-      <th class="adminTitle">Value</th>
-      <th class="adminTitle">Price for perimeter</th>
-      <th class="adminTitle">Price for area</th>
-      <th class="adminTitle">Price for volume</th>
-      <th class="adminTitle">Price for base length</th>
-      <th class="adminTitle">Price for height length</th>
-      <th class="adminTitle">Price for depth length</th>
-    </tr>
-    @for (int i = 0; i < Model.Count; i++)
-    {
-      @Html.Hidden("prices[" + @i + "].ProductAttributeValueId", Model[i].ProductAttributeValueId, new { @readonly = "readonly" })
-      <tr>
-        <td class="adminData">
-          @Html.Label("prices[" + @i + "].AttributeName", Model[i].AttributeName, new { @readonly = "readonly"})
-        </td>
-        <td class="adminData">
-          @Html.Label("prices[" + @i + "].ValueName", Model[i].ValueName, new { @readonly = "readonly" })
-        </td>
-        <td class="adminData attributePrice">
-          @Html.TextBox("prices[" + @i + "].PriceForM1", Model[i].PriceForM1)
-        </td>
-        <td class="adminData attributePrice">
-          @Html.TextBox("prices[" + @i + "].PriceForM2", Model[i].PriceForM2)
-        </td>
-        <td class="adminData attributePrice">
-          @Html.TextBox("prices[" + @i + "].PriceForM3", Model[i].PriceForM3)
-        </td>
-        <td class="adminData attributePrice">
-          @Html.TextBox("prices[" + @i + "].PriceForBaseLength", Model[i].PriceForBaseLength)
-        </td>
-        <td class="adminData attributePrice">
-          @Html.TextBox("prices[" + @i + "].PriceForHeightLength", Model[i].PriceForHeightLength)
-        </td>
-        <td class="adminData attributePrice">
-          @Html.TextBox("prices[" + @i + "].PriceForDepthLength", Model[i].PriceForDepthLength)
-        </td>
-      </tr>
-    }
-    <tr>
-      <td>
-        <input id="attributesPriceForSizeAdminFormSave" type="button" value="Save" class="k-button" />
-      </td>
-      <td>
-        <div class="saveResult"></div>
-      </td>
-    </tr>
-  </table>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        Attribute
+                    </div>
+                    <div class="col-md-2">
+                        Value
+                    </div>
+                    <div class="col-md-2">
+                        Price for perimeter
+                    </div>
+                    <div class="col-md-2">
+                        Price for area
+                    </div>
+                    <div class="col-md-2">
+                        Price for volume
+                    </div>
+                    <div class="col-md-2">
+                        Price for length
+                    </div>
+                    <div class="col-md-2">
+                        Price for height
+                    </div>
+                    <div class="col-md-2">
+                        Price for depth
+                    </div>
+                </div>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    @Html.Hidden("prices[" + @i + "].ProductAttributeValueId", Model[i].ProductAttributeValueId, new { @readonly = "readonly" })
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.Label("prices[" + @i + "].AttributeName", Model[i].AttributeName, new { @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("prices[" + @i + "].ValueName", Model[i].ValueName, new { @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-2 attributePrice">
+                            @Html.TextBox("prices[" + @i + "].PriceForM1", Model[i].PriceForM1)
+                        </div>
+                        <div class="col-md-2 attributePrice">
+                            @Html.TextBox("prices[" + @i + "].PriceForM2", Model[i].PriceForM2)
+                        </div>
+                        <div class="col-md-2 attributePrice">
+                            @Html.TextBox("prices[" + @i + "].PriceForM3", Model[i].PriceForM3)
+                        </div>
+                        <div class="col-md-2 attributePrice">
+                            @Html.TextBox("prices[" + @i + "].PriceForBaseLength", Model[i].PriceForBaseLength)
+                        </div>
+                        <div class="col-md-2 attributePrice">
+                            @Html.TextBox("prices[" + @i + "].PriceForHeightLength", Model[i].PriceForHeightLength)
+                        </div>
+                        <div class="col-md-2 attributePrice">
+                            @Html.TextBox("prices[" + @i + "].PriceForDepthLength", Model[i].PriceForDepthLength)
+                        </div>
+                     </div>
+                }
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <input id="attributesPriceForSizeAdminFormSave" type="button" value="@T("Admin.Common.Save")" class="btn bg-blue" />
+                    </div>
+                    <div class="col-md-9 saveResult">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 
 <script>
