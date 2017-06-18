@@ -129,7 +129,60 @@ namespace Nop4you.Plugin.Widgets.ThemeGrandNode
 
 		public override void Uninstall()
 		{
-			base.Uninstall();
+            //settings
+            _settingService.DeleteSetting<ThemeGrandNodeSettings>();
+
+            //locales
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Color");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Color.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showSwitchStyle");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showSwitchStyle.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showWidgetZone");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showWidgetZone.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setMenuBarColor");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setMenuBarColor.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomValues");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomValues.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomBackground");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomBackground.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomTextColor");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomTextColor.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomDarkColor");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setCustomDarkColor.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showBackToTop");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showBackToTop.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setBackToTopIcon");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setBackToTopIcon.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showBackToTopfa");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showBackToTopfa.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setBackToTopFaIcon");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.setBackToTopFaIcon.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.configurationTabColors");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.configurationTabStoreClosed");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.widgetConfiguration");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.useStoreClosed");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.useStoreClosed.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.storeClosedTemplate");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.storeClosedTemplate.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.showColorsBar");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.useCustomOrdersTemplate");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.useCustomOrdersTemplate.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.storeCustomOrdersTemplate");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.storeCustomOrdersTemplate.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.configurationCustomOrders");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.licenseKey");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Monday");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Tuesday");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Wednesday");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Thursday");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Friday");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Saturday");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.Sunday");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.fixedNav");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.fixedNav.hint");
+            LocalizationExtensions.DeletePluginLocaleResource(this, "Nop4you.Theme.GrandNode.configurationTabSettings");
+
+            base.Uninstall();
 		}
 	}
 }
