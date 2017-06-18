@@ -12,12 +12,39 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="form-group">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         @Html.NopLabelFor(model => model.HasPriceForSize)
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         @Html.NopEditorFor(model => model.HasPriceForSize)
                         @Html.ValidationMessageFor(model => model.HasPriceForSize)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.MinimumBillablePerimeter)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.MinimumBillablePerimeter)
+                        @Html.ValidationMessageFor(model => model.MinimumBillablePerimeter)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.MinimumBillableArea)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.MinimumBillableArea)
+                        @Html.ValidationMessageFor(model => model.MinimumBillableArea)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.MinimumBillableVolume)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.MinimumBillableVolume)
+                        @Html.ValidationMessageFor(model => model.MinimumBillableVolume)
                     </div>
                 </div>
                 <div class="form-group">
@@ -105,33 +132,7 @@
                         @Html.ValidationMessageFor(model => model.MaximumDepthManageable)
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                        @Html.NopLabelFor(model => model.MinimumBillablePerimeter)
-                    </div>
-                    <div class="col-md-9">
-                        @Html.NopEditorFor(model => model.MinimumBillablePerimeter)
-                        @Html.ValidationMessageFor(model => model.MinimumBillablePerimeter)
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                        @Html.NopLabelFor(model => model.MinimumBillableArea)
-                    </div>
-                    <div class="col-md-9">
-                        @Html.NopEditorFor(model => model.MinimumBillableArea)
-                        @Html.ValidationMessageFor(model => model.MinimumBillableArea)
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-3">
-                        @Html.NopLabelFor(model => model.MinimumBillableVolume)
-                    </div>
-                    <div class="col-md-9">
-                        @Html.NopEditorFor(model => model.MinimumBillableVolume)
-                        @Html.ValidationMessageFor(model => model.MinimumBillableVolume)
-                    </div>
-                </div>
+                
                 <div class="form-group">
                     <div class="col-md-3">
                         &nbsp;
