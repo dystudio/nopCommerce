@@ -165,35 +165,35 @@ namespace Nop4you.Plugin.Widgets.ThemeGrandNode.Models
 			colors.Add(gray);
 
             SelectListItem green = new SelectListItem();
-            gray.Text = "green";
-            gray.Value = "green";
+            green.Text = "green";
+            green.Value = "green";
             colors.Add(green);
 
             SelectListItem lightblue = new SelectListItem();
-            gray.Text = "lightblue";
-            gray.Value = "lightblue";
+            lightblue.Text = "lightblue";
+            lightblue.Value = "lightblue";
             colors.Add(lightblue);
 
             SelectListItem orange = new SelectListItem();
-            gray.Text = "orange";
-            gray.Value = "orange";
+            orange.Text = "orange";
+            orange.Value = "orange";
             colors.Add(orange);
 
             SelectListItem purple = new SelectListItem();
-            gray.Text = "purple";
-            gray.Value = "purple";
+            purple.Text = "purple";
+            purple.Value = "purple";
             colors.Add(purple);
 
 
             SelectListItem red = new SelectListItem();
-            gray.Text = "red";
-            gray.Value = "red";
+            red.Text = "red";
+            red.Value = "red";
             colors.Add(red);
 
 
             SelectListItem yellow = new SelectListItem();
-            gray.Text = "yellow";
-            gray.Value = "yellow";
+            yellow.Text = "yellow";
+            yellow.Value = "yellow";
             colors.Add(yellow);
 		}
 	}
