@@ -10,4 +10,10 @@ namespace Nop.Plugin.SMS.Alidayu.Models
     {
         public string PhoneNumber { get; set; }
     }
+
+    public class VerifiedCodeModel
+    {
+        public string PhoneNumber { get; set; }
+        public string Number { get; set; }
+    }
 }

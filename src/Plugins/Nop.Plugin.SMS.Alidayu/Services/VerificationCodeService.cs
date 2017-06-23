@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using Top.Api;
 using Top.Api.Request;
 using Top.Api.Response;
+using Nop.Plugin.SMS.Alidayu.Models;
+using Nop.Core.Caching;
+using Nop.Core.Infrastructure;
 
 namespace Nop.Plugin.SMS.Alidayu.Services
 {
@@ -24,6 +27,7 @@ namespace Nop.Plugin.SMS.Alidayu.Services
         private readonly IWorkContext _workContext;
         private readonly ILogger _logger;
         private readonly IEventPublisher _eventPublisher;
+        private readonly ICacheManager _cacheManager;
 
         #endregion
         public VerificationCodeService(
@@ -31,7 +35,8 @@ namespace Nop.Plugin.SMS.Alidayu.Services
             IStoreService storeService,
             IWorkContext workContext,
             ILogger logger,
-            IEventPublisher eventPublisher)
+            IEventPublisher eventPublisher,
+            ICacheManager cacheManager)
         {
           
             this._settingService = settingService;
@@ -39,6 +44,7 @@ namespace Nop.Plugin.SMS.Alidayu.Services
             this._workContext = workContext;
             this._logger = logger;
             this._eventPublisher = eventPublisher;
+            this._cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
         }
 
         public bool SendVerificationCode(int storeScope, string phoneNumber)
@@ -82,6 +88,21 @@ namespace Nop.Plugin.SMS.Alidayu.Services
                 //raise event       
                 _eventPublisher.Publish(new VerificationCodeSentEvent(phoneNumber, number.ToString()));
                 return true;
+            }
+        }
+
+        public bool VerifyCode(VerifiedCodeModel verifiedCodeModel)
+        {
+            var cachedNumber = _cacheManager.Get<string>(string.Format("Nop.Plugin.SMS.Alidayu.{0}", verifiedCodeModel.PhoneNumber));
+            if (!string.IsNullOrEmpty(cachedNumber) && cachedNumber == verifiedCodeModel.Number)
+            {
+                //raise event       
+                _eventPublisher.Publish(new VerifiedCodeEvent(verifiedCodeModel.PhoneNumber, verifiedCodeModel.Number));
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

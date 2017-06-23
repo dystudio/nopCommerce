@@ -29,4 +29,28 @@ namespace Nop.Plugin.SMS.Alidayu.Domain
             get; private set;
         }
     }
+
+    public class VerifiedCodeEvent
+    {
+        public VerifiedCodeEvent(string phoneNumber, string number)
+        {
+            this.PhoneNumber = phoneNumber;
+            this.Number = number;
+        }
+        /// <summary>
+        /// PhoneNumber
+        /// </summary>
+        public string PhoneNumber
+        {
+            get; private set;
+        }
+
+        /// <summary>
+        /// Number
+        /// </summary>
+        public string Number
+        {
+            get; private set;
+        }
+    }
 }

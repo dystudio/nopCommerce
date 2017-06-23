@@ -68,6 +68,24 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             }
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult VerifyCode(VerifiedCodeModel model)
+        {
+            if (string.IsNullOrEmpty(model.PhoneNumber))
+                throw new Exception("phone number is null or empty.");
+
+            //verify VerificationCode
+            if (this._verificationCodeService.VerifyCode(model))
+            {
+                return Json(new { Verified = true });
+            }
+            else
+            {
+                return Json(new { Verified = false });
+            }
+        }
+
         #endregion
     }
 }
