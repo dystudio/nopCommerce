@@ -1,0 +1,12 @@
+﻿<li>
+    <a href="@Url.RouteUrl("SuperNop.Plugin.Misc.ReferAndEarn.ReferAndEarn")" class="@if ((string) TempData["ReferAndEarnLink"]=="true")
+                                                                     {<text>active</text>}
+                                                                     else
+                                                                     {<text>inactive</text>}">Refer And Earn</a>
+</li>
+
+
+
+<script type="text/javascript">
+    $("ul li:nth-child(1) a").removeClass("active");
+</script>

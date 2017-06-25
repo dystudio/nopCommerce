@@ -1,0 +1,10 @@
+﻿Group: Marketing
+FriendlyName: Refer And Earn Plugin
+SystemName: Nop.Plugin.Misc.ReferAndEarn
+Version: 1.00
+SupportedVersions: 3.90
+Author: dystudio.net
+DisplayOrder: 1
+FileName: Nop.Plugin.Misc.ReferAndEarn.dll
+Description: By this plugin you can setup refer and earn campaign on your online nopcommerce store to encourage your customer to invite new customers.
+

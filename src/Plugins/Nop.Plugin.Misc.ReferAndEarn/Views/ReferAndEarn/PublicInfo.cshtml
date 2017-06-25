@@ -1,0 +1,49 @@
+﻿@using Nop.Plugin.Misc.ReferAndEarn.Models;
+@using Nop.Web.Framework.UI;
+@using Nop.Web.Framework;
+@model PublicInfoModel
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+}
+@section left
+{
+    @Html.Partial("~/Views/Customer/CustomerNavigation.cshtml", Model.NavigationModel, new ViewDataDictionary())
+}
+
+<div class="page account-page customer-info-page">
+    <div class="page-title">
+        <h1>@T("ReferAndEarn")</h1>
+    </div>
+    <div class="page-body">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(model => model.CustomerId)
+            @Html.AntiForgeryToken()
+            <div class="message-error">
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="fieldset">
+                <div class="form-fields">
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.ReferrerCode, new { }, ":")
+                        @Html.TextBoxFor(model => model.ReferrerCode, new { @disabled = "true" })
+                        @Html.ValidationMessageFor(model => model.ReferrerCode)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.FriendEmail, new { }, ":")
+                        @Html.TextBoxFor(model => model.FriendEmail)
+                        @Html.RequiredHint()
+                        @Html.ValidationMessageFor(model => model.FriendEmail)
+                    </div>
+                    <div style="font-style:italic;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Web.FriendEmailId.Hint2")</div>
+                </div>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <text>@ViewBag.SuccessText</text>
+            </div>
+            <div class="buttons">
+                <input type="submit" value="@T("Common.Submit")" name="save-info-button" class="pull-left button-1 save-customer-info-button" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,153 @@
+﻿@{
+    Layout = "";
+    ViewBag.Title = "Configure Page";
+}
+@using Nop.Plugin.Misc.ReferAndEarn.Models;
+@model ConfigurationModel
+@using Nop.Web.Framework;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+@Html.ValidationSummary(true)
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="raw clearfix">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @T("ReferAndEarn")
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.EnablePlugin_OverrideForStore, model => model.EnablePlugin, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.EnablePlugin)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.EnablePlugin)
+                                    @Html.ValidationMessageFor(model => model.EnablePlugin)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.ReferrerCodeLenght_OverrideForStore, model => model.ReferrerCodeLenght, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.ReferrerCodeLenght)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.ReferrerCodeLenght)
+                                    @Html.ValidationMessageFor(model => model.ReferrerCodeLenght)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <text style="font-style:italic; margin-left:22px;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Fields.ReferrerCodeLenght.Hint2")</text>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.ReferrerRewardPoints_OverrideForStore, model => model.ReferrerRewardPoints, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.ReferrerRewardPoints)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.ReferrerRewardPoints)
+                                    @Html.ValidationMessageFor(model => model.ReferrerRewardPoints)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <text style="font-style:italic; margin-left:22px;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Fields.ReferrerRewardPoints.Hint2")</text>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.RefereeRewardPoints_OverrideForStore, model => model.RefereeRewardPoints, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.RefereeRewardPoints)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.RefereeRewardPoints)
+                                    @Html.ValidationMessageFor(model => model.RefereeRewardPoints)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <text style="font-style:italic; margin-left:22px;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Fields.RefereeRewardPoints.Hint2")</text>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.PurchaseLimit_OverrideForStore, model => model.PurchaseLimit, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.PurchaseLimit)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.PurchaseLimit)
+                                    @Html.ValidationMessageFor(model => model.PurchaseLimit) @Model.PrimaryStoreCurrencyCode
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <text style="font-style:italic; margin-left:22px;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Fields.PurchaseLimit.Hint2")</text>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.ReferrelRewardsForFirstPurchase_OverrideForStore, model => model.ReferrelRewardsForFirstPurchase, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.ReferrelRewardsForFirstPurchase)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.ReferrelRewardsForFirstPurchase)
+                                    @Html.ValidationMessageFor(model => model.ReferrelRewardsForFirstPurchase)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <text style="font-style:italic; margin-left:22px;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Fields.ReferrelRewardsForFirstPurchase.Hint2")</text>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.RefereeRewardsForFirstPurchase_OverrideForStore, model => model.RefereeRewardsForFirstPurchase, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.RefereeRewardsForFirstPurchase)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.RefereeRewardsForFirstPurchase)
+                                    @Html.ValidationMessageFor(model => model.RefereeRewardsForFirstPurchase)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <text style="font-style:italic; margin-left:22px;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Fields.RefereeRewardsForFirstPurchase.Hint2")</text>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.OverrideStoreCheckboxFor(model => model.MaximumNoOfReferees_OverrideForStore, model => model.MaximumNoOfReferees, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.MaximumNoOfReferees)
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.NopEditorFor(model => model.MaximumNoOfReferees)
+                                    @Html.ValidationMessageFor(model => model.MaximumNoOfReferees)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <text style="font-style:italic; margin-left:22px;">@T("SuperNop.Plugin.Misc.ReferAndEarn.Fields.MaximumNoOfReferees.Hint2")</text>
+                                </div>
+                            </div>
+
+                            <button type="submit" name="save" class="btn bg-blue">
+                                <i class="fa fa-floppy-o"></i>
+                                @T("Admin.Common.Save")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@Html.Action("LicenseKey", "ReferAndEarnPluginExpiry")
+
+
+}
