@@ -93,7 +93,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Data
 			base.Database.ExecuteSqlCommand(rewardPointsNotification);
 			base.Database.ExecuteSqlCommand(refereeRewardsForFirstPurchase);
 			base.Database.ExecuteSqlCommand(referrerNotificationForFirstOrder);
-			DbContextExtensions.DropPluginTable(this, "SNCCustomerReferrerCode");
+            //drop the table
+            this.DropPluginTable(this.GetTableName<CustomerReferrerCode>());
 			this.SaveChanges();
 		}
 

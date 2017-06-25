@@ -8,7 +8,7 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Data
 	{
 		public CustomerReferrerCodeMap()
 		{
-			base.ToTable("SNCCustomerReferrerCode");
+			base.ToTable("CustomerReferrerCode");
 			base.HasKey<int>((CustomerReferrerCode a) => a.Id);
 		}
 	}
