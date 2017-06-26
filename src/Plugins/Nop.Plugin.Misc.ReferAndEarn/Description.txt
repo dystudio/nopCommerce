@@ -1,6 +1,6 @@
 ﻿Group: Marketing
 FriendlyName: Refer And Earn Plugin
-SystemName: Nop.Plugin.Misc.ReferAndEarn
+SystemName: Misc.ReferAndEarn
 Version: 1.00
 SupportedVersions: 3.90
 Author: dystudio.net

@@ -19,6 +19,7 @@ using Nop.Plugin.Misc.ReferAndEarn.Services;
 using System;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 {
@@ -119,7 +120,7 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 			}
 			CurrencySettings currencySettings = this._settingService.LoadSetting<CurrencySettings>(activeStoreScopeConfiguration);
 			configurationModel.PrimaryStoreCurrencyCode = this._currencyService.GetCurrencyById(currencySettings.PrimaryStoreCurrencyId).CurrencyCode;
-			return base.View("~/Plugins/Nop.Plugin.Misc.ReferAndEarn/Views/ReferAndEarn/Configure.cshtml", configurationModel);
+			return base.View("~/Plugins/Misc.ReferAndEarn/Views/ReferAndEarn/Configure.cshtml", configurationModel);
 		}
 
 		[AdminAuthorize, ChildActionOnly, HttpPost]
@@ -281,7 +282,7 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 			}
 			else
 			{
-				result = base.PartialView("~/Plugins/Nop.Plugin.Misc.ReferAndEarn/Views/ReferAndEarn/MyAccountMenuLink.cshtml");
+				result = base.PartialView("~/Plugins/Misc.ReferAndEarn/Views/ReferAndEarn/MyAccountMenuLink.cshtml");
 			}
 			return result;
 		}
@@ -300,7 +301,7 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 				Customer currentCustomer = this._workContext.CurrentCustomer;
 				PublicInfoModel publicInfoModel = new PublicInfoModel();
 				publicInfoModel = this.PreparePublicInfoModel(publicInfoModel, currentCustomer);
-				result = base.View("~/Plugins/Nop.Plugin.Misc.ReferAndEarn/Views/ReferAndEarn/PublicInfo.cshtml", publicInfoModel);
+				result = base.View("~/Plugins/Misc.ReferAndEarn/Views/ReferAndEarn/PublicInfo.cshtml", publicInfoModel);
 			}
 			return result;
 		}
@@ -336,136 +337,143 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 
 					this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Web.SucessMsg");
 				}
-				result = base.View("~/Plugins/Nop.Plugin.Misc.ReferAndEarn/Views/ReferAndEarn/PublicInfo.cshtml", model);
+				result = base.View("~/Plugins/Misc.ReferAndEarn/Views/ReferAndEarn/PublicInfo.cshtml", model);
 			}
 			else
 			{
-				result = base.View("~/Plugins/Nop.Plugin.Misc.ReferAndEarn/Views/ReferAndEarn/PublicInfo.cshtml", model);
+				result = base.View("~/Plugins/Misc.ReferAndEarn/Views/ReferAndEarn/PublicInfo.cshtml", model);
 			}
 			return result;
 		}
 
 		[NonAction]
 		protected CustomerNavigationModel GetCustomerNavigationModel(Customer customer)
-		{
-			CustomerNavigationModel customerNavigationModel = new CustomerNavigationModel();
-			//ICollection<CustomerNavigationItemModel> arg_49_0 = customerNavigationModel.CustomerNavigationItems;
-			//CustomerNavigationItemModel expr_12 = new CustomerNavigationItemModel();
-			//expr_12.RouteName("CustomerInfo");
-			//expr_12.Title(this._localizationService.GetResource("Account.CustomerInfo"));
-			//expr_12.Tab(0);
-			//expr_12.ItemClass("customer-info");
-			//arg_49_0.Add(expr_12);
-			//ICollection<CustomerNavigationItemModel> arg_92_0 = customerNavigationModel.CustomerNavigationItems;
-			//CustomerNavigationItemModel expr_5A = new CustomerNavigationItemModel();
-			//expr_5A.set_RouteName("CustomerAddresses");
-			//expr_5A.set_Title(this._localizationService.GetResource("Account.CustomerAddresses"));
-			//expr_5A.set_Tab(10);
-			//expr_5A.set_ItemClass("customer-addresses");
-			//arg_92_0.Add(expr_5A);
-			//ICollection<CustomerNavigationItemModel> arg_DB_0 = customerNavigationModel.CustomerNavigationItems;
-			//CustomerNavigationItemModel expr_A3 = new CustomerNavigationItemModel();
-			//expr_A3.set_RouteName("CustomerOrders");
-			//expr_A3.set_Title(this._localizationService.GetResource("Account.CustomerOrders"));
-			//expr_A3.set_Tab(20);
-			//expr_A3.set_ItemClass("customer-orders");
-			//arg_DB_0.Add(expr_A3);
-			//bool flag = this._orderSettings.get_ReturnRequestsEnabled() && this._returnRequestService.SearchReturnRequests(this._storeContext.get_CurrentStore().get_Id(), this._workContext.get_CurrentCustomer().get_Id(), 0, null, null, null, null, 0, 1).Any<ReturnRequest>();
-			//if (flag)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_188_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_150 = new CustomerNavigationItemModel();
-			//	expr_150.set_RouteName("CustomerReturnRequests");
-			//	expr_150.set_Title(this._localizationService.GetResource("Account.CustomerReturnRequests"));
-			//	expr_150.set_Tab(40);
-			//	expr_150.set_ItemClass("return-requests");
-			//	arg_188_0.Add(expr_150);
-			//}
-			//bool flag2 = !this._customerSettings.get_HideDownloadableProductsTab();
-			//if (flag2)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_1E7_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_1AF = new CustomerNavigationItemModel();
-			//	expr_1AF.set_RouteName("CustomerDownloadableProducts");
-			//	expr_1AF.set_Title(this._localizationService.GetResource("Account.DownloadableProducts"));
-			//	expr_1AF.set_Tab(50);
-			//	expr_1AF.set_ItemClass("downloadable-products");
-			//	arg_1E7_0.Add(expr_1AF);
-			//}
-			//bool flag3 = !this._customerSettings.get_HideBackInStockSubscriptionsTab();
-			//if (flag3)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_246_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_20E = new CustomerNavigationItemModel();
-			//	expr_20E.set_RouteName("CustomerBackInStockSubscriptions");
-			//	expr_20E.set_Title(this._localizationService.GetResource("Account.BackInStockSubscriptions"));
-			//	expr_20E.set_Tab(30);
-			//	expr_20E.set_ItemClass("back-in-stock-subscriptions");
-			//	arg_246_0.Add(expr_20E);
-			//}
-			//bool enabled = this._rewardPointsSettings.get_Enabled();
-			//if (enabled)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_2A2_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_26A = new CustomerNavigationItemModel();
-			//	expr_26A.set_RouteName("CustomerRewardPoints");
-			//	expr_26A.set_Title(this._localizationService.GetResource("Account.RewardPoints"));
-			//	expr_26A.set_Tab(60);
-			//	expr_26A.set_ItemClass("reward-points");
-			//	arg_2A2_0.Add(expr_26A);
-			//}
-			//ICollection<CustomerNavigationItemModel> arg_2EC_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//CustomerNavigationItemModel expr_2B4 = new CustomerNavigationItemModel();
-			//expr_2B4.set_RouteName("CustomerChangePassword");
-			//expr_2B4.set_Title(this._localizationService.GetResource("Account.ChangePassword"));
-			//expr_2B4.set_Tab(70);
-			//expr_2B4.set_ItemClass("change-password");
-			//arg_2EC_0.Add(expr_2B4);
-			//bool allowCustomersToUploadAvatars = this._customerSettings.get_AllowCustomersToUploadAvatars();
-			//if (allowCustomersToUploadAvatars)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_347_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_30F = new CustomerNavigationItemModel();
-			//	expr_30F.set_RouteName("CustomerAvatar");
-			//	expr_30F.set_Title(this._localizationService.GetResource("Account.Avatar"));
-			//	expr_30F.set_Tab(80);
-			//	expr_30F.set_ItemClass("customer-avatar");
-			//	arg_347_0.Add(expr_30F);
-			//}
-			//bool flag4 = this._forumSettings.get_ForumsEnabled() && this._forumSettings.get_AllowCustomersToManageSubscriptions();
-			//if (flag4)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_3B3_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_37B = new CustomerNavigationItemModel();
-			//	expr_37B.set_RouteName("CustomerForumSubscriptions");
-			//	expr_37B.set_Title(this._localizationService.GetResource("Account.ForumSubscriptions"));
-			//	expr_37B.set_Tab(90);
-			//	expr_37B.set_ItemClass("forum-subscriptions");
-			//	arg_3B3_0.Add(expr_37B);
-			//}
-			//bool showProductReviewsTabOnAccountPage = this._catalogSettings.get_ShowProductReviewsTabOnAccountPage();
-			//if (showProductReviewsTabOnAccountPage)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_40F_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_3D7 = new CustomerNavigationItemModel();
-			//	expr_3D7.set_RouteName("CustomerProductReviews");
-			//	expr_3D7.set_Title(this._localizationService.GetResource("Account.CustomerProductReviews"));
-			//	expr_3D7.set_Tab(100);
-			//	expr_3D7.set_ItemClass("customer-reviews");
-			//	arg_40F_0.Add(expr_3D7);
-			//}
-			//bool flag5 = this._vendorSettings.get_AllowVendorsToEditInfo() && this._workContext.get_CurrentVendor() != null;
-			//if (flag5)
-			//{
-			//	ICollection<CustomerNavigationItemModel> arg_481_0 = customerNavigationModel.get_CustomerNavigationItems();
-			//	CustomerNavigationItemModel expr_449 = new CustomerNavigationItemModel();
-			//	expr_449.set_RouteName("CustomerVendorInfo");
-			//	expr_449.set_Title(this._localizationService.GetResource("Account.VendorInfo"));
-			//	expr_449.set_Tab(110);
-			//	expr_449.set_ItemClass("customer-vendor-info");
-			//	arg_481_0.Add(expr_449);
-			//}
-			return customerNavigationModel;
+		{            
+            var model = new CustomerNavigationModel();
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "CustomerInfo",
+                Title = _localizationService.GetResource("Account.CustomerInfo"),
+                Tab = CustomerNavigationEnum.Info,
+                ItemClass = "customer-info"
+            });
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "CustomerAddresses",
+                Title = _localizationService.GetResource("Account.CustomerAddresses"),
+                Tab = CustomerNavigationEnum.Addresses,
+                ItemClass = "customer-addresses"
+            });
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "CustomerOrders",
+                Title = _localizationService.GetResource("Account.CustomerOrders"),
+                Tab = CustomerNavigationEnum.Orders,
+                ItemClass = "customer-orders"
+            });
+
+            if (_orderSettings.ReturnRequestsEnabled &&
+                _returnRequestService.SearchReturnRequests(_storeContext.CurrentStore.Id,
+                    _workContext.CurrentCustomer.Id, pageIndex: 0, pageSize: 1).Any())
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerReturnRequests",
+                    Title = _localizationService.GetResource("Account.CustomerReturnRequests"),
+                    Tab = CustomerNavigationEnum.ReturnRequests,
+                    ItemClass = "return-requests"
+                });
+            }
+
+            if (!_customerSettings.HideDownloadableProductsTab)
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerDownloadableProducts",
+                    Title = _localizationService.GetResource("Account.DownloadableProducts"),
+                    Tab = CustomerNavigationEnum.DownloadableProducts,
+                    ItemClass = "downloadable-products"
+                });
+            }
+
+            if (!_customerSettings.HideBackInStockSubscriptionsTab)
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerBackInStockSubscriptions",
+                    Title = _localizationService.GetResource("Account.BackInStockSubscriptions"),
+                    Tab = CustomerNavigationEnum.BackInStockSubscriptions,
+                    ItemClass = "back-in-stock-subscriptions"
+                });
+            }
+
+            if (_rewardPointsSettings.Enabled)
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerRewardPoints",
+                    Title = _localizationService.GetResource("Account.RewardPoints"),
+                    Tab = CustomerNavigationEnum.RewardPoints,
+                    ItemClass = "reward-points"
+                });
+            }
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "CustomerChangePassword",
+                Title = _localizationService.GetResource("Account.ChangePassword"),
+                Tab = CustomerNavigationEnum.ChangePassword,
+                ItemClass = "change-password"
+            });
+
+            if (_customerSettings.AllowCustomersToUploadAvatars)
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerAvatar",
+                    Title = _localizationService.GetResource("Account.Avatar"),
+                    Tab = CustomerNavigationEnum.Avatar,
+                    ItemClass = "customer-avatar"
+                });
+            }
+
+            if (_forumSettings.ForumsEnabled && _forumSettings.AllowCustomersToManageSubscriptions)
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerForumSubscriptions",
+                    Title = _localizationService.GetResource("Account.ForumSubscriptions"),
+                    Tab = CustomerNavigationEnum.ForumSubscriptions,
+                    ItemClass = "forum-subscriptions"
+                });
+            }
+            if (_catalogSettings.ShowProductReviewsTabOnAccountPage)
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerProductReviews",
+                    Title = _localizationService.GetResource("Account.CustomerProductReviews"),
+                    Tab = CustomerNavigationEnum.ProductReviews,
+                    ItemClass = "customer-reviews"
+                });
+            }
+            if (_vendorSettings.AllowVendorsToEditInfo && _workContext.CurrentVendor != null)
+            {
+                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+                {
+                    RouteName = "CustomerVendorInfo",
+                    Title = _localizationService.GetResource("Account.VendorInfo"),
+                    Tab = CustomerNavigationEnum.VendorInfo,
+                    ItemClass = "customer-vendor-info"
+                });
+            }
+
+            //model.SelectedTab = (CustomerNavigationEnum)selectedTabId;
+
+            return model;
 		}
 	}
 }
