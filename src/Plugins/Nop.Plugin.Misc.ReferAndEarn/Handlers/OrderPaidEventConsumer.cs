@@ -13,7 +13,7 @@ using Nop.Plugin.Misc.ReferAndEarn.Services;
 using System;
 using System.Collections.Generic;
 
-namespace Nop.Plugin.Misc.ReferAndEarn.ActionFilter
+namespace Nop.Plugin.Misc.ReferAndEarn.Handlers
 {
 	public class OrderPaidEventConsumer : IConsumer<OrderPaidEvent>
 	{
@@ -50,37 +50,34 @@ namespace Nop.Plugin.Misc.ReferAndEarn.ActionFilter
 
 		public void HandleEvent(OrderPaidEvent eventMessage)
 		{
-			PluginDescriptor pluginDescriptorBySystemName = this._pluginFinder.GetPluginDescriptorBySystemName("Nop.Plugin.Misc.ReferAndEarn");
-			bool flag = pluginDescriptorBySystemName == null;
-			if (!flag)
+			PluginDescriptor pluginDescriptorBySystemName = this._pluginFinder.GetPluginDescriptorBySystemName("Misc.ReferAndEarn");
+			if (pluginDescriptorBySystemName != null)
 			{
-				bool flag2 = !this._pluginFinder.AuthenticateStore(pluginDescriptorBySystemName, this._storeContext.CurrentStore.Id);
-				if (!flag2)
+				if (this._pluginFinder.AuthenticateStore(pluginDescriptorBySystemName, this._storeContext.CurrentStore.Id))
 				{
 					Order order = eventMessage.Order;
-					bool flag3 = order == null;
-					if (!flag3)
+		
+					if (order!= null)
 					{
 						Customer customer = order.Customer;
 						string attribute = GenericAttributeExtensions.GetAttribute<string>(customer, "ReferrerCode", 0);
-						bool flag4 = string.IsNullOrEmpty(attribute);
-						if (!flag4)
+		
+						if (!string.IsNullOrEmpty(attribute))
 						{
 							ICollection<OrderItem> orderItems = order.OrderItems;
-							bool flag5 = orderItems.Count > 1;
-							if (!flag5)
+							bool notFirstOrder = orderItems.Count > 1;
+							if (!notFirstOrder)
 							{
-								string text = string.Format(this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Order.ReffererMsg"), order.Customer.Email);
-								string text2 = string.Format(this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Order.ReffereeMsg"), new object[0]);
+								string reffererMsg = string.Format(this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Order.ReffererMsg"), order.Customer.Email);
+								string reffereeMsg = string.Format(this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Order.ReffereeMsg"), new object[0]);
 								ReferAndEarnSetting referAndEarnSetting = this._settingService.LoadSetting<ReferAndEarnSetting>(this._storeContext.CurrentStore.Id);
 								CustomerReferrerCode customerReferrerCodeByReferrerCodeId = this._referAndEarnService.GetCustomerReferrerCodeByReferrerCodeId(attribute);
-								bool flag6 = customerReferrerCodeByReferrerCodeId != null && referAndEarnSetting.PurchaseLimit <= order.OrderSubtotalExclTax;
-								if (flag6)
+								if (customerReferrerCodeByReferrerCodeId != null && referAndEarnSetting.PurchaseLimit <= order.OrderSubtotalExclTax)
 								{
 									Customer customerById = this._customerService.GetCustomerById(customerReferrerCodeByReferrerCodeId.CustomerId);
-									this._rewardPointService.AddRewardPointsHistoryEntry(customerById, referAndEarnSetting.ReferrelRewardsForFirstPurchase, this._storeContext.CurrentStore.Id, text, null, decimal.Zero, null);
+									this._rewardPointService.AddRewardPointsHistoryEntry(customerById, referAndEarnSetting.ReferrelRewardsForFirstPurchase, this._storeContext.CurrentStore.Id, reffererMsg, null, decimal.Zero, null);
 									this._referAndEarnService.SendReferrerNotificationForFirstOrder(customerById, referAndEarnSetting.ReferrelRewardsForFirstPurchase, order.Customer.Email, referAndEarnSetting.RefereeRewardPoints, this._workContext.WorkingLanguage.Id);
-									this._rewardPointService.AddRewardPointsHistoryEntry(order.Customer, referAndEarnSetting.RefereeRewardsForFirstPurchase, this._storeContext.CurrentStore.Id, text2, null, decimal.Zero, null);
+									this._rewardPointService.AddRewardPointsHistoryEntry(order.Customer, referAndEarnSetting.RefereeRewardsForFirstPurchase, this._storeContext.CurrentStore.Id, reffereeMsg, null, decimal.Zero, null);
 									this._referAndEarnService.SendRefereeNotificationForFirstOrder(order.Customer, referAndEarnSetting.RefereeRewardsForFirstPurchase, order.Customer.Email, referAndEarnSetting.RefereeRewardPoints, this._workContext.WorkingLanguage.Id);
 								}
 							}

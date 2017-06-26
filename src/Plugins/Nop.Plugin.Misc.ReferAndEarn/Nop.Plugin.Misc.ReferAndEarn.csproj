@@ -84,7 +84,7 @@
   <ItemGroup>
     <Compile Include="ActionFilter\AfterRegistationActionFilter.cs" />
     <Compile Include="ActionFilter\BeforeRegistationActionFilter.cs" />
-    <Compile Include="ActionFilter\OrderPaidEventConsumer.cs" />
+    <Compile Include="Handlers\OrderPaidEventConsumer.cs" />
     <Compile Include="ActionFilter\ReferAndEarnFilterProvider.cs" />
     <Compile Include="Controllers\ReferAndEarnController.cs" />
     <Compile Include="Data\CustomerReferrerCodeMap.cs" />
