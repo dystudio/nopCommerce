@@ -97,8 +97,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		public virtual void AddReferAndEarnTokens(IList<Token> tokens, Customer referrerCustomer, int referrerCustomerReward, string refereeCustomerEmail, int refereeCustomerReward)
 		{
 			CustomerReferrerCode customerReferrerCodeByCustomerId = this.GetCustomerReferrerCodeByCustomerId(referrerCustomer.Id);
-			bool flag = customerReferrerCodeByCustomerId == null;
-			if (!flag)
+
+			if (customerReferrerCodeByCustomerId != null)
 			{
 				ReferAndEarnSetting referAndEarnSetting = this._settingService.LoadSetting<ReferAndEarnSetting>(this._storeContext.CurrentStore.Id);
 				tokens.Add(new Token("ReferrelRewardsForFirstPurchase", Convert.ToString(referAndEarnSetting.ReferrelRewardsForFirstPurchase)));
@@ -115,33 +115,31 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		{
 			int localized = LocalizationExtensions.GetLocalized<MessageTemplate, int>(messageTemplate, (MessageTemplate mt) => mt.EmailAccountId, languageId, true, true);
 			EmailAccount emailAccount = this._emailAccountService.GetEmailAccountById(localized);
-			bool flag = emailAccount == null;
-			if (flag)
+
+			if (emailAccount == null)
 			{
 				emailAccount = this._emailAccountService.GetEmailAccountById(this._emailAccountSettings.DefaultEmailAccountId);
 			}
-			bool flag2 = emailAccount == null;
-			if (flag2)
-			{
-				emailAccount = this._emailAccountService.GetAllEmailAccounts().FirstOrDefault<EmailAccount>();
-			}
+            else
+            {
+                emailAccount = this._emailAccountService.GetAllEmailAccounts().FirstOrDefault<EmailAccount>();
+            }
 			return emailAccount;
 		}
 
 		protected virtual MessageTemplate GetActiveMessageTemplate(string messageTemplateName, int storeId)
 		{
 			MessageTemplate messageTemplateByName = this._messageTemplateService.GetMessageTemplateByName(messageTemplateName, storeId);
-			bool flag = messageTemplateByName == null;
+
 			MessageTemplate result;
-			if (flag)
+			if (messageTemplateByName == null)
 			{
 				result = null;
 			}
 			else
 			{
 				bool isActive = messageTemplateByName.IsActive;
-				bool flag2 = !isActive;
-				if (flag2)
+				if (!isActive)
 				{
 					result = null;
 				}
@@ -156,18 +154,18 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		protected virtual int EnsureLanguageIsActive(int languageId, int storeId)
 		{
 			Language language = this._languageService.GetLanguageById(languageId);
-			bool flag = language == null || !language.Published;
-			if (flag)
+
+			if (language == null || !language.Published)
 			{
 				language = this._languageService.GetAllLanguages(false, storeId).FirstOrDefault<Language>();
 			}
-			bool flag2 = language == null || !language.Published;
-			if (flag2)
+
+			if (language == null || !language.Published)
 			{
 				language = this._languageService.GetAllLanguages(false, 0).FirstOrDefault<Language>();
 			}
-			bool flag3 = language == null;
-			if (flag3)
+			
+			if (language == null)
 			{
 				throw new Exception("No active language could be loaded");
 			}
@@ -205,9 +203,9 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 
 		public virtual CustomerReferrerCode GetCustomerReferrerCodeByCustomerId(int customerId)
 		{
-			bool flag = customerId == 0;
+
 			CustomerReferrerCode result;
-			if (flag)
+			if (customerId == 0)
 			{
 				result = null;
 			}
@@ -217,8 +215,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 				where a.CustomerId == customerId
 				select a;
 				CustomerReferrerCode customerReferrerCode = source.ToList<CustomerReferrerCode>().FirstOrDefault<CustomerReferrerCode>();
-				bool flag2 = customerReferrerCode == null;
-				if (flag2)
+		
+				if (customerReferrerCode == null)
 				{
 					ReferAndEarnSetting referAndEarnSetting = this._settingService.LoadSetting<ReferAndEarnSetting>(this._storeContext.CurrentStore.Id);
 					string referrerCode = this.RandomString(referAndEarnSetting.ReferrerCodeLenght).ToUpperInvariant();
@@ -238,9 +236,9 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 
 		public virtual CustomerReferrerCode GetCustomerReferrerCodeByReferrerCodeId(string referrerCode)
 		{
-			bool flag = string.IsNullOrEmpty(referrerCode);
+			
 			CustomerReferrerCode result;
-			if (flag)
+			if (string.IsNullOrEmpty(referrerCode))
 			{
 				result = null;
 			}
@@ -256,8 +254,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 
 		public virtual void InsertCustomerReferrerCode(CustomerReferrerCode customerReferrerCode)
 		{
-			bool flag = customerReferrerCode == null;
-			if (flag)
+
+			if (customerReferrerCode == null)
 			{
 				throw new ArgumentNullException("customerReferrerCode");
 			}
@@ -266,8 +264,7 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 
 		public virtual void UpdateCustomerReferrerCode(CustomerReferrerCode customerReferrerCode)
 		{
-			bool flag = customerReferrerCode == null;
-			if (flag)
+			if (customerReferrerCode == null)
 			{
 				throw new ArgumentNullException("customerReferrerCode");
 			}
@@ -278,9 +275,9 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		{
 			Store currentStore = this._storeContext.CurrentStore;
 			MessageTemplate activeMessageTemplate = this.GetActiveMessageTemplate("ReferAndEarn.ReferrerNotificationToNewCustomer", currentStore.Id);
-			bool flag = activeMessageTemplate == null;
+
 			int result;
-			if (flag)
+			if (activeMessageTemplate == null)
 			{
 				result = 0;
 			}
@@ -303,9 +300,9 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		{
 			Store currentStore = this._storeContext.CurrentStore;
 			MessageTemplate activeMessageTemplate = this.GetActiveMessageTemplate("ReferAndEarn.ReferrerNotification", currentStore.Id);
-			bool flag = activeMessageTemplate == null;
+		
 			int result;
-			if (flag)
+			if (activeMessageTemplate == null)
 			{
 				result = 0;
 			}
@@ -328,9 +325,9 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		{
 			Store currentStore = this._storeContext.CurrentStore;
 			MessageTemplate activeMessageTemplate = this.GetActiveMessageTemplate("ReferAndEarn.ReferrerNotificationToReferrer", currentStore.Id);
-			bool flag = activeMessageTemplate == null;
+		
 			int result;
-			if (flag)
+			if (activeMessageTemplate == null)
 			{
 				result = 0;
 			}
@@ -353,9 +350,9 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		{
 			Store currentStore = this._storeContext.CurrentStore;
 			MessageTemplate activeMessageTemplate = this.GetActiveMessageTemplate("ReferAndEarn.RefereeNotificationForFirstOrder", currentStore.Id);
-			bool flag = activeMessageTemplate == null;
+
 			int result;
-			if (flag)
+			if (activeMessageTemplate == null)
 			{
 				result = 0;
 			}
@@ -378,9 +375,9 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 		{
 			Store currentStore = this._storeContext.CurrentStore;
 			MessageTemplate activeMessageTemplate = this.GetActiveMessageTemplate("ReferAndEarn.ReferrerNotificationForFirstOrder", currentStore.Id);
-			bool flag = activeMessageTemplate == null;
+
 			int result;
-			if (flag)
+			if (activeMessageTemplate == null)
 			{
 				result = 0;
 			}
@@ -422,12 +419,12 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 				string text = string.Format(this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Register.ReffererMsg"), (customerByEmail.Email != null) ? customerByEmail.Email : newCustomerEmail);
 				string text2 = string.Format(this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Register.ReffereeMsg"), new object[0]);
 				ReferAndEarnSetting referAndEarnSetting = this._settingService.LoadSetting<ReferAndEarnSetting>(this._storeContext.CurrentStore.Id);
-				bool flag2 = customerReferrerCodeByReferrerCodeId != null;
-				if (flag2)
+
+				if (customerReferrerCodeByReferrerCodeId != null)
 				{
 					Customer customerById = this._customerService.GetCustomerById(customerReferrerCodeByReferrerCodeId.CustomerId);
-					bool flag3 = referAndEarnSetting.ReferrerRewardPoints > 0;
-					if (flag3)
+			
+					if (referAndEarnSetting.ReferrerRewardPoints > 0)
 					{
 						this._rewardPointService.AddRewardPointsHistoryEntry(customerById, referAndEarnSetting.ReferrerRewardPoints, this._storeContext.CurrentStore.Id, text, null, decimal.Zero, null);
 						this.SendReferACustomerNotificationToReferrer(customerById, referAndEarnSetting.ReferrerRewardPoints, (customerByEmail.Email != null) ? customerByEmail.Email : newCustomerEmail, referAndEarnSetting.RefereeRewardPoints, this._workContext.WorkingLanguage.Id);
@@ -436,8 +433,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 					int noOfTimesUsed = expr_135.NoOfTimesUsed;
 					expr_135.NoOfTimesUsed = noOfTimesUsed + 1;
 					this.UpdateCustomerReferrerCode(customerReferrerCodeByReferrerCodeId);
-					bool flag4 = referAndEarnSetting.RefereeRewardPoints > 0;
-					if (flag4)
+
+					if (referAndEarnSetting.RefereeRewardPoints > 0)
 					{
 						this._rewardPointService.AddRewardPointsHistoryEntry(customerByEmail, referAndEarnSetting.RefereeRewardPoints, this._storeContext.CurrentStore.Id, text2, null, decimal.Zero, null);
 						this.SendNotificationToNewCustomerAfterRegistration(customerByEmail, referAndEarnSetting.ReferrerRewardPoints, (customerByEmail.Email != null) ? customerByEmail.Email : newCustomerEmail, referAndEarnSetting.RefereeRewardPoints, this._workContext.WorkingLanguage.Id);
