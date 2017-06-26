@@ -60,11 +60,11 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
             //SMS Send VerificationCode
             if (this._verificationCodeService.SendVerificationCode(storeScope, model.PhoneNumber))
             {
-                return Json(new { msg = "ok" });
+                return Json(new { Result = true });
             }
             else
             {
-                return Json(new { msg = "" });
+                return Json(new { Result = false });
             }
         }
 
