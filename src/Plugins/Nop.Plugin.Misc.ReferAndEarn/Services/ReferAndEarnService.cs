@@ -176,29 +176,29 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Services
 
 		protected virtual int SendNotification(MessageTemplate messageTemplate, EmailAccount emailAccount, int languageId, IEnumerable<Token> tokens, string toEmailAddress, string toName, string attachmentFilePath = null, string attachmentFileName = null, string replyToEmailAddress = null, string replyToName = null)
 		{
-			string localized = LocalizationExtensions.GetLocalized<MessageTemplate>(messageTemplate, (MessageTemplate mt) => mt.BccEmailAddresses, languageId, true, true);
-			string localized2 = LocalizationExtensions.GetLocalized<MessageTemplate>(messageTemplate, (MessageTemplate mt) => mt.Subject, languageId, true, true);
-			string localized3 = LocalizationExtensions.GetLocalized<MessageTemplate>(messageTemplate, (MessageTemplate mt) => mt.Body, languageId, true, true);
-			string subject = this._tokenizer.Replace(localized2, tokens, false);
-			string body = this._tokenizer.Replace(localized3, tokens, true);
-			QueuedEmail expr_F9 = new QueuedEmail();
-			//expr_F9.set_Priority(5);
-			//expr_F9.set_From(emailAccount.get_Email());
-			//expr_F9.set_FromName(emailAccount.get_DisplayName());
-			//expr_F9.set_To(toEmailAddress);
-			//expr_F9.set_ToName(toName);
-			//expr_F9.set_ReplyTo(replyToEmailAddress);
-			//expr_F9.set_ReplyToName(replyToName);
-			//expr_F9.set_CC(string.Empty);
-			//expr_F9.set_Bcc(localized);
-			//expr_F9.set_Subject(subject);
-			//expr_F9.set_Body(body);
-			//expr_F9.set_AttachmentFilePath(attachmentFilePath);
-			//expr_F9.set_AttachmentFileName(attachmentFileName);
-			//expr_F9.set_AttachedDownloadId(messageTemplate.get_AttachedDownloadId());
-			//expr_F9.set_CreatedOnUtc(DateTime.UtcNow);
-			//expr_F9.set_EmailAccountId(emailAccount.get_Id());
-			QueuedEmail queuedEmail = expr_F9;
+			string bccTemplate = LocalizationExtensions.GetLocalized<MessageTemplate>(messageTemplate, (MessageTemplate mt) => mt.BccEmailAddresses, languageId, true, true);
+			string subjectTemplate = LocalizationExtensions.GetLocalized<MessageTemplate>(messageTemplate, (MessageTemplate mt) => mt.Subject, languageId, true, true);
+			string bodyTemplate = LocalizationExtensions.GetLocalized<MessageTemplate>(messageTemplate, (MessageTemplate mt) => mt.Body, languageId, true, true);
+			string subject = this._tokenizer.Replace(subjectTemplate, tokens, false);
+			string body = this._tokenizer.Replace(bodyTemplate, tokens, true);
+			QueuedEmail email = new QueuedEmail();
+            email.Priority = QueuedEmailPriority.High;
+            email.From = emailAccount.Email;
+            email.FromName = emailAccount.DisplayName;
+            email.To = toEmailAddress;
+            email.ToName = toName;
+            email.ReplyTo = replyToEmailAddress;
+            email.ReplyToName = replyToName;
+            email.CC = string.Empty;
+            email.Bcc = bccTemplate;
+            email.Subject = subject;
+            email.Body = body;
+            email.AttachmentFilePath = attachmentFilePath;
+            email.AttachmentFileName = attachmentFileName;
+            email.AttachedDownloadId = messageTemplate.AttachedDownloadId;
+            email.CreatedOnUtc = DateTime.UtcNow;
+            email.EmailAccountId = emailAccount.Id;
+            QueuedEmail queuedEmail = email;
 			this._queuedEmailService.InsertQueuedEmail(queuedEmail);
 			return queuedEmail.Id;
 		}
