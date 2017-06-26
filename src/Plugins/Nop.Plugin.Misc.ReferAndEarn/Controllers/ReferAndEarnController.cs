@@ -316,8 +316,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 			if (isValid)
 			{
 				Customer customerByEmail = this._customerService.GetCustomerByEmail(model.FriendEmail);
-				bool flag = customerByEmail != null;
-				if (flag)
+				bool alreadyExistsCustomer = customerByEmail != null;
+				if (alreadyExistsCustomer)
 				{
 					base.ModelState.AddModelError("FriendEmail", this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Web.EmailExist"));
 				}
@@ -325,15 +325,15 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 				int activeStoreScopeConfiguration = this.GetActiveStoreScopeConfiguration(this._storeService, this._workContext);
 				ReferAndEarnSetting referAndEarnSetting = this._settingService.LoadSetting<ReferAndEarnSetting>(activeStoreScopeConfiguration);
 				CustomerReferrerCode customerReferrerCodeByCustomerId = this._referAndEarnService.GetCustomerReferrerCodeByCustomerId(currentCustomer.Id);
-				bool flag2 = customerReferrerCodeByCustomerId != null && customerReferrerCodeByCustomerId.NoOfTimesUsed >= referAndEarnSetting.MaximumNoOfReferees;
-				if (flag2)
+				bool maximumNoOfRefereesOverflow = customerReferrerCodeByCustomerId != null && customerReferrerCodeByCustomerId.NoOfTimesUsed >= referAndEarnSetting.MaximumNoOfReferees;
+				if (maximumNoOfRefereesOverflow)
 				{
 					base.ModelState.AddModelError("FriendEmail", this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Web.MaxLimitError"));
 				}
 				bool flag3 = base.ModelState.IsValid && !string.IsNullOrEmpty(model.FriendEmail);
 				if (flag3)
 				{
-					this._referAndEarnService.SendReferACustomerNotification(currentCustomer, referAndEarnSetting.ReferrerRewardPoints, model.FriendEmail, 100, this._workContext.WorkingLanguage.Id);
+					this._referAndEarnService.SendReferACustomerNotification(currentCustomer, referAndEarnSetting.ReferrerRewardPoints, model.FriendEmail,referAndEarnSetting.RefereeRewardPoints, this._workContext.WorkingLanguage.Id);
 
 					this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Web.SucessMsg");
 				}
