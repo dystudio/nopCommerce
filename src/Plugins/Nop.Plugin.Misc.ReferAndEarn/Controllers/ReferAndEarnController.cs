@@ -27,37 +27,21 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 	{
 
 		private readonly IWorkContext _workContext;
-
 		private readonly IStoreContext _storeContext;
-
 		private readonly IStoreService _storeService;
-
 		private readonly ILocalizationService _localizationService;
-
 		private readonly IWebHelper _webHelper;
-
 		private readonly ISettingService _settingService;
-
 		private readonly CustomerSettings _customerSettings;
-
 		private readonly RewardPointsSettings _rewardPointsSettings;
-
 		private readonly ForumSettings _forumSettings;
-
 		private readonly OrderSettings _orderSettings;
-
 		private readonly IReturnRequestService _returnRequestService;
-
 		private readonly IReferAndEarnService _referAndEarnService;
-
 		private readonly ICustomerService _customerService;
-
 		private readonly HttpContextBase _httpContex;
-
 		private readonly ICurrencyService _currencyService;
-
 		private readonly CatalogSettings _catalogSettings;
-
 		private readonly VendorSettings _vendorSettings;
 
 		public ReferAndEarnController(IWorkContext workContext, IStoreContext storeContext, ILocalizationService localizationService, IWebHelper webHelper, IStoreService storeService, ISettingService settingService, CustomerSettings customerSettings, RewardPointsSettings rewardPointsSettings, ForumSettings forumSettings, OrderSettings orderSettings, IReturnRequestService returnRequestService, IReferAndEarnService referAndEarnService, ICustomerService customerService, HttpContextBase httpContex, ICurrencyService currencyService, CatalogSettings catalogSettings, VendorSettings vendorSettings)
@@ -105,8 +89,7 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 			configurationModel.ReferrelRewardsForFirstPurchase = referAndEarnSetting.ReferrelRewardsForFirstPurchase;
 			configurationModel.RefereeRewardsForFirstPurchase = referAndEarnSetting.RefereeRewardsForFirstPurchase;
 			configurationModel.ActiveStoreScopeConfiguration = activeStoreScopeConfiguration;
-			bool flag = activeStoreScopeConfiguration > 0;
-			if (flag)
+			if (activeStoreScopeConfiguration > 0)
 			{
 				configurationModel.EnablePlugin_OverrideForStore = this._settingService.SettingExists<ReferAndEarnSetting, bool>(referAndEarnSetting, (ReferAndEarnSetting x) => x.EnablePlugin, activeStoreScopeConfiguration);
 				configurationModel.ReferrerCodeLenght_OverrideForStore = this._settingService.SettingExists<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.ReferrerCodeLenght, activeStoreScopeConfiguration);
@@ -136,106 +119,98 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 			referAndEarnSetting.PurchaseLimit = model.PurchaseLimit;
 			referAndEarnSetting.ReferrelRewardsForFirstPurchase = model.ReferrelRewardsForFirstPurchase;
 			referAndEarnSetting.RefereeRewardsForFirstPurchase = model.RefereeRewardsForFirstPurchase;
-			bool flag = model.EnablePlugin_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag)
+
+			if (model.EnablePlugin_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, bool>(referAndEarnSetting, (ReferAndEarnSetting x) => x.EnablePlugin, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag2 = activeStoreScopeConfiguration > 0;
-				if (flag2)
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, bool>(referAndEarnSetting, (ReferAndEarnSetting x) => x.EnablePlugin, activeStoreScopeConfiguration);
 				}
 			}
-			bool flag3 = model.ReferrerCodeLenght_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag3)
+
+			if (model.ReferrerCodeLenght_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.ReferrerCodeLenght, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag4 = activeStoreScopeConfiguration > 0;
-				if (flag4)
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.ReferrerCodeLenght, activeStoreScopeConfiguration);
 				}
 			}
-			bool flag5 = model.ReferrerRewardPoints_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag5)
+
+			if (model.ReferrerRewardPoints_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.ReferrerRewardPoints, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag6 = activeStoreScopeConfiguration > 0;
-				if (flag6)
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.ReferrerRewardPoints, activeStoreScopeConfiguration);
 				}
 			}
-			bool flag7 = model.RefereeRewardPoints_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag7)
+
+			if (model.RefereeRewardPoints_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.RefereeRewardPoints, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag8 = activeStoreScopeConfiguration > 0;
-				if (flag8)
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.RefereeRewardPoints, activeStoreScopeConfiguration);
 				}
 			}
-			bool flag9 = model.MaximumNoOfReferees_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag9)
+		
+			if (model.MaximumNoOfReferees_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.MaximumNoOfReferees, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag10 = activeStoreScopeConfiguration > 0;
-				if (flag10)
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.MaximumNoOfReferees, activeStoreScopeConfiguration);
 				}
 			}
-			bool flag11 = model.PurchaseLimit_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag11)
+	
+			if (model.PurchaseLimit_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.PurchaseLimit, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag12 = activeStoreScopeConfiguration > 0;
-				if (flag12)
+
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.PurchaseLimit, activeStoreScopeConfiguration);
 				}
 			}
-			bool flag13 = model.ReferrelRewardsForFirstPurchase_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag13)
+			if (model.ReferrelRewardsForFirstPurchase_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.ReferrelRewardsForFirstPurchase, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag14 = activeStoreScopeConfiguration > 0;
-				if (flag14)
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.ReferrelRewardsForFirstPurchase, activeStoreScopeConfiguration);
 				}
 			}
-			bool flag15 = model.RefereeRewardsForFirstPurchase_OverrideForStore || activeStoreScopeConfiguration == 0;
-			if (flag15)
+
+			if (model.RefereeRewardsForFirstPurchase_OverrideForStore || activeStoreScopeConfiguration == 0)
 			{
 				this._settingService.SaveSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.RefereeRewardsForFirstPurchase, activeStoreScopeConfiguration, false);
 			}
 			else
 			{
-				bool flag16 = activeStoreScopeConfiguration > 0;
-				if (flag16)
+				if (activeStoreScopeConfiguration > 0)
 				{
 					this._settingService.DeleteSetting<ReferAndEarnSetting, int>(referAndEarnSetting, (ReferAndEarnSetting x) => x.RefereeRewardsForFirstPurchase, activeStoreScopeConfiguration);
 				}
@@ -247,12 +222,10 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 
 		public ActionResult RegisterReferrerPage(string referrerCode)
 		{
-			bool flag = !Nop.Core.Domain.Customers.CustomerExtensions.IsRegistered(this._workContext.CurrentCustomer, true);
 			ActionResult result;
-			if (flag)
+			if (!Nop.Core.Domain.Customers.CustomerExtensions.IsRegistered(this._workContext.CurrentCustomer, true))
 			{
-				bool flag2 = !string.IsNullOrEmpty(referrerCode);
-				if (flag2)
+				if (!string.IsNullOrEmpty(referrerCode))
 				{
 					HttpCookie httpCookie = new HttpCookie("referrercode");
 					httpCookie.Value = referrerCode;
@@ -274,9 +247,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 		{
 			int activeStoreScopeConfiguration = this.GetActiveStoreScopeConfiguration(this._storeService, this._workContext);
 			ReferAndEarnSetting referAndEarnSetting = this._settingService.LoadSetting<ReferAndEarnSetting>(activeStoreScopeConfiguration);
-			bool flag = !referAndEarnSetting.EnablePlugin;
 			ActionResult result;
-			if (flag)
+			if (!referAndEarnSetting.EnablePlugin)
 			{
 				result = base.Content("");
 			}
@@ -289,9 +261,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 
 		public ActionResult PublicInfo()
 		{
-			bool flag = !Nop.Core.Domain.Customers.CustomerExtensions.IsRegistered(this._workContext.CurrentCustomer, true);
 			ActionResult result;
-			if (flag)
+			if (!Nop.Core.Domain.Customers.CustomerExtensions.IsRegistered(this._workContext.CurrentCustomer, true))
 			{
 				result = new HttpUnauthorizedResult();
 			}
@@ -330,8 +301,8 @@ namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 				{
 					base.ModelState.AddModelError("FriendEmail", this._localizationService.GetResource("SuperNop.Plugin.Misc.ReferAndEarn.Web.MaxLimitError"));
 				}
-				bool flag3 = base.ModelState.IsValid && !string.IsNullOrEmpty(model.FriendEmail);
-				if (flag3)
+
+				if (ModelState.IsValid && !string.IsNullOrEmpty(model.FriendEmail))
 				{
 					this._referAndEarnService.SendReferACustomerNotification(currentCustomer, referAndEarnSetting.ReferrerRewardPoints, model.FriendEmail,referAndEarnSetting.RefereeRewardPoints, this._workContext.WorkingLanguage.Id);
 
