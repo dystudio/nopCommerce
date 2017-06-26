@@ -1,4 +1,3 @@
-using Microsoft.CSharp.RuntimeBinder;
 using Nop.Core;
 using Nop.Core.Domain.Catalog;
 using Nop.Core.Domain.Customers;
@@ -16,18 +15,14 @@ using Nop.Web.Framework.Controllers;
 using Nop.Web.Models.Customer;
 using Nop.Plugin.Misc.ReferAndEarn.Domain;
 using Nop.Plugin.Misc.ReferAndEarn.Models;
-using Nop.Plugin.Misc.ReferAndEarn.PluginExpiry;
 using Nop.Plugin.Misc.ReferAndEarn.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Nop.Plugin.Misc.ReferAndEarn.Controllers
 {
-	public class ReferAndEarnController : BasePluginController
+    public class ReferAndEarnController : BasePluginController
 	{
 
 		private readonly IWorkContext _workContext;

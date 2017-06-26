@@ -94,12 +94,6 @@
     <Compile Include="Domain\CustomerReferrerCode.cs" />
     <Compile Include="Models\ConfigurationModel.cs" />
     <Compile Include="Models\PublicInfoModel.cs" />
-    <Compile Include="PluginExpiry\CheckLicenseAttribute.cs" />
-    <Compile Include="PluginExpiry\LicenseKeyModel.cs" />
-    <Compile Include="PluginExpiry\PluginExpiryDependencyRegistrar.cs" />
-    <Compile Include="PluginExpiry\PluginTrial.cs" />
-    <Compile Include="PluginExpiry\ReferAndEarnPluginExpiryController.cs" />
-    <Compile Include="PluginExpiry\SNCEncryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferAndEarnPlugin.cs" />
     <Compile Include="ReferAndEarnSetting.cs" />

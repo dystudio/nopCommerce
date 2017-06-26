@@ -5,14 +5,12 @@ using Nop.Services.Common;
 using Nop.Services.Configuration;
 using Nop.Services.Localization;
 using Nop.Plugin.Misc.ReferAndEarn.Data;
-using Nop.Plugin.Misc.ReferAndEarn.PluginExpiry;
-using System;
 using System.Collections.Generic;
 using System.Web.Routing;
 
 namespace Nop.Plugin.Misc.ReferAndEarn
 {
-	public class ReferAndEarnPlugin : BasePlugin, IMiscPlugin, IPlugin, IWidgetPlugin
+    public class ReferAndEarnPlugin : BasePlugin, IMiscPlugin, IPlugin, IWidgetPlugin
 	{
 		private readonly ILocalizationService _localizationService;
 
@@ -22,15 +20,12 @@ namespace Nop.Plugin.Misc.ReferAndEarn
 
 		private readonly ReferAndEarnObjectContext _referAndEarnObjectContext;
 
-		private readonly PluginTrial _pluginTrial;
-
-		public ReferAndEarnPlugin(ILocalizationService localizationService, WidgetSettings widgetSettings, ISettingService settingService, ReferAndEarnObjectContext referAndEarnObjectContext, PluginTrial pluginTrial)
+		public ReferAndEarnPlugin(ILocalizationService localizationService, WidgetSettings widgetSettings, ISettingService settingService, ReferAndEarnObjectContext referAndEarnObjectContext)
 		{
 			this._localizationService = localizationService;
 			this._widgetSettings = widgetSettings;
 			this._settingService = settingService;
 			this._referAndEarnObjectContext = referAndEarnObjectContext;
-			this._pluginTrial = pluginTrial;
 		}
 
 		public void GetConfigurationRoute(out string actionName, out string controllerName, out RouteValueDictionary routeValues)
