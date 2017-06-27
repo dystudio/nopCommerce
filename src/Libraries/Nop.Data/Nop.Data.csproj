@@ -77,6 +77,10 @@
     <Compile Include="Migrations\201706270217477_InitialMigration.Designer.cs">
       <DependentUpon>201706270217477_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706270225094_AddParentIdToStateProvince.cs" />
+    <Compile Include="Migrations\201706270225094_AddParentIdToStateProvince.Designer.cs">
+      <DependentUpon>201706270225094_AddParentIdToStateProvince.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="QueryableExtensions.cs" />
     <Compile Include="Extensions.cs" />
@@ -204,6 +208,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706270217477_InitialMigration.resx">
       <DependentUpon>201706270217477_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706270225094_AddParentIdToStateProvince.resx">
+      <DependentUpon>201706270225094_AddParentIdToStateProvince.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

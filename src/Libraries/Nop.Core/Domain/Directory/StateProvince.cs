@@ -17,7 +17,10 @@ namespace Nop.Core.Domain.Directory
         /// Gets or sets the name
         /// </summary>
         public string Name { get; set; }
-
+        /// <summary>
+        /// Gets or sets the ParentId
+        /// </summary>
+        public virtual int ParentId { get; set; }
         /// <summary>
         /// Gets or sets the abbreviation
         /// </summary>
