@@ -32,6 +32,10 @@ namespace Nop.Admin.Models.Directory
         public int DisplayOrder { get; set; }
 
         public IList<StateProvinceLocalizedModel> Locales { get; set; }
+
+        public int ParentId { get; set; }
+        public string Breadcrumb { get; set; }
+        public IList<SelectListItem> ParentProvinces { get; set; }
     }
 
     public partial class StateProvinceLocalizedModel : ILocalizedModelLocal

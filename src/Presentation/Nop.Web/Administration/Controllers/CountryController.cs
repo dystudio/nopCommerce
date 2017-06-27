@@ -36,6 +36,7 @@ namespace Nop.Admin.Controllers
         private readonly IExportManager _exportManager;
         private readonly IImportManager _importManager;
         private readonly ICustomerActivityService _customerActivityService;
+        private readonly IWorkContext _workContext;
 
         #endregion
 
@@ -52,7 +53,8 @@ namespace Nop.Admin.Controllers
             IStoreMappingService storeMappingService,
             IExportManager exportManager,
             IImportManager importManager,
-            ICustomerActivityService customerActivityService)
+            ICustomerActivityService customerActivityService,
+            IWorkContext workContext)
         {
             this._countryService = countryService;
             this._stateProvinceService = stateProvinceService;
@@ -66,6 +68,7 @@ namespace Nop.Admin.Controllers
             this._exportManager = exportManager;
             this._importManager = importManager;
             this._customerActivityService = customerActivityService;
+            this._workContext = workContext;
         }
 
 		#endregion 
@@ -364,6 +367,22 @@ namespace Nop.Admin.Controllers
         #endregion
 
         #region States / provinces
+        [HttpGet]
+        public ActionResult AllProvinces(string text, int selectedId)
+        {
+            //StateProvince
+            var province = _stateProvinceService.GetStateProvincesByCountryId(selectedId,_workContext.WorkingLanguage.Id, true);
+            province.Insert(0, new StateProvince { Name = "[None]", Id = 0 });
+            var selectList = new List<SelectListItem>();
+            foreach (var c in province)
+                selectList.Add(new SelectListItem()
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.GetStateProvinceBreadCrumb(_stateProvinceService),
+                    Selected = c.Id == selectedId
+                });
+            return new JsonResult { Data = selectList, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
 
         [HttpPost]
         public virtual ActionResult States(int countryId, DataSourceRequest command)
@@ -375,7 +394,12 @@ namespace Nop.Admin.Controllers
 
             var gridModel = new DataSourceResult
             {
-                Data = states.Select(x => x.ToModel()),
+                Data = states.Select(x =>
+                {
+                    var vmodel = x.ToModel();
+                    vmodel.Breadcrumb = x.GetStateProvinceBreadCrumb(_stateProvinceService);
+                    return vmodel;
+                }),
                 Total = states.Count
             };
             return Json(gridModel);
@@ -389,6 +413,8 @@ namespace Nop.Admin.Controllers
 
             var model = new StateProvinceModel();
             model.CountryId = countryId;
+            model.ParentId = 0;
+            model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
             //default value
             model.Published = true;
             //locales
@@ -406,6 +432,21 @@ namespace Nop.Admin.Controllers
             if (country == null)
                 //No country found with the specified id
                 return RedirectToAction("List");
+
+            //父级省份提供
+            //防止提交后 "dataSource" cannot be null.错误
+            //Text = parentCategory.GetCategoryBreadCrumb(_categoryService), Value = parentCategory.Id.ToString()
+            //-->
+            model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
+            if (model.ParentId >= 0)
+            {
+                var parentProvinces = _stateProvinceService.GetStateProvinceById(model.ParentId);
+                if (parentProvinces != null)
+                    model.ParentProvinces.Add(new SelectListItem { Text = parentProvinces.GetStateProvinceBreadCrumb(_stateProvinceService), Value = parentProvinces.Id.ToString() });
+                else
+                    model.ParentId = 0;
+            }
+            //<--
 
             if (ModelState.IsValid)
             {
@@ -440,6 +481,19 @@ namespace Nop.Admin.Controllers
                 return RedirectToAction("List");
 
             var model = sp.ToModel();
+
+            //-->
+            model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
+            if (model.ParentId > 0)
+            {
+                var parentProvinces = _stateProvinceService.GetStateProvinceById(model.ParentId);
+                if (parentProvinces != null)
+                    model.ParentProvinces.Add(new SelectListItem { Text = parentProvinces.GetStateProvinceBreadCrumb(_stateProvinceService), Value = parentProvinces.Id.ToString() });
+                else
+                    model.ParentId = 0;
+            }
+            //<--
+
             //locales
             AddLocales(_languageService, model.Locales, (locale, languageId) =>
             {
@@ -459,6 +513,11 @@ namespace Nop.Admin.Controllers
             if (sp == null)
                 //No state found with the specified id
                 return RedirectToAction("List");
+
+            //防止提交后 "dataSource" cannot be null.错误
+            //-->
+            model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
+            //<--
 
             if (ModelState.IsValid)
             {
