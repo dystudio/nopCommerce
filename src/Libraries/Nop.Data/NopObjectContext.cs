@@ -18,6 +18,12 @@ namespace Nop.Data
     {
         #region Ctor
 
+        
+        public NopObjectContext()
+            : base("MS_SqlStoreConnectionString")
+        {
+            
+        }
         public NopObjectContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
