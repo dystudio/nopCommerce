@@ -31,7 +31,7 @@
                         </div>
                         @Html.HiddenFor(model => model.Locales[item].LanguageId)
                     </div>
-    ,
+,
                     @<div>
                         <div class="form-group">
                             <div class="col-sm-3">
@@ -43,23 +43,18 @@
                             </div>
                         </div>
                     </div>
-
-                    @<div>
-                        <div class="form-group">
-                            <div class="col-sm-3">
-                                @Html.NopLabelFor(model => model.ParentId)
-                            </div>
-                            <div class="col-sm-9">
-                                @(Html.Telerik()
-                                .ComboBoxFor(x => x.ParentId)
-                                .BindTo(Model.ParentProvinces)
-                                .Encode(true)
-                                .DataBinding(x => x.Ajax().Enabled(true).Select("AllProvinces", "Country", new { selectedId = Model.CountryId })))
-                                @Html.ValidationMessageFor(model => model.ParentId)
-                            </div>
+    ))
+                
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.NopLabelFor(model => model.ParentId)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.NopDropDownListFor(model => model.ParentId, Model.ParentProvinces)
+                            @Html.ValidationMessageFor(model => model.ParentId)
                         </div>
                     </div>
-    ))
+
                     <div class="form-group">
                         <div class="col-sm-3">
                             @Html.NopLabelFor(model => model.Abbreviation)

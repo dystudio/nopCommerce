@@ -14,6 +14,7 @@ namespace Nop.Admin.Models.Directory
         public StateProvinceModel()
         {
             Locales = new List<StateProvinceLocalizedModel>();
+            ParentProvinces = new List<SelectListItem>();
         }
         public int CountryId { get; set; }
 
@@ -33,7 +34,10 @@ namespace Nop.Admin.Models.Directory
 
         public IList<StateProvinceLocalizedModel> Locales { get; set; }
 
+        [NopResourceDisplayName("Admin.Configuration.Countries.States.Fields.ParentId")]
         public int ParentId { get; set; }
+
+        [NopResourceDisplayName("Admin.Configuration.Countries.States.Fields.Breadcrumb")]
         public string Breadcrumb { get; set; }
         public IList<SelectListItem> ParentProvinces { get; set; }
     }

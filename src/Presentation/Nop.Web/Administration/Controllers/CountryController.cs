@@ -367,7 +367,23 @@ namespace Nop.Admin.Controllers
         #endregion
 
         #region States / provinces
-        [HttpGet]
+        [NonAction]
+        protected virtual void PrepareProvincesModel(StateProvinceModel model,int countryId,int selectedId)
+        {
+            if (model == null)
+                throw new ArgumentNullException("model");
+            model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
+            var provinces = _stateProvinceService.GetStateProvincesByCountryId(countryId, _workContext.WorkingLanguage.Id, true);
+            foreach (var province in provinces)
+            {
+                model.ParentProvinces.Add(new SelectListItem
+                {
+                    Value = province.Id.ToString(),
+                    Text = province.GetStateProvinceBreadCrumb(_stateProvinceService),
+                    Selected = province.Id == selectedId
+                });
+            }
+        }
         public ActionResult AllProvinces(string text, int selectedId)
         {
             //StateProvince
@@ -414,7 +430,7 @@ namespace Nop.Admin.Controllers
             var model = new StateProvinceModel();
             model.CountryId = countryId;
             model.ParentId = 0;
-            model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
+            PrepareProvincesModel(model, countryId, 0);
             //default value
             model.Published = true;
             //locales
@@ -484,6 +500,7 @@ namespace Nop.Admin.Controllers
 
             //-->
             model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
+            PrepareProvincesModel(model, sp.CountryId, sp.Id);
             if (model.ParentId > 0)
             {
                 var parentProvinces = _stateProvinceService.GetStateProvinceById(model.ParentId);
@@ -517,6 +534,7 @@ namespace Nop.Admin.Controllers
             //防止提交后 "dataSource" cannot be null.错误
             //-->
             model.ParentProvinces = new List<SelectListItem> { new SelectListItem { Text = "[None]", Value = "0" } };
+            PrepareProvincesModel(model,sp.CountryId, model.Id);
             //<--
 
             if (ModelState.IsValid)
