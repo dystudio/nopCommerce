@@ -1,0 +1,8 @@
+﻿Group: Price providers
+FriendlyName: Fixed Price provider
+SystemName: Price.FixedRate
+Version: 1.0
+SupportedVersions: 3.90
+Author: Gaja Digital Agency
+DisplayOrder: 1
+FileName: Nop.Plugin.Price.FixedRate.dll

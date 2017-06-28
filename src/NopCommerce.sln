@@ -141,6 +141,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.Misc.ReferAndEar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.Misc.CacheAnalytics", "Plugins\Nop.Plugin.Misc.CacheAnalytics\Nop.Plugin.Misc.CacheAnalytics.csproj", "{3889619D-50C5-491F-9789-C58A15D1AFB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nop.Plugin.Price.FixedRate", "Plugins\Nop.Plugin.Price.FixedRate\Nop.Plugin.Price.FixedRate.csproj", "{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1254,6 +1256,24 @@ Global
 		{3889619D-50C5-491F-9789-C58A15D1AFB8}.Test|Mixed Platforms.Build.0 = Release|Any CPU
 		{3889619D-50C5-491F-9789-C58A15D1AFB8}.Test|x86.ActiveCfg = Release|Any CPU
 		{3889619D-50C5-491F-9789-C58A15D1AFB8}.Test|x86.Build.0 = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Debug|x86.Build.0 = Debug|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Release|x86.Build.0 = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Test|Any CPU.Build.0 = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Test|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Test|Mixed Platforms.Build.0 = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Test|x86.ActiveCfg = Release|Any CPU
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7}.Test|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1323,6 +1343,7 @@ Global
 		{E2532C8C-54CE-4085-B723-C3C15225F516} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
 		{6327F70A-BED6-4DD4-AB98-A4B29190634C} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
 		{3889619D-50C5-491F-9789-C58A15D1AFB8} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
+		{E0421F35-23EE-4B5A-8B48-9D23C6590CB7} = {7881B112-7843-4542-B1F7-F99553FB9BB7}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
 		Project = ".\NopCommerce.ndproj"

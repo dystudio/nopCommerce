@@ -1,0 +1,228 @@
+﻿@*
+       
+    * This file is part of 'Fixed Price provider' plug-in.
+
+       'Fixed Price provider' plug-in is free software: you can redistribute it and/or modify
+       it under the terms of the GNU General Public License as published by
+       the Free Software Foundation, either version 3 of the License, or
+       (at your option) any later version.
+
+       'Fixed Price provider' plug-in is distributed in the hope that it will be useful,
+       but WITHOUT ANY WARRANTY; without even the implied warranty of
+       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+       GNU General Public License for more details.
+
+       You should have received a copy of the GNU General Public License
+       along with Foobar.  If not, see <http://www.gnu.org/licenses/>
+    
+*@
+@using Nop.Plugin.Price.FixedRate.Models;
+@model FixedPriceModel
+@{
+    Layout = "";
+}
+
+    <div class="panel panel-default" id="productprice-grid">
+        <div class="panel-heading">
+            @T("Plugins.Price.FixedRate.Fields.PriceByCountry")
+        </div>
+        <div class="panel-body">
+            <div id="productprice-grid"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#productprice-grid").kendoGrid({
+                        dataSource: {
+                            type: "json",
+                            transport: {
+                                read: {
+                                    url: "@Html.Raw(Url.Action("ProductPriceList", "FixedPrice", new { productId = Model.ProductId }))",
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                create: {
+                                    url: "@Html.Raw(Url.Action("ProductPriceInsert", "FixedPrice", new { productId = Model.ProductId }))",
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                update: {
+                                    url: "@Html.Raw(Url.Action("ProductPriceUpdate", "FixedPrice"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                },
+                                destroy: {
+                                    url: "@Html.Raw(Url.Action("ProductPriceDelete", "FixedPrice"))",
+                                    type: "POST",
+                                    dataType: "json"
+                                }
+                            },
+                            schema: {
+                                data: "Data",
+                                total: "Total",
+                                errors: "Errors",
+                                model: {
+                                    id: "Id",
+                                    fields: {
+                                        Country: { editable: true, type: "string" },
+                                        CountryId: { editable: true, type: "number" },
+                                        Currency: { editable: true, type: "string" },
+                                        CurrencyId: { editable: true, type: "number" },
+                                        Price: { editable: true, type: "number" },
+                                        Id: { editable: false, type: "number" }
+                                    }
+                                }
+                            },
+                            noRecords: true,
+                            messages: {
+                                noRecords: "There is no data on current page"
+                            },
+                            requestEnd: function(e) {
+                                if (e.type == "create" || e.type == "update") {
+                                    this.read();
+                                }
+                            },
+                            error: function(e) {
+                                display_kendoui_grid_error(e);
+                                // Cancel the changes
+                                this.cancelChanges();
+                            },
+                            serverPaging: true,
+                            serverFiltering: true,
+                            serverSorting: true
+                        },
+                        pageable: {
+                            refresh: true,
+                            numeric: false,
+                            previousNext: false,
+                            info: false
+                        },
+                        toolbar: ["create"],
+                        edit: function(e) {
+                            if (e.model.isNew()) {
+                                //little hack here
+                                //pre-select the first value of kendoui dropdownlist datasource
+                                //for some reasons (maybe, bug) it always sends 0
+                                //if no value has been selected (changed) in the dropdownlist
+                                if (allCountries.length > 0) {
+                                    e.model.CountryId = allCountries[0].Id;
+                                }
+                                if (allcurrencies.length > 0) {
+                                    e.model.CurrencyId = allcurrencies[0].Id;
+                                }
+                            }
+                        },
+                        editable: {
+                            confirmation: false,
+                            mode: "inline"
+                        },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "CountryId",
+                                title: "@T("Country")",
+                                width: 250,
+                                editor: countryDropDownEditor,
+                                template: "#:Country#"
+                            },
+
+                            {
+                                field: "CurrencyId",
+                                title: "@T("Currency")",
+                                width: 250,
+                                editor: currencyDropDownEditor,
+                                template: "#:Currency#"
+                            },
+                            {
+                                field: "Price",
+                                title: "@T("Price")",
+                                width: 150,
+                                format: "{0:0}"
+                            },
+                            {
+                                command: [
+                                    {
+                                        name: "edit",
+                                        text: "@T("Admin.Common.Edit")"
+                                    }, {
+                                        name: "destroy",
+                                        text: "@T("Admin.Common.Delete")"
+                                    }
+                                ],
+                                width: 200
+                            }
+                        ]
+                    });
+                });
+
+                //local datasource
+                var allCountries = [
+
+                    @for (int i = 0; i < Model.AvailableCountryList.Count; i++)
+            {
+
+                var countryItem = Model.AvailableCountryList[i];
+                <text>
+                    {
+                        Id: @(countryItem.Value),
+                        Name: "@(Html.Raw(HttpUtility.JavaScriptStringEncode(countryItem.Text)))"
+                    }
+                        </text>
+                if (i != Model.AvailableCountryList.Count - 1)
+                {
+                    <text>,</text>
+                }
+            }
+                ];
+
+                var allcurrencies = [
+                    @for (int i = 0; i < Model.AvailableCurrencyList.Count; i++)
+            {
+                var currencyItem = Model.AvailableCurrencyList[i];
+                <text>
+                        {
+                            Id: @(currencyItem.Value),
+                            Name: "@(Html.Raw(HttpUtility.JavaScriptStringEncode(currencyItem.Text)))"
+                        }
+                            </text>
+                if (i != Model.AvailableCurrencyList.Count - 1)
+                {
+                    <text>,</text>
+                }
+            }
+                ];
+
+                function countryDropDownEditor(container, options) {
+                    $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:CountryId"/>')
+                        .appendTo(container)
+                        .kendoDropDownList({
+                            autoBind: false,
+                            dataSource: allCountries
+                        });
+                }
+
+                function currencyDropDownEditor(container, options) {
+                    $('<input required data-text-field="Name" data-value-field="Id" data-bind="value:CurrencyId"/>')
+                        .appendTo(container)
+                        .kendoDropDownList({
+                            autoBind: false,
+                            dataSource: allcurrencies
+                        });
+                }
+            </script>
+            <input type="submit" id="btnRefreshProductPrice" style="display: none" />
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#btnRefreshProductPrice').click(function () {
+                        //refresh grid
+                        var grid = $("#productprice-grid").data('kendoGrid');
+                        grid.dataSource.read();
+
+                        //return false to don't reload a page
+                        return false;
+                    });
+                });
+            </script>
+
+
+        </div>
+    </div>
