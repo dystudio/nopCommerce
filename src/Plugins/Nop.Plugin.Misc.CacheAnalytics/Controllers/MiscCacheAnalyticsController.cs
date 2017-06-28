@@ -40,111 +40,120 @@ namespace Nop.Plugin.Misc.CacheAnalytics.Controllers
 
             var cache = MemoryCache.Default;
 
-            var storesField = typeof(MemoryCache).GetField("_stores", BindingFlags.NonPublic | BindingFlags.Instance);
-
-            if (storesField != null)
+            CacheItemModel cacheItem = null;
+            foreach (var item in cache)
             {
-                var stores = (object[])storesField.GetValue(cache);
-
-                if (stores != null)
-                {
-                    // MemoryCacheStore
-                    foreach (var store in stores)
-                    {
-                        var entriesField = store.GetType().GetField("_entries", BindingFlags.NonPublic | BindingFlags.Instance);
-
-                        if (entriesField != null)
-                        {                            
-                            var entries = (Hashtable)entriesField.GetValue(store);
-
-                            if (entries != null)
-                            {
-                                foreach (var entry in entries.Cast<DictionaryEntry>().ToList())
-                                {
-                                    var cacheItem = new CacheItemModel();
-
-                                    // MemoryCacheKey
-                                    var keyProp = entry.Key.GetType().GetProperty("Key", BindingFlags.NonPublic | BindingFlags.Instance);
-
-                                    if (keyProp != null)
-                                    {
-                                        var entryKey = keyProp.GetValue(entry.Value);
-
-                                        if (entryKey != null)
-                                        {
-                                            cacheItem.Key = entryKey.ToString();
-                                        }
-                                    }
-
-                                    // MemoryCacheEntry
-                                    var valueProp = entry.Value.GetType().GetProperty("Value", BindingFlags.NonPublic | BindingFlags.Instance);
-
-                                    if (valueProp != null)
-                                    {
-                                        var entryValue = valueProp.GetValue(entry.Value);
-
-                                        if (entryValue != null)
-                                        {
-                                            // type
-                                            if (entryValue is IDictionary)
-                                            {
-                                                cacheItem.Type = "Dictionary";
-                                                cacheItem.Count = ((IDictionary)entryValue).Count;
-                                            }
-                                            else if (entryValue is IList)
-                                            {
-                                                cacheItem.Type = "List";
-                                                cacheItem.Count = ((IList)entryValue).Count;
-                                            }
-                                            else
-                                            {
-                                                cacheItem.Type = entryValue.GetType().Name;
-                                            }
-
-                                            // value
-                                            cacheItem.Value = JsonConvert.SerializeObject(entryValue, Formatting.Indented);
-
-                                            // size
-                                            int size = 0;
-
-                                            if (entryValue is IEnumerable)
-                                            {
-                                                foreach (var item in ((IEnumerable)entryValue))
-                                                {
-                                                    size += GetObjectSize(item);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                size = GetObjectSize(entryValue);
-                                            }
-
-                                            cacheItem.Size = size;
-                                        }
-                                    }
-
-                                    var utcAbsExpProp = entry.Value.GetType().GetProperty("UtcAbsExp", BindingFlags.NonPublic | BindingFlags.Instance);
-
-                                    if (utcAbsExpProp != null)
-                                    {
-                                        var entryExpiry = utcAbsExpProp.GetValue(entry.Value);
-
-                                        if (entryExpiry != null)
-                                        {
-                                            cacheItem.ExpiryDate = (DateTime)entryExpiry;
-                                        }
-                                    }
-
-                                    if (cacheItem.Key != null && cacheItem.Value != null)
-                                    {
-                                        list.Add(cacheItem);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                cacheItem = new CacheItemModel();
+                cacheItem.Key = item.Key;
+                cacheItem.Value = item.Value.ToString();
+                list.Add(cacheItem);
             }
+
+            //var storesField = typeof(MemoryCache).GetField("_stores", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //if (storesField != null)
+            //{
+            //    var stores = (object[])storesField.GetValue(cache);
+
+            //    if (stores != null)
+            //    {
+            //        // MemoryCacheStore
+            //        foreach (var store in stores)
+            //        {
+            //            var entriesField = store.GetType().GetField("_entries", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //            if (entriesField != null)
+            //            {                            
+            //                var entries = (Hashtable)entriesField.GetValue(store);
+
+            //                if (entries != null)
+            //                {
+            //                    foreach (var entry in entries.Cast<DictionaryEntry>().ToList())
+            //                    {
+            //                        var cacheItem = new CacheItemModel();
+
+            //                        // MemoryCacheKey
+            //                        var keyProp = entry.Key.GetType().GetProperty("Key", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //                        if (keyProp != null)
+            //                        {
+            //                            var entryKey = keyProp.GetValue(entry.Value);
+
+            //                            if (entryKey != null)
+            //                            {
+            //                                cacheItem.Key = entryKey.ToString();
+            //                            }
+            //                        }
+
+            //                        // MemoryCacheEntry
+            //                        var valueProp = entry.Value.GetType().GetProperty("Value", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //                        if (valueProp != null)
+            //                        {
+            //                            var entryValue = valueProp.GetValue(entry.Value);
+
+            //                            if (entryValue != null)
+            //                            {
+            //                                // type
+            //                                if (entryValue is IDictionary)
+            //                                {
+            //                                    cacheItem.Type = "Dictionary";
+            //                                    cacheItem.Count = ((IDictionary)entryValue).Count;
+            //                                }
+            //                                else if (entryValue is IList)
+            //                                {
+            //                                    cacheItem.Type = "List";
+            //                                    cacheItem.Count = ((IList)entryValue).Count;
+            //                                }
+            //                                else
+            //                                {
+            //                                    cacheItem.Type = entryValue.GetType().Name;
+            //                                }
+
+            //                                // value
+            //                                cacheItem.Value = JsonConvert.SerializeObject(entryValue, Formatting.Indented);
+
+            //                                // size
+            //                                int size = 0;
+
+            //                                if (entryValue is IEnumerable)
+            //                                {
+            //                                    foreach (var item in ((IEnumerable)entryValue))
+            //                                    {
+            //                                        size += GetObjectSize(item);
+            //                                    }
+            //                                }
+            //                                else
+            //                                {
+            //                                    size = GetObjectSize(entryValue);
+            //                                }
+
+            //                                cacheItem.Size = size;
+            //                            }
+            //                        }
+
+            //                        var utcAbsExpProp = entry.Value.GetType().GetProperty("UtcAbsExp", BindingFlags.NonPublic | BindingFlags.Instance);
+
+            //                        if (utcAbsExpProp != null)
+            //                        {
+            //                            var entryExpiry = utcAbsExpProp.GetValue(entry.Value);
+
+            //                            if (entryExpiry != null)
+            //                            {
+            //                                cacheItem.ExpiryDate = (DateTime)entryExpiry;
+            //                            }
+            //                        }
+
+            //                        if (cacheItem.Key != null && cacheItem.Value != null)
+            //                        {
+            //                            list.Add(cacheItem);
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
             return list;
         }
