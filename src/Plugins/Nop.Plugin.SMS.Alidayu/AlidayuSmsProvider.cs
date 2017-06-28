@@ -13,6 +13,9 @@ using Nop.Services.Orders;
 using Top.Api;
 using Top.Api.Request;
 using Top.Api.Response;
+using Nop.Core.Domain.Logging;
+using Nop.Core.Data;
+using Nop.Core;
 
 namespace Nop.Plugin.SMS.Alidayu
 {
@@ -27,6 +30,8 @@ namespace Nop.Plugin.SMS.Alidayu
         private readonly ILogger _logger;
         private readonly IOrderService _orderService;
         private readonly ISettingService _settingService;
+        private readonly IRepository<ActivityLogType> _activityLogTypeRepository;
+        private readonly IWebHelper _webHelper;
 
         #endregion
 
@@ -35,12 +40,16 @@ namespace Nop.Plugin.SMS.Alidayu
         public AlidayuSmsProvider(AlidayuSettings alidayuSettings,
             ILogger logger,
             IOrderService orderService,
-            ISettingService settingService)
+            ISettingService settingService,
+            IRepository<ActivityLogType> activityLogTypeRepository,
+            IWebHelper webHelper)
         {
             this._alidayuSettings = alidayuSettings;
             this._logger = logger;
             this._orderService = orderService;
             this._settingService = settingService;
+            this._activityLogTypeRepository = activityLogTypeRepository;
+            this._webHelper = webHelper;
         }
 
         #endregion
@@ -163,6 +172,14 @@ namespace Nop.Plugin.SMS.Alidayu
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.TestFailed", "Test message sending failed");
             this.AddOrUpdatePluginLocaleResource("Plugins.Sms.Alidayu.TestSuccess", "Test message was sent");
 
+            var smsActivityType = new ActivityLogType
+            {
+                SystemKeyword = "Nop.Plugin.SMS.Alidayu.VerificationCodeSent",
+                Enabled = false,
+                Name = "Alidayu.Verification Code Sent."
+            };
+           _activityLogTypeRepository.Insert(smsActivityType);
+
             base.Install();
         }
 
@@ -195,6 +212,14 @@ namespace Nop.Plugin.SMS.Alidayu
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.SendTest.Hint");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.TestFailed");
             this.DeletePluginLocaleResource("Plugins.Sms.Alidayu.TestSuccess");
+
+            var smsActivityType = _activityLogTypeRepository.Table.Where(
+                x => x.SystemKeyword == "Nop.Plugin.SMS.Alidayu.VerificationCodeSent").FirstOrDefault();
+            if (smsActivityType != null)
+            {
+                _activityLogTypeRepository.Delete(smsActivityType);
+            }
+            
 
             base.Uninstall();
         }

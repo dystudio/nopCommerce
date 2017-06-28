@@ -1,9 +1,14 @@
-﻿using Nop.Core.Caching;
+﻿using Nop.Core;
+using Nop.Core.Caching;
+using Nop.Core.Data;
+using Nop.Core.Domain.Logging;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Infrastructure;
 using Nop.Core.Plugins;
 using Nop.Plugin.SMS.Alidayu.Domain;
 using Nop.Services.Events;
+using System;
+using System.Linq;
 
 namespace Nop.Plugin.SMS.Alidayu.Infrastructure.Cache
 {
@@ -11,15 +16,24 @@ namespace Nop.Plugin.SMS.Alidayu.Infrastructure.Cache
     {
         #region Fields
 
-        private ICacheManager _cacheManager;
+        private readonly ICacheManager _cacheManager;
+        private readonly IRepository<ActivityLog> _activityLogRepository;
+        private readonly IRepository<ActivityLogType> _activityLogTypeRepository;
+        private readonly IWebHelper _webHelper;
 
         #endregion
 
         #region Ctor
 
-        public VerificationCodeSentEventConsumer(ICacheManager cacheManager)
+        public VerificationCodeSentEventConsumer(ICacheManager cacheManager,
+            IRepository<ActivityLog> activityLogRepository,
+            IRepository<ActivityLogType> activityLogTypeRepository,
+            IWebHelper webHelper)
         {
-            this._cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static"); ;
+            this._cacheManager = EngineContext.Current.ContainerManager.Resolve<ICacheManager>("nop_cache_static");
+            this._activityLogRepository = activityLogRepository;
+            this._activityLogTypeRepository = activityLogTypeRepository;
+            this._webHelper = webHelper;
         }
 
         #endregion
@@ -40,6 +54,23 @@ namespace Nop.Plugin.SMS.Alidayu.Infrastructure.Cache
                 return eventMessage.Number;
             });
 
+            //TODO
+            //insert activity log
+            var smsActivityType = _activityLogTypeRepository.Table.Where(
+                x => x.SystemKeyword == "Nop.Plugin.SMS.Alidayu.VerificationCodeSent").FirstOrDefault();
+            if (smsActivityType != null)
+            {
+                _activityLogTypeRepository.Insert(smsActivityType);
+                var activity = new ActivityLog();
+                activity.ActivityLogTypeId = smsActivityType.Id;
+                activity.Customer = new Core.Domain.Customers.Customer();
+                activity.Comment = string.Format("Verification code {0} sent to {1}",eventMessage.Number, eventMessage.PhoneNumber);
+                activity.CreatedOnUtc = DateTime.UtcNow;
+                activity.IpAddress = _webHelper.GetCurrentIpAddress();
+
+                _activityLogRepository.Insert(activity);
+            }
+            
         }
 
         #endregion
