@@ -47,7 +47,6 @@ namespace Nop.Plugin.SMS.Alidayu.Controllers
         #region Methods
         [HttpPost]
         [AllowAnonymous]
-        //TODO
         public ActionResult SendVerificationCode(VerificationCodeModel model)
         {
             if (string.IsNullOrEmpty(model.PhoneNumber))
