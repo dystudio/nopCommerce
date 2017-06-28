@@ -58,7 +58,6 @@ namespace Nop.Plugin.SMS.Alidayu.Infrastructure.Cache
                 return eventMessage.Number;
             });
 
-            //TODO
             //insert activity log
             var smsActivityType = _activityLogTypeRepository.Table.Where(
                 x => x.SystemKeyword == "Nop.Plugin.SMS.Alidayu.VerificationCodeSent").FirstOrDefault();
