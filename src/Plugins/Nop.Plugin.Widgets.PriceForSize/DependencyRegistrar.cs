@@ -41,7 +41,7 @@ namespace Nop.Plugin.Widgets.PriceForSize
           .WithParameter(ResolvedParameter.ForNamed<IDbContext>(CONTEXT_NAME))
           .InstancePerLifetimeScope();
 
-      builder.RegisterType<Nop.Plugin.Widgets.PriceForSize.Services.PriceCalculationService>().As<IPriceCalculationService>().InstancePerLifetimeScope();
+     // builder.RegisterType<Nop.Plugin.Widgets.PriceForSize.Services.PriceCalculationService>().As<IPriceCalculationService>().InstancePerLifetimeScope();
 
      // builder.RegisterType<Nop.Plugin.Widgets.PriceForSize.ActionFilters.ProductActionFilter>().As<System.Web.Mvc.IFilterProvider>();
     }
